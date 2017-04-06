@@ -12,15 +12,13 @@ import com.aston.group.stationdefender.utils.TextureManager;
 public class ItemWater extends Item {
 
     /**
-     * Construct a new Water Bottle Item
+     * Construct a new Water Item
      */
     public ItemWater() {
-        super("Water bottle");
+        super("Water");
         id = 10;
         cost = 3;
-        value = 2;
-        // TODO: Water Bottle item texture needed
-        texture = TextureManager.INSTANCE.loadTexture(8);
+        texture = TextureManager.INSTANCE.loadTexture(29);
         placeable = false;
     }
 

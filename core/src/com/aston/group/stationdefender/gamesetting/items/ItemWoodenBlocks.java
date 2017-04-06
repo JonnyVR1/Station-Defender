@@ -18,8 +18,7 @@ public class ItemWoodenBlocks extends Item {
         super("Wooden Blocks");
         id = 12;
         cost = 3;
-        // TODO: Wood texture needed
-        texture = TextureManager.INSTANCE.loadTexture(8);
+        texture = TextureManager.INSTANCE.loadTexture(27);
         placeable = false;
     }
 

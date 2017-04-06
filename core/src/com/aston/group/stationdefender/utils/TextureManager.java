@@ -36,6 +36,11 @@ public enum TextureManager {
     private static final int BLACK_HOVER_TEXTURE = 23;
     private static final int ITEM_HEALTH_TEXTURE = 24;
     private static final int CLOSE_COMBAT_WEAPON_TEXTURE = 25;
+    private static final int ITEM_BANDAGES_TEXTURE = 26;
+    private static final int ITEM_WOOD_TEXTURE = 27;
+    private static final int ITEM_BRICKS_TEXTURE = 28;
+    private static final int ITEM_WATER_TEXTURE = 29;
+    private static final int ITEM_CEMENT_TEXTURE = 30;
 
 
     /**
@@ -121,6 +126,21 @@ public enum TextureManager {
                 break;
             case CLOSE_COMBAT_WEAPON_TEXTURE:
                 texture = new Texture(Gdx.files.internal("textures/cc-turret.png"));
+                break;
+            case ITEM_BANDAGES_TEXTURE:
+                texture = new Texture(Gdx.files.internal("textures/item-bandages.png"));
+                break;
+            case ITEM_WOOD_TEXTURE:
+                texture = new Texture(Gdx.files.internal("textures/item-wood.png"));
+                break;
+            case ITEM_BRICKS_TEXTURE:
+                texture = new Texture(Gdx.files.internal("textures/item-bricks.png"));
+                break;
+            case ITEM_WATER_TEXTURE:
+                texture = new Texture(Gdx.files.internal("textures/item-water.png"));
+                break;
+            case ITEM_CEMENT_TEXTURE:
+                texture = new Texture(Gdx.files.internal("textures/item-cement.png"));
                 break;
         }
         return texture;

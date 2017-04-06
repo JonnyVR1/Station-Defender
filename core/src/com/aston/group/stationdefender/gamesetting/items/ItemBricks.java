@@ -17,9 +17,8 @@ public class ItemBricks extends Item {
     public ItemBricks() {
         super("Bricks");
         id = 6;
-        cost = 3;
-        // TODO: Bricks texture needed
-        texture = TextureManager.INSTANCE.loadTexture(8);
+        cost = 5;
+        texture = TextureManager.INSTANCE.loadTexture(28);
         placeable = false;
     }
 

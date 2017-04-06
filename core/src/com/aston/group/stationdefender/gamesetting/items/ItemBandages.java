@@ -18,9 +18,8 @@ public class ItemBandages extends Item {
         super("Bandages");
         id = 5;
         cost = 3;
-        value = 2;
-        // TODO: Bandages texture needed
-        texture = TextureManager.INSTANCE.loadTexture(8);
+        health = 5;
+        texture = TextureManager.INSTANCE.loadTexture(26);
         placeable = false;
     }
 

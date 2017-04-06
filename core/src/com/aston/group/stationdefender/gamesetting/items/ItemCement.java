@@ -17,9 +17,8 @@ public class ItemCement extends Item {
     public ItemCement() {
         super("Cement");
         id = 8;
-        cost = 3;
-        // TODO: cement texture needed
-        texture = TextureManager.INSTANCE.loadTexture(8);
+        cost = 8;
+        texture = TextureManager.INSTANCE.loadTexture(30);
         placeable = false;
     }
 
