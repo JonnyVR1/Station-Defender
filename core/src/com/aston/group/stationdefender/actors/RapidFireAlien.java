@@ -12,13 +12,10 @@ public class RapidFireAlien extends Alien {
     private boolean overloaded = false;
 
     /**
-     * Construct a new RapidFireAlien with given X and Y co-ordinates
-     *
-     * @param x The X co-ordinate to give the Alien
-     * @param y The Y co-ordinate to give the Alien
+     * Construct a new RapidFireAlien default X and Y co-ordinates of '0'
      */
-    public RapidFireAlien(int x, int y) {
-        super("Rapid Fire Alien", -125, 5.0, 10, Constants.UNIT_HEALTH, 2, 0.5, x, y, 100, 38);
+    public RapidFireAlien() {
+        super("Rapid Fire Alien", -125, 5.0, 10, Constants.UNIT_HEALTH, 2, 0.5, 0, 0, 100, 38);
         setTexture(TextureManager.INSTANCE.loadTexture(12));
     }
 

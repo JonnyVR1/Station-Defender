@@ -33,6 +33,6 @@ public class ItemCloseCombatWeapon extends Item {
 
     @Override
     public Actor getPlaceableActor() {
-        return new CloseCombatWeapon(0, 0);
+        return new CloseCombatWeapon();
     }
 }

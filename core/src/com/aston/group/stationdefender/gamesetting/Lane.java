@@ -438,6 +438,7 @@ public class Lane implements UnitCallback {
      *
      * @param projectile The Projectile to check for collisions
      * @param unit       The Unit to check for collisions against the Projectile
+     * @param isBossEnemy Whether the Unit is a Boss Enemy or not
      */
     private void projectileCollisionHelper(Projectile projectile, Unit unit, boolean isBossEnemy) {
         if (unit.isFacingLeft() && projectile.isColliding(unit.getX(), unit.getY(), unit.getWidth(), unit.getHeight())) {

@@ -15,13 +15,10 @@ public class Alien extends Unit {
     private final SpriteBatch batch;
 
     /**
-     * Construct a new Alien with given X and Y co-ordinates
-     *
-     * @param x The X co-ordinate to give the Alien
-     * @param y The Y co-ordinate to give the Alien
+     * Construct a new Alien with default X and Y co-ordinates of '0'
      */
-    public Alien(int x, int y) {
-        this("Alien", -120, Constants.DEFAULT_DAMAGE, 5, Constants.UNIT_HEALTH, 5.0, 12, x, y, 100, 38);
+    public Alien() {
+        this("Alien", -120, Constants.DEFAULT_DAMAGE, 5, Constants.UNIT_HEALTH, 5.0, 12, 0, 0, 100, 38);
     }
 
     /**

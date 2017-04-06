@@ -11,13 +11,10 @@ import com.aston.group.stationdefender.utils.TextureManager;
 public class KamikazeAlien extends Alien {
 
     /**
-     * Create a new KamikazeAlien with given X and Y co-ordinates
-     *
-     * @param x The X co-ordinate of the KamikazeAlien
-     * @param y The Y co-ordinate of the KamikazeAlien
+     * Create a new KamikazeAlien with default X and Y co-ordinates of '0'
      */
-    public KamikazeAlien(int x, int y) {
-        super("Kamikaze Alien", -100, 100, 1, Constants.UNIT_HEALTH, 1.0, 0.9, x, y, 100, 38);
+    public KamikazeAlien() {
+        super("Kamikaze Alien", -100, 100, 1, Constants.UNIT_HEALTH, 1.0, 0.9, 0, 0, 100, 38);
         setTexture(TextureManager.INSTANCE.loadTexture(14));
     }
 

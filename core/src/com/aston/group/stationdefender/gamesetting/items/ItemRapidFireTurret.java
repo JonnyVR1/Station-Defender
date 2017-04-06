@@ -33,6 +33,6 @@ public class ItemRapidFireTurret extends Item {
 
     @Override
     public Actor getPlaceableActor() {
-        return new RapidFireWeapon(0, 0);
+        return new RapidFireWeapon();
     }
 }

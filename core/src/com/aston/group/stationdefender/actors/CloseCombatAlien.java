@@ -11,13 +11,10 @@ import com.aston.group.stationdefender.utils.TextureManager;
 public class CloseCombatAlien extends Alien {
 
     /**
-     * Create a new CloseCombatAlien with given X and Y co-ordinates
-     *
-     * @param x The X co-ordinate of the CloseCombatAlien
-     * @param y The Y co-ordinate of the CloseCombatAlien
+     * Create a new CloseCombatAlien with default X and Y co-ordinates of '0'
      */
-    public CloseCombatAlien(int x, int y) {
-        super("Close Combat Alien", -100, 60.0, 2, Constants.UNIT_HEALTH, 1, 7.0, x, y, 20, 20);
+    public CloseCombatAlien() {
+        super("Close Combat Alien", -100, 60.0, 2, Constants.UNIT_HEALTH, 1, 7.0, 0, 0, 20, 20);
         setTexture(TextureManager.INSTANCE.loadTexture(22));
     }
 }

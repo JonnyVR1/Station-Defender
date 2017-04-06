@@ -14,13 +14,10 @@ public class RapidFireWeapon extends Weapon {
     private boolean overloaded = false;
 
     /**
-     * Construct a new RapidFireWeapon with given X and Y co-ordinates
-     *
-     * @param x The X co-ordinate to give the RapidFireWeapon
-     * @param y The Y co-ordinate to give the RapidFireWeapon
+     * Construct a new RapidFireWeapon with default X and Y co-ordinates of '0'
      */
-    public RapidFireWeapon(int x, int y) {
-        super("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, x, y, 60, 60, 1.0, 15, 25);
+    public RapidFireWeapon() {
+        super("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 0, 0, 60, 60, 1.0, 15, 25);
         setTexture(TextureManager.INSTANCE.loadTexture(13));
     }
 

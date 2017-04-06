@@ -18,17 +18,17 @@ public class UnitFactory {
     private static Actor getEnemy(Units units) {
         switch (units) {
             case ALIEN:
-                return new Alien(0, 0);
+                return new Alien();
             case CLOSE_COMBAT_ALIEN:
-                return new CloseCombatAlien(0, 0);
+                return new CloseCombatAlien();
             case KAMIKAZE:
-                return new KamikazeAlien(0, 0);
+                return new KamikazeAlien();
             case RAPID_FIRE_ALIEN:
-                return new RapidFireAlien(0, 0);
+                return new RapidFireAlien();
             case MINE:
-                return new Mine(0, 0);
+                return new Mine();
             default:
-                return new Alien(0, 0);
+                return new Alien();
         }
     }
 

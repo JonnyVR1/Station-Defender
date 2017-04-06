@@ -12,13 +12,10 @@ public class Mine extends Alien {
     private long lastTime;
 
     /**
-     * Create a new Mine with given X and Y co-ordinates
-     *
-     * @param x The X co-ordinate of the Mine
-     * @param y The Y co-ordinate of the Mine
+     * Create a new Mine with default X and Y co-ordinates of '0'
      */
-    public Mine(int x, int y) {
-        super("Mine", 0, 10, 4.0, Constants.UNIT_HEALTH, 4, 0.9, x, y, 60, 50);
+    public Mine() {
+        super("Mine", 0, 10, 4.0, Constants.UNIT_HEALTH, 4, 0.9, 0, 0, 60, 50);
         setTexture(TextureManager.INSTANCE.loadTexture(11));
     }
 
