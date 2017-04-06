@@ -94,8 +94,8 @@ public class Tower implements Actor {
      * @param health The amount of health to add to the Tower
      */
     public void addHealth(int health) {
-        indicatorManager.addIndicator("+" + Integer.toString( health), Color.YELLOW);
         this.health += health;
+        indicatorManager.addIndicator("+" + Integer.toString( health), Color.YELLOW);
     }
 
     @Override
