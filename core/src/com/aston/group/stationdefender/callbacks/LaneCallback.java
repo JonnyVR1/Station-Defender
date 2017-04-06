@@ -14,14 +14,14 @@ public interface LaneCallback {
      *
      * @param money The amount of money to add to the Player
      */
-    void addMoney(int money);
+    void addMoney(@SuppressWarnings("SameParameterValue") int money);
 
     /**
      * Callback to add points to the Player
      *
      * @param score The amount of points to add to the Player
      */
-    void addScore(int score);
+    void addScore(@SuppressWarnings("SameParameterValue") int score);
 
     /**
      * Callback to tell the Tower to take damage
