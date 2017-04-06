@@ -11,7 +11,7 @@ public class CloseCombatWeaponTest {
 
     @Before
     public void setUp() {
-        weapon = new CloseCombatWeapon();
+        weapon = new CloseCombatWeapon(0, 0);
     }
 
     /*String name, double speed, double damage, double rateOfFire, double health,
