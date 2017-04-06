@@ -4,7 +4,7 @@ import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.utils.TextureManager;
 
 /**
- * Fast Firing Alien with fast, but low damage.
+ * Fast Firing Alien with fast speed, but low damage.
  *
  * @author IngramJ
  */

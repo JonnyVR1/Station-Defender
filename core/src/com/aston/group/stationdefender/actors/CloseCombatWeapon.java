@@ -4,7 +4,7 @@ import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.utils.TextureManager;
 
 /**
- * Fast Alien with slow, but high damage.
+ * Fast Alien with slow speed, but high damage.
  *
  * @author IngramJ
  */

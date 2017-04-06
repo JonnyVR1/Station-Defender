@@ -15,7 +15,7 @@ public class Mine extends Alien {
      * Create a new Mine with default X and Y co-ordinates of '0'
      */
     public Mine() {
-        super("Mine", 0, 10, 4.0, Constants.UNIT_HEALTH, 4, 0.9, 0, 0, 60, 50);
+        super("Mine", 0, 60, 4.0, Constants.UNIT_HEALTH, 4, 0.9, 0, 0, 60, 50);
         setTexture(TextureManager.INSTANCE.loadTexture(11));
     }
 

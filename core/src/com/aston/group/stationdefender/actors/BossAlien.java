@@ -5,7 +5,7 @@ import com.aston.group.stationdefender.utils.TextureManager;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Boss Alien displayed at the end of the level.
+ * Boss Alien displayed at the end of the level.  Low speed but high damage.
  *
  * @author Jonathon Fitch
  */
