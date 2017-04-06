@@ -20,12 +20,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Tower implements Actor {
     private final int height = 400;
     private final int width = 100;
-    private final int x = 0;
-    private final int y = 100;
     private final SpriteBatch batch;
     private final Texture texture;
     private final BitmapFont font;
     private final ParticleEffectHelper particleEffectHelper;
+    private int x = 0;
+    private int y = 100;
     private int health;
     private boolean exists;
 
@@ -71,16 +71,6 @@ public class Tower implements Actor {
         return x + width > this.x && x < this.x + this.width && y + height > this.y && y < this.y + this.height;
     }
 
-    /**
-     * Determines what happens when the tower gets destroyed.
-     */
-    @Override
-    public void destroy() {
-        health = 0;
-        exists = false;
-        particleEffectHelper.destroy(x, y);
-    }
-
     @Override
     public void dispose() {
         texture.dispose();
@@ -99,7 +89,9 @@ public class Tower implements Actor {
      */
     public void takeDamage(double damage) {
         if (health - damage <= 0) {
-            destroy();
+            health = 0;
+            exists = false;
+            particleEffectHelper.destroy(x, y);
         } else
             health -= damage;
     }
@@ -111,5 +103,35 @@ public class Tower implements Actor {
      */
     public void addHealth(int health) {
         this.health += health;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
     }
 }

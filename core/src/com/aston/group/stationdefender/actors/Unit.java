@@ -91,7 +91,6 @@ public abstract class Unit implements Actor {
     @Override
     public abstract void act(float delta);
 
-    @Override
     public void destroy() {
         exists = false;
         particleEffectHelper.destroy(x, y);

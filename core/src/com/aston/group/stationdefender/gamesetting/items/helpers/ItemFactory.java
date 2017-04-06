@@ -1,4 +1,4 @@
-package com.aston.group.stationdefender.utils.resources;
+package com.aston.group.stationdefender.gamesetting.items.helpers;
 
 import com.aston.group.stationdefender.gamesetting.items.*;
 

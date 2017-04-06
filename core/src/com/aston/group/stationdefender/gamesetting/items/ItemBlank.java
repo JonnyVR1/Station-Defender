@@ -1,6 +1,6 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
-import com.aston.group.stationdefender.actors.Unit;
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
 
 /**
@@ -24,7 +24,7 @@ public class ItemBlank extends Item {
     }
 
     @Override
-    public Unit getPlaceableUnit() {
+    public Actor getPlaceableActor() {
         return null;
     }
 }

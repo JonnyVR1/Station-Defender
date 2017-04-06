@@ -24,11 +24,6 @@ public interface Actor {
     void act(float delta);
 
     /**
-     * Destroys the Actor
-     */
-    void destroy();
-
-    /**
      * Returns the exist state of the Actor
      *
      * @return true if the Actor exists, false if the Actor does not exist
@@ -46,4 +41,46 @@ public interface Actor {
      * Dispose of unused resources
      */
     void dispose();
+
+    /**
+     * Returns the height of the Unit
+     *
+     * @return The height of the Unit
+     */
+    int getHeight();
+
+    /**
+     * Returns the width of the Unit
+     *
+     * @return The width of the Unit
+     */
+    int getWidth();
+
+    /**
+     * Returns the X co-ordinate of the Unit
+     *
+     * @return The X co-ordinate of the Unit
+     */
+    int getX();
+
+    /**
+     * Sets the X co-ordinate of the Unit
+     *
+     * @param x The X co-ordinate of the Unit
+     */
+    void setX(int x);
+
+    /**
+     * Returns the Y co-ordinate of the Unit
+     *
+     * @return The Y co-ordinate of the Unit
+     */
+    int getY();
+
+    /**
+     * Sets the Y co-ordinate of the Unit
+     *
+     * @param y The Y co-ordinate of the Unit
+     */
+    void setY(int y);
 }

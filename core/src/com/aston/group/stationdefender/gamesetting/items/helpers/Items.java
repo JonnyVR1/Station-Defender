@@ -1,4 +1,4 @@
-package com.aston.group.stationdefender.utils.resources;
+package com.aston.group.stationdefender.gamesetting.items.helpers;
 
 /**
  * This enum is responsible for holding a list of Items that can be created within the Game.

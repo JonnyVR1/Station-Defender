@@ -15,7 +15,7 @@ public class UnitFactory {
      * @param units The set of Units to choose from
      * @return A new Enemy Unit
      */
-    private static Unit getEnemy(Units units) {
+    private static Actor getEnemy(Units units) {
         switch (units) {
             case ALIEN:
                 return new Alien(0, 0);
@@ -37,7 +37,7 @@ public class UnitFactory {
      *
      * @return The new Enemy Unit
      */
-    public static Unit getRandomEnemy() {
+    public static Actor getRandomEnemy() {
         int rand = (int) (Math.random() * (Units.values().length));
         return UnitFactory.getEnemy(Units.values()[rand]);
     }
@@ -47,7 +47,7 @@ public class UnitFactory {
      *
      * @return The new Boss Enemy unit
      */
-    public static Unit getBossEnemy() {
+    public static Actor getBossEnemy() {
         return new BossAlien();
     }
 }

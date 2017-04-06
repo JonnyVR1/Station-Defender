@@ -1,10 +1,10 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.actors.CloseCombatWeapon;
-import com.aston.group.stationdefender.actors.Unit;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
+import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.aston.group.stationdefender.utils.TextureManager;
-import com.aston.group.stationdefender.utils.resources.Items;
 
 /**
  * ItemCloseCombatWeapon represents a CloseCombatWeapon Item that can be used within the game
@@ -32,7 +32,7 @@ public class ItemCloseCombatWeapon extends Item {
     }
 
     @Override
-    public Unit getPlaceableUnit() {
+    public Actor getPlaceableActor() {
         return new CloseCombatWeapon(0, 0);
     }
 }

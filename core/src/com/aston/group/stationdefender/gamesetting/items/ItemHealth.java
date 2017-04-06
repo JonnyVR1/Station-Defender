@@ -1,9 +1,9 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
-import com.aston.group.stationdefender.actors.Unit;
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
+import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.aston.group.stationdefender.utils.TextureManager;
-import com.aston.group.stationdefender.utils.resources.Items;
 
 /**
  * ItemHealth represents a Health Item that can be used within the game to give the Tower
@@ -33,7 +33,7 @@ public class ItemHealth extends Item {
     }
 
     @Override
-    public Unit getPlaceableUnit() {
+    public Actor getPlaceableActor() {
         return null;
     }
 }

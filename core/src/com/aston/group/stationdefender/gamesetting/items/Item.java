@@ -1,9 +1,9 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
-import com.aston.group.stationdefender.actors.Unit;
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
 import com.aston.group.stationdefender.engine.GameEngine;
-import com.aston.group.stationdefender.utils.resources.Items;
+import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -67,9 +67,9 @@ public abstract class Item {
     /**
      * Abstract method to return whether the Item can be placed on the Level
      *
-     * @return A Unit that can be placed on the Level, null if the Unit cannot be placed on the Level
+     * @return An Actor that can be placed on the Level, null if the Actor cannot be placed on the Level
      */
-    public abstract Unit getPlaceableUnit();
+    public abstract Actor getPlaceableActor();
 
     /**
      * Returns the ID of the Item

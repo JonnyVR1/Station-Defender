@@ -1,5 +1,6 @@
 package com.aston.group.stationdefender.gamesetting;
 
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.actors.Mine;
 import com.aston.group.stationdefender.actors.Unit;
 import com.aston.group.stationdefender.actors.helpers.UnitFactory;
@@ -9,9 +10,9 @@ import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.gamesetting.helpers.Projectile;
 import com.aston.group.stationdefender.gamesetting.helpers.Tile;
 import com.aston.group.stationdefender.gamesetting.items.Item;
+import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
 import com.aston.group.stationdefender.utils.MouseInput;
 import com.aston.group.stationdefender.utils.ProjectileFactory;
-import com.aston.group.stationdefender.utils.resources.ItemFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
@@ -30,7 +31,7 @@ import java.util.stream.IntStream;
 public class Lane implements UnitCallback {
     private final int x, y, height;
     private final Array<Tile> tiles = new Array<>();
-    private final Array<Unit> units = new Array<>();
+    private final Array<Actor> actors = new Array<>();
     private final Array<Item> itemDrops = new Array<>();
     private final ProjectileFactory projectileFactory;
     private final LaneCallback laneCallback;
@@ -79,21 +80,21 @@ public class Lane implements UnitCallback {
     /**
      * Places a Unit in a Lane using the Tile as a helper
      *
-     * @param unit The Unit to place
-     * @param x    The X co-ordinate of the Tile
-     * @param y    The Y co-ordinate of the Tile
+     * @param actor The Actor to place
+     * @param x     The X co-ordinate of the Tile
+     * @param y     The Y co-ordinate of the Tile
      * @return True if the placement was successful, false if the placement was unsuccessful
      */
-    boolean place(Unit unit, int x, int y) {
+    boolean place(Actor actor, int x, int y) {
         for (int i = 0; i < tiles.size; i++) {
             if (tiles.get(i).isColliding(x, y, 1, 1) && !isTileOccupied(i) && !tiles.get(i).isInvalid()) {
-                unit.setX(tiles.get(i).getCenterX() - (unit.getWidth() / 2));
-                unit.setY(tiles.get(i).getCenterY() - (unit.getHeight() / 2));
+                actor.setX(tiles.get(i).getCenterX() - (actor.getWidth() / 2));
+                actor.setY(tiles.get(i).getCenterY() - (actor.getHeight() / 2));
                 if (tiles.get(i).isHasItem()) {
                     Item item = ItemFactory.getRandomItem();
                     laneCallback.collectItem(item);
                 }
-                units.add(unit);
+                actors.add(actor);
                 return true;
             }
         }
@@ -107,7 +108,7 @@ public class Lane implements UnitCallback {
      * @return true if a Unit is on the Tile, false if a Unit is not on the Tile
      */
     private boolean isTileOccupied(int tileIndex) {
-        return tiles.get(tileIndex) != null && IntStream.range(0, units.size).anyMatch(i -> tiles.get(tileIndex).isColliding(units.get(i)));
+        return tiles.get(tileIndex) != null && IntStream.range(0, actors.size).anyMatch(i -> tiles.get(tileIndex).isColliding(actors.get(i)));
     }
 
     /**
@@ -173,68 +174,78 @@ public class Lane implements UnitCallback {
             tile.render();
         }
         //Units
-        for (Unit unit : units) {
-            unit.render(delta);
-            unit.setUnitCallback(this);
+        for (Actor actor : actors) {
+            actor.render(delta);
+            if (actor instanceof Unit) {
+                Unit unit = (Unit) actor;
+                unit.setUnitCallback(this);
+            }
         }
 
         //Check if Units are adjacent. if they are, share the adjacent actor with each other
-        for (int i = 0; i < units.size; i++) {
+        for (int i = 0; i < actors.size; i++) {
             boolean isUnitAdjacent = false;
-
-            Unit unit = null;
-            for (int j = 0; j < units.size; j++) {
-                if (i != j) {
-                    if (units.get(i).isUnitAdjacent(units.get(j)) && !(units.get(i) instanceof Mine)) {
-                        isUnitAdjacent = true;
-                        unit = units.get(j);
-                        break;
+            if (actors.get(i) instanceof Unit) {
+                Unit actor1 = (Unit) actors.get(i);
+                Unit unit = null;
+                for (int j = 0; j < actors.size; j++) {
+                    if (i != j && actors.get(j) instanceof Unit) {
+                        Unit actor2 = (Unit) actors.get(j);
+                        if (actor1.isUnitAdjacent(actor2) && !(actor2 instanceof Mine)) {
+                            isUnitAdjacent = true;
+                            unit = actor2;
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (!(units.get(i) instanceof Mine)) {
-                if (isUnitAdjacent) {
-                    units.get(i).setIsAdjacent(true);
-                } else {
-                    units.get(i).setIsAdjacent(false);
+                if (!(actor1 instanceof Mine)) {
+                    if (isUnitAdjacent) {
+                        actor1.setIsAdjacent(true);
+                    } else {
+                        actor1.setIsAdjacent(false);
+                    }
+                    actor1.setAdjacentActor(unit);
                 }
-                units.get(i).setAdjacentActor(unit);
-            }
 
-            //Check if aliens are near tower
-            unit = units.get(i);
-            if (unit.isFacingLeft() && laneCallback.isTowerColliding(unit.getX(), unit.getY(), unit.getWidth(), unit.getHeight())) {
-                laneCallback.towerTakeDamage(unit.getDamage());
-                overrun = true;
-                unit.destroy();
-                units.removeIndex(i);
+                //Check if aliens are near tower
+                unit = actor1;
+                if (unit.isFacingLeft() && laneCallback.isTowerColliding(unit.getX(), unit.getY(), unit.getWidth(), unit.getHeight())) {
+                    laneCallback.towerTakeDamage(unit.getDamage());
+                    overrun = true;
+                    unit.destroy();
+                    actors.removeIndex(i);
+                }
             }
         }
 
         //Remove Dead Units
-        Iterator<Unit> unitsIterator = units.iterator();
+        Iterator<Actor> unitsIterator = actors.iterator();
         while (unitsIterator.hasNext()) {
-            Unit unit = unitsIterator.next();
-            if (!unit.getExists()) {
-                dropItem(ItemFactory.getItemByChance(), unit.getX(), unit.getY());
-                unit.setHealth(-1);
-            }
-            if (unit.getHealth() <= 0) {
-                unitsIterator.remove();
+            Actor actor = unitsIterator.next();
+            Unit unit;
+            if (actor instanceof Unit) {
+                unit = (Unit) actor;
+                if (!unit.getExists()) {
+                    dropItem(ItemFactory.getItemByChance(), unit.getX(), unit.getY());
+                    unit.setHealth(-1);
+                }
+                if (unit.getHealth() <= 0) {
+                    unitsIterator.remove();
+                }
             }
         }
 
         //Spawn New Aliens
         if (System.currentTimeMillis() - lastRenderTime > 2200 + Math.random() * 3000) {
             if (alienAmount > 0) {
-                Unit unit = UnitFactory.getRandomEnemy();
+                Actor unit = UnitFactory.getRandomEnemy();
                 if (unit instanceof Mine)
                     unit.setX(getRandomTileCenterX() - (unit.getHeight() / 2));
                 else
                     unit.setX(getLastTileCenterX() - (unit.getWidth() / 2));
                 unit.setY(getLastTileCenterY() - (unit.getHeight() / 2));
-                units.add(unit);
+                actors.add(unit);
                 alienAmount--;
             }
             lastRenderTime = System.currentTimeMillis();
@@ -242,7 +253,7 @@ public class Lane implements UnitCallback {
 
         //Draw Projectiles
         projectileFactory.render(delta);
-        projectileCollision(units, null);
+        projectileCollision(actors, null);
 
         //Check if lane is cleared
         if (isLaneCleared() && alienAmount <= 0) {
@@ -289,7 +300,13 @@ public class Lane implements UnitCallback {
      * @return True if the lane is cleared of Aliens, false if not
      */
     private boolean isLaneCleared() {
-        return IntStream.range(0, units.size).noneMatch(i -> units.get(i).isFacingLeft());
+        return IntStream.range(0, actors.size).noneMatch(i -> {
+            if (actors.get(i) instanceof Unit) {
+                Unit unit = (Unit) actors.get(i);
+                return unit.isFacingLeft();
+            }
+            return false;
+        });
     }
 
     /**
@@ -354,8 +371,8 @@ public class Lane implements UnitCallback {
         for (Tile tile : tiles) {
             tile.dispose();
         }
-        for (Unit unit : units) {
-            unit.dispose();
+        for (Actor actor : actors) {
+            actor.dispose();
         }
     }
 
@@ -398,15 +415,17 @@ public class Lane implements UnitCallback {
     /**
      * Checks if projectiles are colliding with a Unit or an array of Units
      *
-     * @param unitsArray The array of Units to cycle through
-     * @param bossUnit   The singular boss Unit to check for collisions
+     * @param actorsArray The array of Units to cycle through
+     * @param bossUnit    The singular boss Unit to check for collisions
      */
-    void projectileCollision(Array<Unit> unitsArray, Unit bossUnit) {
+    void projectileCollision(Array<Actor> actorsArray, Unit bossUnit) {
         for (int i = 0; i < projectileFactory.getProjectiles().size; i++) {
-            if (unitsArray != null) {
-                for (int j = 0; j < unitsArray.size; j++) {
-                    Unit unit = unitsArray.get(j);
-                    projectileCollisionHelper(projectileFactory.getProjectiles().get(i), unit);
+            if (actorsArray != null) {
+                for (int j = 0; j < actorsArray.size; j++) {
+                    if (actorsArray.get(i) instanceof Unit) {
+                        Unit unit = (Unit) actorsArray.get(j);
+                        projectileCollisionHelper(projectileFactory.getProjectiles().get(i), unit);
+                    }
                 }
             } else {
                 projectileCollisionHelper(projectileFactory.getProjectiles().get(i), bossUnit);

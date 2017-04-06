@@ -1,6 +1,6 @@
 package com.aston.group.stationdefender.gamesetting.helpers;
 
-import com.aston.group.stationdefender.actors.Unit;
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.utils.MouseInput;
@@ -61,11 +61,11 @@ public class Tile {
     /**
      * Returns whether a Unit is colliding with a Tile
      *
-     * @param unit The Unit to check the collision status
+     * @param actor The Unit to check the collision status
      * @return true if the Unit is colliding, false if the Unit is not colliding
      */
-    public boolean isColliding(Unit unit) {
-        return isColliding(unit.getX(), unit.getY(), unit.getWidth(), unit.getHeight());
+    public boolean isColliding(Actor actor) {
+        return isColliding(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
     }
 
     /**

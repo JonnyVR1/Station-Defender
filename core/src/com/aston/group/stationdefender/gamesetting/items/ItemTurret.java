@@ -1,10 +1,10 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
-import com.aston.group.stationdefender.actors.Unit;
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.actors.Weapon;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
+import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.aston.group.stationdefender.utils.TextureManager;
-import com.aston.group.stationdefender.utils.resources.Items;
 
 /**
  * ItemTurret represents a Turret Weapon Item that can be used within the game
@@ -32,7 +32,7 @@ public class ItemTurret extends Item {
     }
 
     @Override
-    public Unit getPlaceableUnit() {
+    public Actor getPlaceableActor() {
         return new Weapon(0, 0);
     }
 }

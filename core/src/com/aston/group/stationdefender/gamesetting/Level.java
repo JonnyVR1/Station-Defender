@@ -1,5 +1,6 @@
 package com.aston.group.stationdefender.gamesetting;
 
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.actors.Tower;
 import com.aston.group.stationdefender.actors.Unit;
 import com.aston.group.stationdefender.actors.helpers.UnitFactory;
@@ -167,16 +168,16 @@ public class Level implements LaneCallback {
      * Place an actor at the given lane and tile. if there is already an actor
      * at that tile placing should not happen.
      *
-     * @param unit The Unit to be placed
-     * @param x    The X co-ordinate the place the Unit
-     * @param y    The Y co-ordinate of the Unit
+     * @param actor The Actor to be placed
+     * @param x     The X co-ordinate the place the Unit
+     * @param y     The Y co-ordinate of the Unit
      * @return true if the placement is successful, false if not
      **/
-    public boolean place(Unit unit, int x, int y) {
+    public boolean place(Actor actor, int x, int y) {
         boolean result = false;
         for (Lane lane : lanes) {
             if (lane.isColliding(x, y)) {
-                if (lane.place(unit, x, y))
+                if (lane.place(actor, x, y))
                     result = true;
             }
         }
@@ -263,7 +264,7 @@ public class Level implements LaneCallback {
      * Create the Boss Enemy
      */
     private void createBoss() {
-        bossEnemy = UnitFactory.getBossEnemy();
+        bossEnemy = (Unit) UnitFactory.getBossEnemy();
         bossEnemy.setX(Gdx.graphics.getWidth());
         bossEnemy.setY(Gdx.graphics.getHeight() / 2 - (bossEnemy.getHeight() / 2));
         isBossCreated = true;
