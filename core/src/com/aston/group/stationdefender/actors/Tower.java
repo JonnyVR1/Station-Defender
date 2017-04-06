@@ -5,6 +5,7 @@ import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.utils.FontManager;
 import com.aston.group.stationdefender.utils.TextureManager;
+import com.aston.group.stationdefender.utils.indicators.IndicatorManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,22 +24,20 @@ public class Tower implements Actor {
     private final SpriteBatch batch;
     private final Texture texture;
     private final BitmapFont font;
-    private final ParticleEffectHelper particleEffectHelper;
+    private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
+    private final IndicatorManager indicatorManager = new IndicatorManager();
     private int x = 0;
     private int y = 100;
-    private int health;
-    private boolean exists;
+    private int health = Constants.TOWER_HEALTH;
+    private boolean exists = true;
 
     /**
      * Construct a new Tower
      */
     public Tower() {
-        exists = true;
-        health = Constants.TOWER_HEALTH;
         texture = TextureManager.INSTANCE.loadTexture(6);
         batch = GameEngine.getBatch();
         font = FontManager.getFont(16);
-        particleEffectHelper = new ParticleEffectHelper();
     }
 
     @Override
@@ -75,6 +74,7 @@ public class Tower implements Actor {
     public void dispose() {
         texture.dispose();
         batch.dispose();
+        indicatorManager.dispose();
     }
 
     @Override
@@ -88,6 +88,7 @@ public class Tower implements Actor {
      * @param damage Causes the Unit's health to deplete.
      */
     public void takeDamage(double damage) {
+        indicatorManager.addIndicator("-" + Integer.toString((int) damage), Color.RED);
         if (health - damage <= 0) {
             health = 0;
             exists = false;
@@ -102,6 +103,7 @@ public class Tower implements Actor {
      * @param health The amount of health to add to the Tower
      */
     public void addHealth(int health) {
+        indicatorManager.addIndicator("+" + Integer.toString( health), Color.YELLOW);
         this.health += health;
     }
 
