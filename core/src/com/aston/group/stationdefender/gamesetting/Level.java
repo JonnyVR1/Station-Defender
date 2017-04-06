@@ -110,6 +110,7 @@ public class Level implements LaneCallback {
             if (bossEnemy.getHealth() == 0) {
                 bossEnemy.destroy();
                 isBossDestroyed = true;
+                addMoney(20);
             }
         }
         if (hasLost)

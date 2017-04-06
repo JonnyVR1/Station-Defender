@@ -17,22 +17,22 @@ import java.util.Random;
  */
 public abstract class Unit implements Actor {
     final double speed; //How many tiles it can move per "tick".
-    final IndicatorManager indicatorManager;
+    final IndicatorManager indicatorManager = new IndicatorManager();
     final double rateOfFire; //How many times the unit fires per "tick".
     final int width; //Unit's width
     final int height; //Unit's height
     private final double range; //How many tiles forward the Unit can fire.
     private final String name; //Name of the type of unit.
-    private final ParticleEffectHelper particleEffectHelper;
+    private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final double chanceToHit; //Chance of a hit
     double damage; //How much damage each successful hit causes.
     int x; //Unit's position on the X-Axis
     int y; //Unit's position on the Y-Axis
-    boolean isAdjacent; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
-    Actor adjacentActor; //The Unit that this Unit is adjacent to.
+    boolean isAdjacent = false; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
+    Actor adjacentActor = null; //The Unit that this Unit is adjacent to.
     boolean facingLeft; //Whether the Unit is facing left or not
     UnitCallback unitCallback; //The UnitCallBack used for the Unit
-    private boolean exists; //Whether the Unit is alive or dead.
+    private boolean exists = true; //Whether the Unit is alive or dead.
     private double health; //How much damage the Unit can take before being destroyed.
     private Texture texture;
 
@@ -64,11 +64,6 @@ public abstract class Unit implements Actor {
         this.width = width;
         this.height = height;
         this.chanceToHit = chanceToHit;
-        isAdjacent = false;
-        adjacentActor = null;
-        exists = true;
-        indicatorManager = new IndicatorManager();
-        particleEffectHelper = new ParticleEffectHelper();
     }
 
     /**

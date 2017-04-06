@@ -424,11 +424,11 @@ public class Lane implements UnitCallback {
                 for (int j = 0; j < actorsArray.size; j++) {
                     if (actorsArray.get(i) instanceof Unit) {
                         Unit unit = (Unit) actorsArray.get(j);
-                        projectileCollisionHelper(projectileFactory.getProjectiles().get(i), unit);
+                        projectileCollisionHelper(projectileFactory.getProjectiles().get(i), unit, false);
                     }
                 }
             } else {
-                projectileCollisionHelper(projectileFactory.getProjectiles().get(i), bossUnit);
+                projectileCollisionHelper(projectileFactory.getProjectiles().get(i), bossUnit, true);
             }
         }
     }
@@ -439,13 +439,17 @@ public class Lane implements UnitCallback {
      * @param projectile The Projectile to check for collisions
      * @param unit       The Unit to check for collisions against the Projectile
      */
-    private void projectileCollisionHelper(Projectile projectile, Unit unit) {
+    private void projectileCollisionHelper(Projectile projectile, Unit unit, boolean isBossEnemy) {
         if (unit.isFacingLeft() && projectile.isColliding(unit.getX(), unit.getY(), unit.getWidth(), unit.getHeight())) {
             projectile.setDead();
             double damage = projectile.getDamage();
             if (unit.getHealth() - damage <= 0) {
-                laneCallback.addMoney(Constants.MONEY_REGENERATION);
-                laneCallback.addScore(Constants.ADD_SCORE_AMOUNT);
+                if (isBossEnemy)
+                    laneCallback.addMoney(Constants.BOSS_DESTROY_MONEY_REGENERATION);
+                else {
+                    laneCallback.addMoney(Constants.MONEY_REGENERATION);
+                    laneCallback.addScore(Constants.ADD_SCORE_AMOUNT);
+                }
             }
             unit.takeDamage(damage);
         }

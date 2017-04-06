@@ -58,6 +58,7 @@ public interface Constants {
 
     int START_MONEY = 50;
     int MONEY_REGENERATION = 1;
+    int BOSS_DESTROY_MONEY_REGENERATION = 20;
     int ADD_SCORE_AMOUNT = 10;
 
     Color primaryColor = Color.valueOf("#37474F");
