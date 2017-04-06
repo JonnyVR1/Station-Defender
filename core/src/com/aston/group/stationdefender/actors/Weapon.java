@@ -20,7 +20,7 @@ public class Weapon extends Unit {
     private final SpriteBatch batch;
     private final double buildTime;
     private final int cost;
-    boolean built;
+    boolean built = false;
     long lastTime;
     private int costToUpgrade;
     private double remainingBuildTime;
@@ -63,7 +63,6 @@ public class Weapon extends Unit {
         this.cost = cost;
         this.costToUpgrade = costToUpgrade;
         remainingBuildTime = buildTime;
-        built = false;
         facingLeft = false;
         batch = GameEngine.getBatch();
         setTexture(TextureManager.INSTANCE.loadTexture(8));

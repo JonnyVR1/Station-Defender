@@ -21,24 +21,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Tower implements Actor {
     private final int height = 400;
     private final int width = 100;
-    private final SpriteBatch batch;
-    private final Texture texture;
-    private final BitmapFont font;
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final Texture texture = TextureManager.INSTANCE.loadTexture(6);
+    private final BitmapFont font = FontManager.getFont(16);
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final IndicatorManager indicatorManager = new IndicatorManager();
     private int x = 0;
     private int y = 100;
     private int health = Constants.TOWER_HEALTH;
     private boolean exists = true;
-
-    /**
-     * Construct a new Tower
-     */
-    public Tower() {
-        texture = TextureManager.INSTANCE.loadTexture(6);
-        batch = GameEngine.getBatch();
-        font = FontManager.getFont(16);
-    }
 
     @Override
     public void render(float delta) {
