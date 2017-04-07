@@ -41,6 +41,7 @@ public class Tower implements Actor {
         font.setColor(Color.WHITE);
         font.draw(batch, "Health: " + health, (Gdx.graphics.getWidth() / 2) - 500, Gdx.graphics.getHeight() - 50);
         batch.end();
+        indicatorManager.render(delta, x, y);
     }
 
     @Override
