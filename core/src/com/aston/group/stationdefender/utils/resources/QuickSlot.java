@@ -1,7 +1,7 @@
 package com.aston.group.stationdefender.utils.resources;
 
 import com.aston.group.stationdefender.gamesetting.items.Item;
-import com.aston.group.stationdefender.gamesetting.items.ItemStack;
+import com.aston.group.stationdefender.gamesetting.items.helpers.ItemStack;
 import com.aston.group.stationdefender.utils.FontManager;
 import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.graphics.Texture;

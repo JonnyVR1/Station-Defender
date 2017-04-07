@@ -1,6 +1,7 @@
-package com.aston.group.stationdefender.gamesetting.items;
+package com.aston.group.stationdefender.gamesetting.items.helpers;
 
 import com.aston.group.stationdefender.engine.GameEngine;
+import com.aston.group.stationdefender.gamesetting.items.Item;
 import com.aston.group.stationdefender.utils.FontManager;
 import com.aston.group.stationdefender.utils.MouseInput;
 import com.badlogic.gdx.graphics.Color;

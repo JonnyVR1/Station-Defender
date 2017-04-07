@@ -436,8 +436,8 @@ public class Lane implements UnitCallback {
     /**
      * Helper method to avoid duplicate code in projectileCollision()
      *
-     * @param projectile The Projectile to check for collisions
-     * @param unit       The Unit to check for collisions against the Projectile
+     * @param projectile  The Projectile to check for collisions
+     * @param unit        The Unit to check for collisions against the Projectile
      * @param isBossEnemy Whether the Unit is a Boss Enemy or not
      */
     private void projectileCollisionHelper(Projectile projectile, Unit unit, boolean isBossEnemy) {
