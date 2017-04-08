@@ -34,7 +34,7 @@ public class MenuScreen implements Screen {
     private final SpriteBatch batch;
     private final BitmapFont font;
     private final TextButton playButton, exitButton;
-    private final Stage stage;
+    private final Stage stage = new Stage();
     private final Texture texture;
     private final GameEngine gameEngine;
     private MenuCallback menuCallback;
@@ -58,8 +58,6 @@ public class MenuScreen implements Screen {
                 }
             }
         };
-
-        stage = new Stage();
 
         Texture hoverTexture = TextureManager.INSTANCE.loadTexture(23);
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();

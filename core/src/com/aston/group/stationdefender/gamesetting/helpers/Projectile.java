@@ -15,22 +15,18 @@ import com.badlogic.gdx.utils.Pool;
 public class Projectile implements Pool.Poolable {
     private final SpriteBatch batch;
     private final Texture texture;
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private boolean alive;
-    private double damage;
-    private double speed;
+    private int x = 0;
+    private int y = 0;
+    private int width = 10;
+    private int height = 8;
+    private boolean alive = false;
+    private double damage, speed;
 
     /**
      * Construct a new Projectile with a default
      * X and Y co-ordinates of '0'
      */
     public Projectile() {
-        x = 0;
-        y = 0;
-        alive = false;
         batch = GameEngine.getBatch();
         texture = TextureManager.INSTANCE.loadTexture(9);
     }
@@ -48,8 +44,6 @@ public class Projectile implements Pool.Poolable {
         this.y = y;
         this.speed = speed;
         this.damage = damage;
-        width = 10;
-        height = 8;
         alive = true;
     }
 

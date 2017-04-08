@@ -20,7 +20,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author Mohammad Foysal
  */
 public class GameScreen implements Screen, PlayerCallback, LevelCallback {
-    private final Player player;
+    private final Player player = new Player();
     private final GameCallback gameCallback;
     private final Level level;
     private final GameEngine gameEngine;
@@ -34,11 +34,8 @@ public class GameScreen implements Screen, PlayerCallback, LevelCallback {
     public GameScreen(final GameCallback gameCallback, int levelNumber) {
         this.gameCallback = gameCallback;
         gameEngine = GameEngine.INSTANCE;
-
-        player = new Player();
         player.setPlayerCallback(this);
         level = new Level(this, levelNumber);
-
         MouseInput.setPosition(new Vector2());
     }
 

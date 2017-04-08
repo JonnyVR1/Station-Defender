@@ -21,7 +21,8 @@ public class ItemStack<T extends Item> implements Iterable<T> {
     private final ArrayList<T> items = new ArrayList<>();
     private final SpriteBatch batch;
     private final BitmapFont font;
-    private final int width, height;
+    private final int width = 32;
+    private final int height = 32;
     private final Class<? extends Item> itemClass;
     private int x;
     private int y;
@@ -36,8 +37,6 @@ public class ItemStack<T extends Item> implements Iterable<T> {
         addItem(item);
         batch = GameEngine.getBatch();
         font = FontManager.getFont(16);
-        width = 32;
-        height = 32;
     }
 
     /**

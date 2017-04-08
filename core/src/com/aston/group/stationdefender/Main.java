@@ -25,8 +25,8 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
     private TwoTextScreen instructionScreen;
     private MenuScreen menuScreen;
     private GameScreen gameScreen;
-    private int levelNumber;
-    private int totalScore;
+    private int levelNumber = 1;
+    private int totalScore = 0;
 
     @Override
     public void create() {
@@ -34,8 +34,6 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
         instructionScreen = new TwoTextScreen(false);
         introScreen = new IntroScreen();
         menuScreen = new MenuScreen();
-        levelNumber = 1;
-        totalScore = 0;
         initGame();
 
         // Setup title and body text

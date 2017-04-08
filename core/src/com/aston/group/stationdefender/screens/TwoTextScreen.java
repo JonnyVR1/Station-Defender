@@ -36,7 +36,7 @@ import java.util.Objects;
  */
 public class TwoTextScreen implements Screen {
     private final SpriteBatch batch;
-    private final Stage stage;
+    private final Stage stage = new Stage();
     private final BitmapFont titleFont;
     private final BitmapFont bodyFont;
     private final TextButton backButton;
@@ -64,7 +64,6 @@ public class TwoTextScreen implements Screen {
         bodyFont = FontManager.getFont(30);
         titleFont = FontManager.getFont(50);
         BitmapFont buttonFont = FontManager.getFont(18);
-        stage = new Stage();
 
         //Background
         Texture texture = TextureManager.INSTANCE.loadTexture(2);

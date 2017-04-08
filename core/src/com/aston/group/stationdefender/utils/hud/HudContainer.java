@@ -22,11 +22,6 @@ public class HudContainer extends HudElement {
      * Create a new HudContainer at with default X and Y co-ordinates of '0'
      */
     HudContainer() {
-        this.x = 0;
-        this.y = 0;
-        width = 400;
-        height = 200;
-        title = "Blank Container";
         shapeRenderer = GameEngine.getShapeRenderer();
         batch = GameEngine.getBatch();
         font = FontManager.getFont(16);

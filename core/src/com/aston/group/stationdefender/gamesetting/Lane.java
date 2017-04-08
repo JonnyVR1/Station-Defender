@@ -29,7 +29,7 @@ import java.util.stream.IntStream;
  * @author Twba Alshaghdari
  */
 public class Lane implements UnitCallback {
-    private final int x, y, height;
+    private final int x, y;
     private final Array<Tile> tiles = new Array<>();
     private final Array<Actor> actors = new Array<>();
     private final Array<Item> itemDrops = new Array<>();
@@ -54,7 +54,6 @@ public class Lane implements UnitCallback {
         this.laneCallback = laneCallback;
         this.x = x;
         this.y = y;
-        this.height = Constants.TILE_HEIGHT;
 
         Tile[] tile = new Tile[numberOfTiles];
         int tileX = x;
@@ -331,7 +330,8 @@ public class Lane implements UnitCallback {
      * @return true if the values overlap, false if the values do not overlap
      */
     boolean isColliding(int x, int y) {
-        return x + 1 > this.x && x < this.x + this.width && y + 1 > this.y && y < this.y + this.height;
+        int height = Constants.TILE_HEIGHT;
+        return x + 1 > this.x && x < this.x + this.width && y + 1 > this.y && y < this.y + height;
     }
 
     @Override

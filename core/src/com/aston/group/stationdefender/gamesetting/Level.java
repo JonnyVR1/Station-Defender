@@ -33,7 +33,7 @@ public class Level implements LaneCallback {
     private final BitmapFont font;
     private final Array<Lane> lanes = new Array<>();
     private final int levelNumber;
-    private final Tower tower;
+    private final Tower tower = new Tower();
     private Unit bossEnemy;
     private boolean isBossCreated = false;
     private boolean isBossDestroyed = false;
@@ -49,7 +49,6 @@ public class Level implements LaneCallback {
     public Level(LevelCallback levelCallback, int levelNumber) {
         this.levelNumber = levelNumber;
         this.levelCallback = levelCallback;
-        tower = new Tower();
         batch = GameEngine.getBatch();
         if (levelNumber == 1)
             texture = TextureManager.INSTANCE.loadTexture(3);

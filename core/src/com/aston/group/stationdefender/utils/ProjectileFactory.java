@@ -21,12 +21,6 @@ public class ProjectileFactory {
     private final Array<Projectile> projectiles = new Array<>();
 
     /**
-     * Construct a new ProjectileFactory
-     */
-    public ProjectileFactory() {
-    }
-
-    /**
      * Shoots a bullet
      *
      * @param x      The initial X co-ordinate of the bullet

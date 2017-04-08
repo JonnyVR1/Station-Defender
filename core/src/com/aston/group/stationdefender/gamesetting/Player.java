@@ -33,17 +33,17 @@ import com.badlogic.gdx.utils.Array;
  * @author Mohammed Foysal
  */
 public class Player implements InputProcessor, ItemCallback {
-    private final Array<QuickSlot> quickSlots;
+    private final Array<QuickSlot> quickSlots = new Array<>();
     private final QuickSlotCallback quickSlotCallback;
     private final SpriteBatch batch;
     private final BitmapFont font;
-    private final Stage stage;
+    private final Stage stage = new Stage();
     private final TextButton menuButton;
-    private final IndicatorManager moneyIndicator;
-    private final StackableInventory inventory;
+    private final IndicatorManager moneyIndicator = new IndicatorManager();
+    private final StackableInventory inventory = new StackableInventory();
     private Item currentItem;
-    private int score;
-    private int money;
+    private int score = 0;
+    private int money = Constants.START_MONEY;
     private PlayerCallback playerCallback;
     private int selectedSlot = 0;
     private boolean itemsLoaded = false;
@@ -53,9 +53,6 @@ public class Player implements InputProcessor, ItemCallback {
      */
     public Player() {
         batch = GameEngine.getBatch();
-        inventory = new StackableInventory();
-        score = 0;
-        money = Constants.START_MONEY;
         FileUtils.loadLevel((score, money, levelNumber, items) -> {
             this.score = score;
             if (money < 20)
@@ -73,7 +70,6 @@ public class Player implements InputProcessor, ItemCallback {
         }
 
         //Quick Slots
-        quickSlots = new Array<>();
         int slotX = 0;
         for (int i = 0; i < 8; i++) {
             QuickSlot quickSlot = new QuickSlot(slotX);
@@ -89,7 +85,6 @@ public class Player implements InputProcessor, ItemCallback {
         BitmapFont buttonFont = FontManager.getFont(22);
 
         //Buttons
-        stage = new Stage();
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = buttonFont;
         menuButton = new TextButton(Constants.MENU, textButtonStyle);
@@ -100,7 +95,6 @@ public class Player implements InputProcessor, ItemCallback {
         menuButton.setPosition((Gdx.graphics.getWidth() / 2) + 200, Gdx.graphics.getHeight() - 80);
 
         //Initialise Money Indicator
-        moneyIndicator = new IndicatorManager();
         updateQuickSlots();
     }
 

@@ -18,12 +18,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  * @author Twba Al-shaghdari
  */
 public class Tile {
-    private final int x, y, width, height;
+    private final int x, y;
+    private final int width = Constants.TILE_WIDTH;
+    private final int height = Constants.TILE_HEIGHT;
     private final SpriteBatch batch;
     private final Texture texture;
     private final ShapeRenderer shapeRenderer;
-    private boolean hasItem;
-    private boolean invalid;
+    private boolean hasItem = false;
+    private boolean invalid = false;
 
     /**
      * Construct a new Tile with given X and Y co-ordinates
@@ -34,14 +36,9 @@ public class Tile {
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
-        width = Constants.TILE_WIDTH;
-        height = Constants.TILE_HEIGHT;
-
         batch = GameEngine.getBatch();
         texture = TextureManager.INSTANCE.loadTexture(4);
         shapeRenderer = GameEngine.getShapeRenderer();
-        hasItem = false;
-        invalid = false;
     }
 
     /**

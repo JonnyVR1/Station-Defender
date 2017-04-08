@@ -1,5 +1,6 @@
 package com.aston.group.stationdefender.utils.resources;
 
+import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.gamesetting.items.Item;
 import com.aston.group.stationdefender.gamesetting.items.helpers.ItemStack;
 import com.aston.group.stationdefender.utils.FontManager;
@@ -35,7 +36,7 @@ public class QuickSlot {
      */
     public QuickSlot(int x) {
         this.x = x;
-        batch = new SpriteBatch();
+        batch = GameEngine.getBatch();
         Texture texture = TextureManager.INSTANCE.loadTexture(5);
         trQuickSlot = new TextureRegion(texture, 78, 29, 20, 20);
         trQuickSlotHovered = new TextureRegion(texture, 57, 29, 20, 20);
@@ -68,7 +69,6 @@ public class QuickSlot {
      * Dispose of the resources created
      */
     public void dispose() {
-        batch.dispose();
         font.dispose();
     }
 

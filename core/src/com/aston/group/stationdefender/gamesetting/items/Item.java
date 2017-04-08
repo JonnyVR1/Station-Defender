@@ -16,15 +16,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class Item {
     private final SpriteBatch batch;
     private final String name;
-    Items sku;
+    Items sku = Items.UNKNOWN;
     int id;
     boolean placeable;
     Texture texture;
-    int cost;
-    int value;
-    int health;
+    int cost = 0;
+    int value = 0;
+    int health = 0;
     private boolean justSpawned;
-    private int x, y, width, height;
+    private int x, y;
+    private int width = 32;
+    private int height = 32;
 
     /**
      * Construct a new Item with a name
@@ -33,12 +35,6 @@ public abstract class Item {
      */
     Item(String name) {
         this.name = name;
-        width = 32;
-        height = 32;
-        cost = 0;
-        value = 0;
-        health = 0;
-        sku = Items.UNKNOWN;
         batch = GameEngine.getBatch();
     }
 
