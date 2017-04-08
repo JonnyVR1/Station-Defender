@@ -33,6 +33,6 @@ public class ItemTurret extends Item {
 
     @Override
     public Actor getPlaceableActor() {
-        return new Weapon(0, 0);
+        return new Weapon();
     }
 }

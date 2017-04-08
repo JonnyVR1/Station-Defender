@@ -28,13 +28,10 @@ public class Weapon extends Unit {
     private HudElement hudElement;
 
     /**
-     * Construct a new Weapon with given X and Y co-ordinates
-     *
-     * @param x The X co-ordinate to give the Weapon
-     * @param y The Y co-ordinate to give the Weapon
+     * Construct a new Weapon with default X and Y co-ordinates of '0'
      */
-    public Weapon(int x, int y) {
-        this("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, x, y, 60, 60, 1.5, 10, 10);
+    public Weapon() {
+        this("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 0, 0, 60, 60, 1.5, 10, 10);
     }
 
     /**

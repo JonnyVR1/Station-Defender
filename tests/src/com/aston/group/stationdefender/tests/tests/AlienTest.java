@@ -19,7 +19,7 @@ public class AlienTest {
 
     @Test
     public void testConstructor() {
-        Alien a = new Alien(0, 0);
+        Alien a = new Alien();
         assertNotNull(a);
         assertEquals("Alien", alien.getName());
         assertEquals(1, alien.getSpeed(), 0);

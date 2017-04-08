@@ -21,7 +21,7 @@ public class WeaponTest {
 
     @Test
     public void testConstructor() {
-        Weapon weapon = new Weapon(0, 0);
+        Weapon weapon = new Weapon();
         assertEquals(0, weapon.getX());
         assertEquals(0, weapon.getY());
         assertEquals("Weapon", testWep.getName());

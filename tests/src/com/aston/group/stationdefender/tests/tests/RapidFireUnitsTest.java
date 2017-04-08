@@ -13,7 +13,7 @@ public class RapidFireUnitsTest {
 
     @Before
     public void setUp() {
-        alien = new RapidFireAlien(2, 2);
+        alien = new RapidFireAlien();
         weapon = new RapidFireWeapon();
     }
 

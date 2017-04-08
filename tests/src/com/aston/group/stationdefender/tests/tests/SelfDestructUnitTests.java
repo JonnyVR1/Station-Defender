@@ -11,7 +11,7 @@ public class SelfDestructUnitTests {
 
     @Before
     public void setUp() {
-        testKamikaze = new KamikazeAlien(5, 4);
+        testKamikaze = new KamikazeAlien();
     }
 
     @Test
