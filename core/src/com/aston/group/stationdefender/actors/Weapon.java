@@ -55,10 +55,10 @@ public class Weapon extends Unit {
      */
     public Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int x, int y, int width, int height,
                   double buildTime, int cost, int costToUpgrade) {
-        super(name, speed, damage, rateOfFire, health, range, chanceToHit, x, y, width, height);
-        this.buildTime = buildTime;
-        this.cost = cost;
-        this.costToUpgrade = costToUpgrade;
+        super("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 0, 0, 60, 60);
+        this.buildTime = 1.5;
+        this.cost = 10;
+        this.costToUpgrade = 10;
         remainingBuildTime = buildTime;
         facingLeft = false;
         batch = GameEngine.getBatch();
