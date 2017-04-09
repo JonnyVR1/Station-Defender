@@ -2,6 +2,7 @@ package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.actors.helpers.ParticleEffectHelper;
 import com.aston.group.stationdefender.callbacks.UnitCallback;
+import com.aston.group.stationdefender.utils.TextureManager;
 import com.aston.group.stationdefender.utils.indicators.IndicatorManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,20 +22,20 @@ public abstract class Unit implements Actor {
     final double rateOfFire; //How many times the unit fires per "tick".
     final int width; //Unit's width
     final int height; //Unit's height
+    final Texture texture;
     private final double range; //How many tiles forward the Unit can fire.
     private final String name; //Name of the type of unit.
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final double chanceToHit; //Chance of a hit
     double damage; //How much damage each successful hit causes.
-    int x; //Unit's position on the X-Axis
-    int y; //Unit's position on the Y-Axis
+    int x = 0; //Unit's position on the X-Axis
+    int y = 0; //Unit's position on the Y-Axis
     boolean isAdjacent = false; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
     Actor adjacentActor = null; //The Unit that this Unit is adjacent to.
     boolean facingLeft; //Whether the Unit is facing left or not
     UnitCallback unitCallback; //The UnitCallBack used for the Unit
     private boolean exists = true; //Whether the Unit is alive or dead.
     private double health; //How much damage the Unit can take before being destroyed.
-    private Texture texture;
 
     /**
      * Construct a new Unit with given name, speed, damage, rateOfFile, health, range, x co-ordinate, y co-ordinate,
@@ -47,23 +48,21 @@ public abstract class Unit implements Actor {
      * @param health      The health of the Unit
      * @param range       The range of the Unit
      * @param chanceToHit The chance of the Weapon to score a hit
-     * @param x           The X co-ordinate of the Unit
-     * @param y           The Y co-ordinate of the Unit
      * @param width       The width of the Unit
      * @param height      The height of the Unit
+     * @param texture     The texture graphic of the Unit
      */
-    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int x, int y, int width, int height) {
+    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture) {
         this.name = name;
         this.speed = speed;
         this.damage = damage;
         this.rateOfFire = rateOfFire;
         this.health = health;
         this.range = range;
-        this.x = x;
-        this.y = y;
         this.width = width;
         this.height = height;
         this.chanceToHit = chanceToHit;
+        this.texture = TextureManager.INSTANCE.loadTexture(texture);
     }
 
     /**
@@ -363,23 +362,5 @@ public abstract class Unit implements Actor {
             System.out.println("Null values are not allowed");
         }
         return result;
-    }
-
-    /**
-     * Returns the Texture of the Unit
-     *
-     * @return The Texture of the Unit
-     */
-    Texture getTexture() {
-        return texture;
-    }
-
-    /**
-     * Sets the Texture of the Unit
-     *
-     * @param texture The Texture of the Unit
-     */
-    void setTexture(Texture texture) {
-        this.texture = texture;
     }
 }

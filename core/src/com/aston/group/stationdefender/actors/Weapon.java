@@ -3,7 +3,6 @@ package com.aston.group.stationdefender.actors;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.utils.MouseInput;
-import com.aston.group.stationdefender.utils.TextureManager;
 import com.aston.group.stationdefender.utils.hud.Hud;
 import com.aston.group.stationdefender.utils.hud.HudElement;
 import com.aston.group.stationdefender.utils.hud.HudWeapon;
@@ -31,7 +30,7 @@ public class Weapon extends Unit {
      * Construct a new Weapon with default X and Y co-ordinates of '0'
      */
     public Weapon() {
-        this("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 0, 0, 60, 60, 1.5, 10, 10);
+        this("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 1.5, 10, 10, 8);
     }
 
     /**
@@ -45,24 +44,20 @@ public class Weapon extends Unit {
      * @param health        The health of the Weapon
      * @param range         The range of the Weapon
      * @param chanceToHit   The chance of the Weapon to score a hit
-     * @param x             The X co-ordinate of the Weapon
-     * @param y             The Y co-ordinate of the Weapon
-     * @param width         The width of the Weapon
-     * @param height        The height of the Weapon
      * @param buildTime     The build time of the Weapon
      * @param cost          The cost of the Weapon
-     * @param costToUpgrade THe cost to upgrade to the Weapon
+     * @param costToUpgrade The cost to upgrade to the Weapon
+     * @param texture       The texture graphic of the Weapon
      */
-    public Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int x, int y, int width, int height,
-                  double buildTime, int cost, int costToUpgrade) {
-        super("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 0, 0, 60, 60);
-        this.buildTime = 1.5;
-        this.cost = 10;
-        this.costToUpgrade = 10;
+    Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit,
+           double buildTime, int cost, int costToUpgrade, int texture) {
+        super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, texture);
+        this.buildTime = buildTime;
+        this.cost = cost;
+        this.costToUpgrade = costToUpgrade;
         remainingBuildTime = buildTime;
         facingLeft = false;
         batch = GameEngine.getBatch();
-        setTexture(TextureManager.INSTANCE.loadTexture(8));
         startTime = System.currentTimeMillis();
     }
 
@@ -70,7 +65,7 @@ public class Weapon extends Unit {
     public void render(float delta) {
         batch.begin();
         renderParticleEffect(delta, batch);
-        batch.draw(getTexture(), x, y, width, height);
+        batch.draw(texture, x, y, width, height);
         batch.end();
         act(delta);
         checkInput();

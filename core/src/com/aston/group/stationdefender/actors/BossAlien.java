@@ -1,7 +1,5 @@
 package com.aston.group.stationdefender.actors;
 
-import com.aston.group.stationdefender.utils.TextureManager;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -15,7 +13,6 @@ public class BossAlien extends Alien {
      * Create a new BossAlien with default X and Y co-ordinates of '0'
      */
     public BossAlien() {
-        super("Alien", -60, 200, 5, 800, 5.0, 8, 0, 0, 300, 225);
-        setTexture(TextureManager.INSTANCE.loadTexture(ThreadLocalRandom.current().nextInt(15, 19)));
+        super("Alien", -60, 200, 5, 800, 5.0, 8, 300, 225, ThreadLocalRandom.current().nextInt(15, 19));
     }
 }

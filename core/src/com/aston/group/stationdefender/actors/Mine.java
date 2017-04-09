@@ -1,7 +1,6 @@
 package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
-import com.aston.group.stationdefender.utils.TextureManager;
 
 /**
  * Mine Alien with low range, low rate of fire and no speed (stays in one place) but has a high damage
@@ -15,8 +14,7 @@ public class Mine extends Alien {
      * Create a new Mine with default X and Y co-ordinates of '0'
      */
     public Mine() {
-        super("Mine", 0, 60, 4.0, Constants.UNIT_HEALTH, 4, 0.9, 0, 0, 60, 50);
-        setTexture(TextureManager.INSTANCE.loadTexture(11));
+        super("Mine", 0, 60, 4.0, Constants.UNIT_HEALTH, 4, 0.9, 60, 50, 11);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
-import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -18,7 +17,7 @@ public class Alien extends Unit {
      * Construct a new Alien with default X and Y co-ordinates of '0'
      */
     public Alien() {
-        this("Alien", -120, Constants.DEFAULT_DAMAGE, 5, Constants.UNIT_HEALTH, 5.0, 12, 0, 0, 100, 38);
+        this("Alien", -120, Constants.DEFAULT_DAMAGE, 5, Constants.UNIT_HEALTH, 5.0, 12, 100, 38, 7);
     }
 
     /**
@@ -32,15 +31,13 @@ public class Alien extends Unit {
      * @param health      The health of the Alien
      * @param range       The range of the Alien
      * @param chanceToHit The chance of the Weapon to score a hit
-     * @param x           The X co-ordinate of the Alien
-     * @param y           The Y co-ordinate of the Alien
      * @param width       The width of the Alien
      * @param height      The height of the Alien
+     * @param texture     The texture graphic of the Alien
      */
-    public Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int x, int y, int width, int height) {
-        super(name, speed, damage, rateOfFire, health, range, chanceToHit, x, y, width, height);
+    Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture) {
+        super(name, speed, damage, rateOfFire, health, range, chanceToHit, width, height, texture);
         batch = GameEngine.getBatch();
-        setTexture(TextureManager.INSTANCE.loadTexture(7));
         facingLeft = true;
     }
 
@@ -52,7 +49,7 @@ public class Alien extends Unit {
             batch.setColor(1f, 1f, 1f, 1f);
         else
             batch.setColor(.5f, .5f, .5f, 1f);
-        batch.draw(getTexture(), x, y, width, height);
+        batch.draw(texture, x, y, width, height);
         batch.end();
         act(delta);
         indicatorManager.render(delta, x, y);

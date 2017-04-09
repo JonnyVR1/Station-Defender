@@ -1,7 +1,5 @@
 package com.aston.group.stationdefender.actors;
 
-import com.aston.group.stationdefender.utils.TextureManager;
-
 /**
  * RapidFireWeapon is a class that represents a RapidFireWeapon object
  * that Humans (Unit) can arm themselves with and use to destroy Aliens.
@@ -17,8 +15,7 @@ public class RapidFireWeapon extends Weapon {
      * Construct a new RapidFireWeapon with default X and Y co-ordinates of '0'
      */
     public RapidFireWeapon() {
-        super("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 0, 0, 60, 60, 1.0, 15, 25);
-        setTexture(TextureManager.INSTANCE.loadTexture(13));
+        super("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 1.0, 15, 25, 13);
     }
 
     /**
