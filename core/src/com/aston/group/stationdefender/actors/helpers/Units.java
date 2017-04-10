@@ -10,6 +10,5 @@ public enum Units {
     CLOSE_COMBAT_ALIEN,
     KAMIKAZE,
     RAPID_FIRE_ALIEN,
-    MINE,
-    BOSS_ALIEN
+    MINE
 }

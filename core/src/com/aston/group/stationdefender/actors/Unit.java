@@ -23,8 +23,8 @@ public abstract class Unit implements Actor {
     final int width; //Unit's width
     final int height; //Unit's height
     final Texture texture;
+    final String name; //Name of the type of unit.
     private final double range; //How many tiles forward the Unit can fire.
-    private final String name; //Name of the type of unit.
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final double chanceToHit; //Chance of a hit
     double damage; //How much damage each successful hit causes.
@@ -96,11 +96,7 @@ public abstract class Unit implements Actor {
         texture.dispose();
     }
 
-    /**
-     * Method for getting the name of the Unit.
-     *
-     * @return name of the Unit.
-     */
+    @Override
     public String getName() {
         return name;
     }

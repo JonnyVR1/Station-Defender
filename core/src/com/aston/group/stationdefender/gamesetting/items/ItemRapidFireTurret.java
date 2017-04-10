@@ -1,7 +1,7 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
 import com.aston.group.stationdefender.actors.Actor;
-import com.aston.group.stationdefender.actors.RapidFireWeapon;
+import com.aston.group.stationdefender.actors.Weapon;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
 import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.aston.group.stationdefender.utils.TextureManager;
@@ -33,6 +33,6 @@ public class ItemRapidFireTurret extends Item {
 
     @Override
     public Actor getPlaceableActor() {
-        return new RapidFireWeapon();
+        return new Weapon("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 1.0, 15, 25, 13);
     }
 }

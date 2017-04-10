@@ -1,8 +1,9 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
 import com.aston.group.stationdefender.actors.Actor;
-import com.aston.group.stationdefender.actors.CloseCombatWeapon;
+import com.aston.group.stationdefender.actors.Weapon;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
+import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.aston.group.stationdefender.utils.TextureManager;
 
@@ -33,6 +34,6 @@ public class ItemCloseCombatWeapon extends Item {
 
     @Override
     public Actor getPlaceableActor() {
-        return new CloseCombatWeapon();
+        return new Weapon("Close Combat Weapon", 25, 50.0, 2.0, Constants.UNIT_HEALTH, 4.0, 7.0, 2.0, 15, 25, 25);
     }
 }

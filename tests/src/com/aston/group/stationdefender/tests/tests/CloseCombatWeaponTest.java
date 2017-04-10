@@ -1,17 +1,18 @@
 package com.aston.group.stationdefender.tests.tests;
 
-import com.aston.group.stationdefender.actors.CloseCombatWeapon;
+import com.aston.group.stationdefender.actors.Weapon;
+import com.aston.group.stationdefender.config.Constants;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class CloseCombatWeaponTest {
-    private CloseCombatWeapon weapon;
+    private Weapon weapon;
 
     @Before
     public void setUp() {
-        weapon = new CloseCombatWeapon();
+        weapon = new Weapon("Close Combat Weapon", 25, 50.0, 2.0, Constants.UNIT_HEALTH, 4.0, 7.0, 2.0, 15, 25, 25);
     }
 
     /*String name, double speed, double damage, double rateOfFire, double health,

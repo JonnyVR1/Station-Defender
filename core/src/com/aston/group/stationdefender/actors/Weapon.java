@@ -19,12 +19,13 @@ public class Weapon extends Unit {
     private final SpriteBatch batch;
     private final double buildTime;
     private final int cost;
-    boolean built = false;
-    long lastTime;
+    private boolean built = false;
+    private long lastTime;
     private int costToUpgrade;
     private double remainingBuildTime;
     private long startTime;
     private HudElement hudElement;
+    private boolean overloaded = false;
 
     /**
      * Construct a new Weapon with default X and Y co-ordinates of '0'
@@ -49,8 +50,8 @@ public class Weapon extends Unit {
      * @param costToUpgrade The cost to upgrade to the Weapon
      * @param texture       The texture graphic of the Weapon
      */
-    Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit,
-           double buildTime, int cost, int costToUpgrade, int texture) {
+    public Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit,
+                  double buildTime, int cost, int costToUpgrade, int texture) {
         super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, texture);
         this.buildTime = buildTime;
         this.cost = cost;
@@ -73,17 +74,37 @@ public class Weapon extends Unit {
 
     @Override
     public void act(float delta) {
-        if (built && !checkZeroHealth()) {
-            if (!isAdjacent) {
-                if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
-                    unitCallback.onFire(x + 40, y + 35, speed, getDamage());
-                    lastTime = System.currentTimeMillis();
+        switch (name) {
+            case "Rapid Fire Weapon":
+                if (!checkZeroHealth() && built) {
+                    if (!overloaded) {
+                        if (isAdjacent) {
+                            overloaded = rapidFireHelper();
+                        } else {
+                            overloaded = false;
+                            if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
+                                unitCallback.onFire(x + 40, y + 35, speed, getDamage());
+                                lastTime = System.currentTimeMillis();
+                            }
+                        }
+                    }
+                } else {
+                    decrementBuildTimer();
                 }
-            } else {
-                adjacentActor.takeDamage(fire());
-            }
-        } else {
-            decrementBuildTimer();
+            default:
+                if (built && !checkZeroHealth()) {
+                    if (!isAdjacent) {
+                        if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
+                            unitCallback.onFire(x + 40, y + 35, speed, getDamage());
+                            lastTime = System.currentTimeMillis();
+                        }
+                    } else {
+                        adjacentActor.takeDamage(fire());
+                    }
+                } else {
+                    decrementBuildTimer();
+                }
+                break;
         }
     }
 
@@ -184,5 +205,23 @@ public class Weapon extends Unit {
         Double newUpgradeCost = Math.ceil((costToUpgrade * 1.25));
         costToUpgrade = newUpgradeCost.intValue();
         damage = Math.ceil((damage * 1.1));
+    }
+
+    /**
+     * Returns if the Weapon is overloaded.
+     *
+     * @return Overloaded state of the Weapon.
+     */
+    public boolean getOverloaded() {
+        return overloaded;
+    }
+
+    /**
+     * Sets if the Weapon is overloaded or not.
+     *
+     * @param overloaded state of the Weapon.
+     */
+    public void setOverloaded(boolean overloaded) {
+        this.overloaded = overloaded;
     }
 }

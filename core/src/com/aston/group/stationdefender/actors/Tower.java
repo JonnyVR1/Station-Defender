@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Jonathon Fitch, Peter Holmes
  */
 public class Tower implements Actor {
+    private static final String name = "Tower";
     private final int height = 400;
     private final int width = 100;
     private final SpriteBatch batch = GameEngine.getBatch();
@@ -127,5 +128,10 @@ public class Tower implements Actor {
     @Override
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

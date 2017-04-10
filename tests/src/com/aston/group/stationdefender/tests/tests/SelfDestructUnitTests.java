@@ -1,17 +1,19 @@
 package com.aston.group.stationdefender.tests.tests;
 
-import com.aston.group.stationdefender.actors.KamikazeAlien;
+import com.aston.group.stationdefender.actors.Alien;
+import com.aston.group.stationdefender.config.Constants;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class SelfDestructUnitTests {
-    private KamikazeAlien testKamikaze;
+    private Alien testKamikaze;
 
     @Before
     public void setUp() {
-        testKamikaze = new KamikazeAlien();
+        testKamikaze = new Alien("Kamikaze Alien", -100, 100, 1, Constants.UNIT_HEALTH, 1.0, 0.9, 100, 38, 14);
+        ;
     }
 
     @Test

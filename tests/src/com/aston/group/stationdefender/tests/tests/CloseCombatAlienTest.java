@@ -1,17 +1,18 @@
 package com.aston.group.stationdefender.tests.tests;
 
-import com.aston.group.stationdefender.actors.CloseCombatAlien;
+import com.aston.group.stationdefender.actors.Alien;
+import com.aston.group.stationdefender.config.Constants;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class CloseCombatAlienTest {
-    private CloseCombatAlien alien;
+    private Alien alien;
 
     @Before
     public void setUp() {
-        alien = new CloseCombatAlien();
+        alien = new Alien("Close Combat Alien", -100, 60.0, 2, Constants.UNIT_HEALTH, 1, 7.0, 20, 20, 22);
     }
 
     @Test
@@ -25,7 +26,7 @@ public class CloseCombatAlienTest {
 
     @Test
     public void testDamageAndCheckHealth() {
-        alien = new CloseCombatAlien();
+        alien = new Alien("Close Combat Alien", -100, 60.0, 2, Constants.UNIT_HEALTH, 1, 7.0, 20, 20, 22);
         assertEquals(100, (int) alien.getHealth());
         for (int i = 100; i > 0; i--) {
             assertEquals(i, alien.getHealth(), 0);

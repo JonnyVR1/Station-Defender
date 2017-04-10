@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Alien extends Unit {
     private final SpriteBatch batch;
+    private long lastTime;
+    private boolean overloaded = false;
 
     /**
      * Construct a new Alien with default X and Y co-ordinates of '0'
@@ -35,7 +37,7 @@ public class Alien extends Unit {
      * @param height      The height of the Alien
      * @param texture     The texture graphic of the Alien
      */
-    Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture) {
+    public Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture) {
         super(name, speed, damage, rateOfFire, health, range, chanceToHit, width, height, texture);
         batch = GameEngine.getBatch();
         facingLeft = true;
@@ -57,14 +59,56 @@ public class Alien extends Unit {
 
     @Override
     public void act(float delta) {
-        if (!checkZeroHealth()) {
-            if (isAdjacent) {
-                adjacentActor.takeDamage(fire());
-            } else {
-                move(delta);
-            }
-        } else {
-            destroy();
+        switch (name) {
+            case "Kamikaze Alien":
+                if (!checkZeroHealth()) {
+                    if (isAdjacent && !(getAdjacentActor().getName().equalsIgnoreCase("Mine"))) {
+                        adjacentActor.takeDamage(fire());
+                        destroy();
+                    } else {
+                        move(delta);
+                    }
+                } else {
+                    destroy();
+                }
+                break;
+            case "Mine":
+                if (!checkZeroHealth()) {
+                    if (!isAdjacent) {
+                        if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
+                            unitCallback.onFire(x - 40, y + 35, -30, getDamage());
+                            lastTime = System.currentTimeMillis();
+                        }
+                    }
+                } else {
+                    destroy();
+                }
+                break;
+            case "Rapid Fire Alien":
+                if (!checkZeroHealth()) {
+                    if (!overloaded) {
+                        if (isAdjacent && !(getAdjacentActor().getName().equalsIgnoreCase("Mine"))) {
+                            overloaded = rapidFireHelper();
+                        } else {
+                            move(delta);
+                        }
+                    } else
+                        overloaded = false;
+                } else {
+                    destroy();
+                }
+                break;
+            default:
+                if (!checkZeroHealth()) {
+                    if (isAdjacent) {
+                        adjacentActor.takeDamage(fire());
+                    } else {
+                        move(delta);
+                    }
+                } else {
+                    destroy();
+                }
+                break;
         }
     }
 
@@ -73,7 +117,7 @@ public class Alien extends Unit {
      *
      * @param delta The time in seconds since the last move
      */
-    void move(float delta) {
+    private void move(float delta) {
         if (!isAdjacent()) {
             x += (speed * delta);
         } else {
@@ -81,5 +125,23 @@ public class Alien extends Unit {
                 getAdjacentActor().takeDamage(getDamage());
             }
         }
+    }
+
+    /**
+     * Returns if the Alien is overloaded.
+     *
+     * @return Overloaded state of the Alien.
+     */
+    public boolean getOverloaded() {
+        return overloaded;
+    }
+
+    /**
+     * Sets if the Alien is overloaded or not.
+     *
+     * @param overloaded state of the Alien.
+     */
+    public void setOverloaded(boolean overloaded) {
+        this.overloaded = overloaded;
     }
 }

@@ -83,4 +83,11 @@ public interface Actor {
      * @param y The Y co-ordinate of the Unit
      */
     void setY(int y);
+
+    /**
+     * Method for getting the name of the Actor.
+     *
+     * @return name of the Actor.
+     */
+    String getName();
 }

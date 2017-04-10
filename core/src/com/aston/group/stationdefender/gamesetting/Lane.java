@@ -1,7 +1,6 @@
 package com.aston.group.stationdefender.gamesetting;
 
 import com.aston.group.stationdefender.actors.Actor;
-import com.aston.group.stationdefender.actors.Mine;
 import com.aston.group.stationdefender.actors.Unit;
 import com.aston.group.stationdefender.actors.helpers.UnitFactory;
 import com.aston.group.stationdefender.callbacks.LaneCallback;
@@ -190,7 +189,7 @@ public class Lane implements UnitCallback {
                 for (int j = 0; j < actors.size; j++) {
                     if (i != j && actors.get(j) instanceof Unit) {
                         Unit actor2 = (Unit) actors.get(j);
-                        if (actor1.isUnitAdjacent(actor2) && !(actor2 instanceof Mine)) {
+                        if (actor1.isUnitAdjacent(actor2) && !(actor2.getName().equalsIgnoreCase("Mine"))) {
                             isUnitAdjacent = true;
                             unit = actor2;
                             break;
@@ -198,7 +197,7 @@ public class Lane implements UnitCallback {
                     }
                 }
 
-                if (!(actor1 instanceof Mine)) {
+                if (!(actor1.getName().equalsIgnoreCase("Mine"))) {
                     if (isUnitAdjacent) {
                         actor1.setIsAdjacent(true);
                     } else {
@@ -239,7 +238,7 @@ public class Lane implements UnitCallback {
         if (System.currentTimeMillis() - lastRenderTime > 2200 + Math.random() * 3000) {
             if (alienAmount > 0) {
                 Actor unit = UnitFactory.getRandomEnemy();
-                if (unit instanceof Mine)
+                if (unit.getName().equalsIgnoreCase("Mine"))
                     unit.setX(getRandomTileCenterX() - (unit.getHeight() / 2));
                 else
                     unit.setX(getLastTileCenterX() - (unit.getWidth() / 2));

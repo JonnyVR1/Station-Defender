@@ -1,20 +1,21 @@
 package com.aston.group.stationdefender.tests.tests;
 
-import com.aston.group.stationdefender.actors.RapidFireAlien;
-import com.aston.group.stationdefender.actors.RapidFireWeapon;
+import com.aston.group.stationdefender.actors.Alien;
+import com.aston.group.stationdefender.actors.Weapon;
+import com.aston.group.stationdefender.config.Constants;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class RapidFireUnitsTest {
-    private RapidFireAlien alien;
-    private RapidFireWeapon weapon;
+    private Alien alien;
+    private Weapon weapon;
 
     @Before
     public void setUp() {
-        alien = new RapidFireAlien();
-        weapon = new RapidFireWeapon();
+        alien = new Alien("Rapid Fire Alien", -125, 5.0, 10, Constants.UNIT_HEALTH, 2, 0.5, 100, 38, 12);
+        weapon = new Weapon("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 1.0, 15, 25, 13);
     }
 
     /**
