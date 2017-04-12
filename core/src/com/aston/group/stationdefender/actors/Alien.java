@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Alien extends Unit {
     private final SpriteBatch batch;
-    private long lastTime;
     private boolean overloaded = false;
 
     /**
@@ -75,10 +74,7 @@ public class Alien extends Unit {
             case "Mine":
                 if (!checkZeroHealth()) {
                     if (!isAdjacent) {
-                        if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
-                            unitCallback.onFire(x - 40, y + 35, -30, getDamage());
-                            lastTime = System.currentTimeMillis();
-                        }
+                        unitFireHelper(-40, -30);
                     }
                 } else {
                     destroy();

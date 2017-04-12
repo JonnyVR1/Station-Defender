@@ -19,11 +19,11 @@ import java.util.Random;
 public abstract class Unit implements Actor {
     final double speed; //How many tiles it can move per "tick".
     final IndicatorManager indicatorManager = new IndicatorManager();
-    final double rateOfFire; //How many times the unit fires per "tick".
     final int width; //Unit's width
     final int height; //Unit's height
     final Texture texture;
     final String name; //Name of the type of unit.
+    private final double rateOfFire; //How many times the unit fires per "tick".
     private final double range; //How many tiles forward the Unit can fire.
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final double chanceToHit; //Chance of a hit
@@ -33,9 +33,10 @@ public abstract class Unit implements Actor {
     boolean isAdjacent = false; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
     Actor adjacentActor = null; //The Unit that this Unit is adjacent to.
     boolean facingLeft; //Whether the Unit is facing left or not
-    UnitCallback unitCallback; //The UnitCallBack used for the Unit
+    private UnitCallback unitCallback; //The UnitCallBack used for the Unit
     private boolean exists = true; //Whether the Unit is alive or dead.
     private double health; //How much damage the Unit can take before being destroyed.
+    private long lastTime; //The last time a unit fired a missile.
 
     /**
      * Construct a new Unit with given name, speed, damage, rateOfFile, health, range, x co-ordinate, y co-ordinate,
@@ -358,5 +359,18 @@ public abstract class Unit implements Actor {
             System.out.println("Null values are not allowed");
         }
         return result;
+    }
+
+    /**
+     * Helper method that lets units fire a missile
+     *
+     * @param dXPos  The difference in X position for the start of the missile
+     * @param dSpeed The difference in speed for the missile
+     */
+    void unitFireHelper(int dXPos, int dSpeed) {
+        if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
+            unitCallback.onFire(x + dXPos, y + 35, speed + dSpeed, damage);
+            lastTime = System.currentTimeMillis();
+        }
     }
 }

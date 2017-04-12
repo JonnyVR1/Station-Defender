@@ -20,7 +20,6 @@ public class Weapon extends Unit {
     private final double buildTime;
     private final int cost;
     private boolean built = false;
-    private long lastTime;
     private int costToUpgrade;
     private double remainingBuildTime;
     private long startTime;
@@ -82,10 +81,7 @@ public class Weapon extends Unit {
                             overloaded = rapidFireHelper();
                         } else {
                             overloaded = false;
-                            if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
-                                unitCallback.onFire(x + 40, y + 35, speed, getDamage());
-                                lastTime = System.currentTimeMillis();
-                            }
+                            unitFireHelper(40, 0);
                         }
                     }
                 } else {
@@ -94,10 +90,7 @@ public class Weapon extends Unit {
             default:
                 if (built && !checkZeroHealth()) {
                     if (!isAdjacent) {
-                        if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
-                            unitCallback.onFire(x + 40, y + 35, speed, getDamage());
-                            lastTime = System.currentTimeMillis();
-                        }
+                        unitFireHelper(40, 0);
                     } else {
                         adjacentActor.takeDamage(fire());
                     }
