@@ -134,4 +134,9 @@ public class Tower implements Actor {
     public String getName() {
         return name;
     }
+
+    @Override
+    public boolean isUnit() {
+        return false;
+    }
 }
