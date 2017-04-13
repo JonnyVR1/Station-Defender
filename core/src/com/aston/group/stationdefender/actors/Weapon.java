@@ -63,31 +63,27 @@ public class Weapon extends Unit {
 
     @Override
     public void act(float delta) {
-        switch (name) {
-            case "Rapid Fire Weapon":
-                if (!checkZeroHealth() && built) {
+        if (built && !checkZeroHealth()) {
+            switch (name) {
+                case "Rapid Fire Weapon":
                     if (!overloaded) {
                         if (isAdjacent) {
                             overloaded = rapidFireHelper();
                         } else {
                             overloaded = false;
-                            unitFireHelper(40, 1);
+                            unitFireHelper(40, 0);
                         }
                     }
-                } else {
-                    decrementBuildTimer();
-                }
-            default:
-                if (built && !checkZeroHealth()) {
+                default:
                     if (!isAdjacent) {
-                        unitFireHelper(40, 1);
+                        unitFireHelper(40, 0);
                     } else {
                         adjacentActor.takeDamage(fire());
                     }
-                } else {
-                    decrementBuildTimer();
-                }
-                break;
+                    break;
+            }
+        } else {
+            decrementBuildTimer();
         }
     }
 

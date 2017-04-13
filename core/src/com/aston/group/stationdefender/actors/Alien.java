@@ -54,30 +54,22 @@ public class Alien extends Unit {
 
     @Override
     public void act(float delta) {
-        switch (name) {
-            case "Kamikaze Alien":
-                if (!checkZeroHealth()) {
+        if (!checkZeroHealth()) {
+            switch (name) {
+                case "Kamikaze Alien":
                     if (isAdjacent && !(getAdjacentActor().getName().equalsIgnoreCase("Mine"))) {
                         adjacentActor.takeDamage(fire());
                         destroy();
                     } else {
                         move(delta);
                     }
-                } else {
-                    destroy();
-                }
-                break;
-            case "Mine":
-                if (!checkZeroHealth()) {
+                    break;
+                case "Mine":
                     if (!isAdjacent) {
-                        unitFireHelper(-40, -30);
+                        unitFireHelper(-10, -30);
                     }
-                } else {
-                    destroy();
-                }
-                break;
-            case "Rapid Fire Alien":
-                if (!checkZeroHealth()) {
+                    break;
+                case "Rapid Fire Alien":
                     if (!overloaded) {
                         if (isAdjacent && !(getAdjacentActor().getName().equalsIgnoreCase("Mine"))) {
                             overloaded = rapidFireHelper();
@@ -86,21 +78,17 @@ public class Alien extends Unit {
                         }
                     } else
                         overloaded = false;
-                } else {
-                    destroy();
-                }
-                break;
-            default:
-                if (!checkZeroHealth()) {
+                    break;
+                default:
                     if (isAdjacent) {
                         adjacentActor.takeDamage(fire());
                     } else {
                         move(delta);
                     }
-                } else {
-                    destroy();
-                }
-                break;
+                    break;
+            }
+        } else {
+            destroy();
         }
     }
 
