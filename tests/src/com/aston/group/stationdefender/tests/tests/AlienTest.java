@@ -23,16 +23,16 @@ public class AlienTest {
         Alien a = new Alien();
         assertNotNull(a);
         assertEquals("Alien", alien.getName());
-        assertEquals(1, alien.getSpeed(), 0);
-        assertEquals(3, alien.getDamage(), 0);
-        assertEquals(3, alien.getRateOfFire(), 0);
-        assertEquals(15, alien.getHealth(), 0);
-        assertEquals(1, alien.getRange(), 0);
+        assertEquals(-120, alien.getSpeed(), 0);
+        assertEquals(50, alien.getDamage(), 0);
+        assertEquals(5, alien.getRateOfFire(), 0);
+        assertEquals(100, alien.getHealth(), 0);
+        assertEquals(5, alien.getRange(), 0);
     }
 
     @Test
     public void testDamageAndCheckHealth() {
-        for (int i = 15; i > 0; i--) {
+        for (int i = 100; i > 0; i--) {
             assertEquals(i, alien.getHealth(), 0);
             assertEquals(false, alien.checkZeroHealth());
             alien.takeDamage(1);
@@ -44,7 +44,7 @@ public class AlienTest {
     @Test
     public void testFiring() {
         double damageDealt = alien.fire();
-        assertTrue((damageDealt >= 0) && (damageDealt <= 9));
+        assertTrue(damageDealt >= 0);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class AlienTest {
 
     @Test
     public void testDamageDealing() {
-        assertEquals(10, adjacentWep.getHealth(), 0);
+        assertEquals(100, adjacentWep.getHealth(), 0);
         alien.setAdjacentActor(adjacentWep);
         assertEquals(adjacentWep, alien.getAdjacentActor());
         alien.act(0.1f);

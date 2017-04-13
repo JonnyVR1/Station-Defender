@@ -18,7 +18,7 @@ public class SelfDestructUnitTests {
     @Test
     public void testKamikazeConstructor() {
         assertEquals("Kamikaze Alien", testKamikaze.getName());
-        assertEquals(4, testKamikaze.getSpeed(), 0);
+        assertEquals(-100, testKamikaze.getSpeed(), 0);
         assertEquals(100, testKamikaze.getDamage(), 0);
         assertEquals(1, testKamikaze.getRateOfFire(), 0);
         assertEquals(100, testKamikaze.getHealth(), 0);

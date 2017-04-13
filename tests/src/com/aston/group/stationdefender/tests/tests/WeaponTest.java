@@ -26,21 +26,21 @@ public class WeaponTest {
         assertEquals(0, weapon.getX());
         assertEquals(0, weapon.getY());
         assertEquals("Weapon", testWep.getName());
-        assertEquals(0, testWep.getSpeed(), 0);
-        assertEquals(10, testWep.getDamage(), 0);
-        assertEquals(2, testWep.getRateOfFire(), 0);
-        assertEquals(10, testWep.getHealth(), 0);
-        assertEquals(1, testWep.getRange(), 0);
-        assertEquals(2.0, testWep.getBuildTime(), 0);
-        assertEquals(100, testWep.getCost(), 0);
-        assertEquals(25, testWep.getCostToUpgrade(), 0);
+        assertEquals(50, testWep.getSpeed(), 0);
+        assertEquals(50, testWep.getDamage(), 0);
+        assertEquals(10, testWep.getRateOfFire(), 0);
+        assertEquals(100, testWep.getHealth(), 0);
+        assertEquals(12, testWep.getRange(), 0);
+        assertEquals(1.5, testWep.getBuildTime(), 0);
+        assertEquals(10, testWep.getCost(), 0);
+        assertEquals(10, testWep.getCostToUpgrade(), 0);
     }
 
     @Test
     public void testBuiltAndRemainingBuildTime() {
         assertEquals(testWep.getBuilt(), false);
         assertEquals(true, (testWep.getBuildTime() == testWep.getRemainingBuildTime()));
-        assertEquals(2.0, testWep.getRemainingBuildTime(), 0);
+        assertEquals(1.5, testWep.getRemainingBuildTime(), 0);
 
         for (int i = 2; i > 1; i--) {
             ThreadSleep.threadSleep(testWep);
@@ -48,7 +48,7 @@ public class WeaponTest {
             assertEquals(false, testWep.getBuilt());
         }
 
-        assertEquals(1.0, testWep.getRemainingBuildTime(), 0);
+        assertEquals(0.5, testWep.getRemainingBuildTime(), 0);
         ThreadSleep.threadSleep(testWep);
         ThreadSleep.threadSleep(testWep);
         assertEquals(true, testWep.getBuilt());
@@ -57,7 +57,7 @@ public class WeaponTest {
 
     @Test
     public void testDamageAndCheckHealth() {
-        for (int i = 10; i > 0; i--) {
+        for (int i = 100; i > 0; i--) {
             assertEquals(i, testWep.getHealth(), 0);
             assertEquals(false, testWep.checkZeroHealth());
             testWep.takeDamage(1);
@@ -70,7 +70,7 @@ public class WeaponTest {
     public void testFiring() {
         for (int i = 0; i < 1000; i++) {
             double damageDealt = testWep.fire();
-            assertTrue((damageDealt >= 0) && (damageDealt <= 20));
+            assertTrue(damageDealt >= 0);
         }
     }
 
@@ -93,7 +93,7 @@ public class WeaponTest {
 
     @Test
     public void testDamageDealing() {
-        assertEquals(5, adjacentAlien.getHealth(), 0);
+        assertEquals(100, adjacentAlien.getHealth(), 0);
         testWep.setAdjacentActor(adjacentAlien);
         assertEquals(adjacentAlien, testWep.getAdjacentActor());
         for (int i = 2; i > 1; i--) {
@@ -110,14 +110,14 @@ public class WeaponTest {
 
     @Test
     public void testUpgrade() {
-        assertEquals(10, testWep.getDamage(), 0);
-        assertEquals(25, testWep.getCostToUpgrade(), 0);
+        assertEquals(50, testWep.getDamage(), 0);
+        assertEquals(10, testWep.getCostToUpgrade(), 0);
         testWep.upgradeWeapon();
-        assertEquals(11, testWep.getDamage(), 0);
-        assertEquals(32, testWep.getCostToUpgrade(), 0);
+        assertEquals(56, testWep.getDamage(), 0);
+        assertEquals(13, testWep.getCostToUpgrade(), 0);
         for (int i = 0; i < 1000; i++) {
             double damageDealt = testWep.fire();
-            assertTrue((damageDealt >= 0) && (damageDealt <= 22));
+            assertTrue(damageDealt >= 0);
         }
     }
 }

@@ -21,19 +21,19 @@ public class CloseCombatWeaponTest {
     @Test
     public void test() {
         assertEquals("Close Combat Weapon", weapon.getName());
-        assertEquals(0, weapon.getSpeed(), 0);
-        assertEquals(50.0, weapon.getDamage(), 0);
-        assertEquals(2.0, weapon.getRateOfFire(), 0);
-        assertEquals(100.0, weapon.getHealth(), 0);
-        assertEquals(1.0, weapon.getRange(), 0);
-        assertEquals(7.0, weapon.getChanceToHit(), 0);
+        assertEquals(25, weapon.getSpeed(), 0);
+        assertEquals(50, weapon.getDamage(), 0);
+        assertEquals(2, weapon.getRateOfFire(), 0);
+        assertEquals(100, weapon.getHealth(), 0);
+        assertEquals(4, weapon.getRange(), 0);
+        assertEquals(7, weapon.getChanceToHit(), 0);
         assertEquals(0, weapon.getX(), 0);
         assertEquals(0, weapon.getY(), 0);
         assertEquals(60, weapon.getWidth(), 0);
         assertEquals(60, weapon.getHeight(), 0);
-        assertEquals(5.0, weapon.getBuildTime(), 0);
-        assertEquals(50.0, weapon.getCost(), 0);
-        assertEquals(25.0, weapon.getCostToUpgrade(), 0);
+        assertEquals(2, weapon.getBuildTime(), 0);
+        assertEquals(15, weapon.getCost(), 0);
+        assertEquals(25, weapon.getCostToUpgrade(), 0);
     }
 
     @Test
