@@ -2,6 +2,8 @@ package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
 
+import java.util.Objects;
+
 /**
  * Superclass for different Alien types.
  *
@@ -57,7 +59,7 @@ public class Alien extends Unit {
         if (!checkZeroHealth()) {
             switch (name) {
                 case "Kamikaze Alien":
-                    if (isAdjacent && !(getAdjacentActor().getName().equalsIgnoreCase("Mine"))) {
+                    if (isAdjacent && !Objects.equals(getAdjacentActor().getName(), "Mine")) {
                         adjacentActor.takeDamage(fire());
                         destroy();
                     } else {
@@ -71,7 +73,7 @@ public class Alien extends Unit {
                     break;
                 case "Rapid Fire Alien":
                     if (!overloaded) {
-                        if (isAdjacent && !(getAdjacentActor().getName().equalsIgnoreCase("Mine"))) {
+                        if (isAdjacent && !Objects.equals(getAdjacentActor().getName(), "Mine")) {
                             overloaded = rapidFireHelper();
                         } else {
                             move(delta);
