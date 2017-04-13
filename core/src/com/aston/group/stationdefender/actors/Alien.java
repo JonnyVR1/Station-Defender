@@ -1,8 +1,6 @@
 package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
-import com.aston.group.stationdefender.engine.GameEngine;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Superclass for different Alien types.
@@ -11,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @version 01/11/2016
  */
 public class Alien extends Unit {
-    private final SpriteBatch batch;
     private boolean overloaded = false;
 
     /**
@@ -37,9 +34,7 @@ public class Alien extends Unit {
      * @param texture     The texture graphic of the Alien
      */
     public Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture) {
-        super(name, speed, damage, rateOfFire, health, range, chanceToHit, width, height, texture);
-        batch = GameEngine.getBatch();
-        facingLeft = true;
+        super(name, speed, damage, rateOfFire, health, range, chanceToHit, width, height, texture, true);
     }
 
     @Override

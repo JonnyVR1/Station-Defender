@@ -1,8 +1,6 @@
 package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
-import com.aston.group.stationdefender.engine.GameEngine;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Weapon is a class that represents a weapon object
@@ -12,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @version 01/11/2016
  */
 public class Weapon extends Unit {
-    private final SpriteBatch batch;
     private final double buildTime;
     private final int cost;
     private boolean built = false;
@@ -46,13 +43,11 @@ public class Weapon extends Unit {
      */
     public Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit,
                   double buildTime, int cost, int costToUpgrade, int texture) {
-        super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, texture);
+        super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, texture, false);
         this.buildTime = buildTime;
         this.cost = cost;
         this.costToUpgrade = costToUpgrade;
         remainingBuildTime = buildTime;
-        facingLeft = false;
-        batch = GameEngine.getBatch();
         startTime = System.currentTimeMillis();
     }
 

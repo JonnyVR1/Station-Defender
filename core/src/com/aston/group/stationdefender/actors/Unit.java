@@ -2,6 +2,7 @@ package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.actors.helpers.ParticleEffectHelper;
 import com.aston.group.stationdefender.callbacks.UnitCallback;
+import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.utils.MouseInput;
 import com.aston.group.stationdefender.utils.TextureManager;
 import com.aston.group.stationdefender.utils.hud.Hud;
@@ -11,6 +12,7 @@ import com.aston.group.stationdefender.utils.indicators.IndicatorManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Random;
 
@@ -27,16 +29,17 @@ public abstract class Unit implements Actor {
     final int height; //Unit's height
     final Texture texture;
     final String name; //Name of the type of unit.
+    final SpriteBatch batch;
     private final double rateOfFire; //How many times the unit fires per "tick".
     private final double range; //How many tiles forward the Unit can fire.
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final double chanceToHit; //Chance of a hit
+    private final boolean facingLeft; //Whether the Unit is facing left or not
     double damage; //How much damage each successful hit causes.
     int x = 0; //Unit's position on the X-Axis
     int y = 0; //Unit's position on the Y-Axis
     boolean isAdjacent = false; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
     Actor adjacentActor = null; //The Unit that this Unit is adjacent to.
-    boolean facingLeft; //Whether the Unit is facing left or not
     private UnitCallback unitCallback; //The UnitCallBack used for the Unit
     private boolean exists = true; //Whether the Unit is alive or dead.
     private double health; //How much damage the Unit can take before being destroyed.
@@ -58,7 +61,7 @@ public abstract class Unit implements Actor {
      * @param height      The height of the Unit
      * @param texture     The texture graphic of the Unit
      */
-    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture) {
+    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture, boolean facingLeft) {
         this.name = name;
         this.speed = speed;
         this.damage = damage;
@@ -69,6 +72,8 @@ public abstract class Unit implements Actor {
         this.height = height;
         this.chanceToHit = chanceToHit;
         this.texture = TextureManager.INSTANCE.loadTexture(texture);
+        this.facingLeft = facingLeft;
+        batch = GameEngine.getBatch();
     }
 
     /**
