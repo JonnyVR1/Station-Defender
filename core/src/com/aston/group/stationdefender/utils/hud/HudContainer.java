@@ -35,7 +35,6 @@ public class HudContainer extends HudElement {
         shapeRenderer.setColor(Constants.primaryDarkColor);
         shapeRenderer.rect(x, (height + y) - 20, width, 20);
         shapeRenderer.end();
-
         batch.begin();
         font.draw(batch, title, x + 5, (height + y) - 5);
         batch.end();

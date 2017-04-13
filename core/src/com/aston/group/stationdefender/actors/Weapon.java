@@ -2,10 +2,6 @@ package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
-import com.aston.group.stationdefender.utils.MouseInput;
-import com.aston.group.stationdefender.utils.hud.Hud;
-import com.aston.group.stationdefender.utils.hud.HudElement;
-import com.aston.group.stationdefender.utils.hud.HudWeapon;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -23,7 +19,6 @@ public class Weapon extends Unit {
     private int costToUpgrade;
     private double remainingBuildTime;
     private long startTime;
-    private HudElement hudElement;
     private boolean overloaded = false;
 
     /**
@@ -98,34 +93,6 @@ public class Weapon extends Unit {
                     decrementBuildTimer();
                 }
                 break;
-        }
-    }
-
-    @Override
-    public void destroy() {
-        if (hudElement != null) {
-            Hud.removeHudElement(hudElement);
-            hudElement = null;
-        }
-        super.destroy();
-    }
-
-    /**
-     * Checks whether the MouseInput is colliding with the Weapon.
-     * If it does then create a new HUD element for the Weapon
-     */
-    private void checkInput() {
-        if (MouseInput.isColliding(x, y, width, height)) {
-            if (hudElement == null) {
-                hudElement = new HudWeapon();
-                hudElement.setX(x);
-                hudElement.setY(y);
-                hudElement.setObject(this);
-                Hud.addHudElement(hudElement);
-            }
-        } else if (Hud.isNotColliding()) {
-            Hud.removeHudElement(hudElement);
-            hudElement = null;
         }
     }
 

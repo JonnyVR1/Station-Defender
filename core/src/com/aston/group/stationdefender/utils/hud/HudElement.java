@@ -43,12 +43,4 @@ public abstract class HudElement {
     public void setY(int y) {
         this.y = y;
     }
-
-    /**
-     * Sets the Object to be associated with the HudElement
-     *
-     * @param object The Object to be associated with the HudElement
-     */
-    public void setObject(Object object) {
-    }
 }

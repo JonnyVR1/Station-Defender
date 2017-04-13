@@ -2,7 +2,11 @@ package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.actors.helpers.ParticleEffectHelper;
 import com.aston.group.stationdefender.callbacks.UnitCallback;
+import com.aston.group.stationdefender.utils.MouseInput;
 import com.aston.group.stationdefender.utils.TextureManager;
+import com.aston.group.stationdefender.utils.hud.Hud;
+import com.aston.group.stationdefender.utils.hud.HudElement;
+import com.aston.group.stationdefender.utils.hud.HudUnit;
 import com.aston.group.stationdefender.utils.indicators.IndicatorManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,6 +41,7 @@ public abstract class Unit implements Actor {
     private boolean exists = true; //Whether the Unit is alive or dead.
     private double health; //How much damage the Unit can take before being destroyed.
     private long lastTime; //The last time a unit fired a missile.
+    private HudElement hudElement;
 
     /**
      * Construct a new Unit with given name, speed, damage, rateOfFile, health, range, x co-ordinate, y co-ordinate,
@@ -87,6 +92,10 @@ public abstract class Unit implements Actor {
     public abstract void act(float delta);
 
     public void destroy() {
+        if (hudElement != null) {
+            Hud.removeHudElement(hudElement);
+            hudElement = null;
+        }
         exists = false;
         particleEffectHelper.destroy(x, y);
     }
@@ -371,6 +380,24 @@ public abstract class Unit implements Actor {
         if (unitCallback != null && System.currentTimeMillis() - lastTime >= (10000 / rateOfFire)) {
             unitCallback.onFire(x + dXPos, y + 35, speed + dSpeed, damage);
             lastTime = System.currentTimeMillis();
+        }
+    }
+
+    /**
+     * Checks whether the MouseInput is colliding with the Weapon.
+     * If it does then create a new HUD element for the Weapon
+     */
+    void checkInput() {
+        if (MouseInput.isColliding(x, y, width, height)) {
+            if (hudElement == null) {
+                hudElement = new HudUnit(this);
+                hudElement.setX(x);
+                hudElement.setY(y);
+                Hud.addHudElement(hudElement);
+            }
+        } else if (Hud.isNotColliding()) {
+            Hud.removeHudElement(hudElement);
+            hudElement = null;
         }
     }
 }

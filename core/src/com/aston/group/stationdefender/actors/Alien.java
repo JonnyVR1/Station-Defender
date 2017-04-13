@@ -52,6 +52,7 @@ public class Alien extends Unit {
             batch.setColor(.5f, .5f, .5f, 1f);
         batch.draw(texture, x, y, width, height);
         batch.end();
+        checkInput();
         act(delta);
         indicatorManager.render(delta, x, y);
     }
