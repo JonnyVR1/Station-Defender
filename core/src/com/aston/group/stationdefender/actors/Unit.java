@@ -214,15 +214,15 @@ public abstract class Unit implements Actor {
     /**
      * Sets the Actor adjacent to the Unit
      *
-     * @param adjacentActor The Actor that the Unit is adjacent to
+     * @param actor The Actor that the Unit is adjacent to
      */
-    public void setAdjacentActor(Actor adjacentActor) {
-        if (adjacentActor != null) {
-            this.adjacentActor = adjacentActor;
-            setIsAdjacent(true);
+    public void setAdjacentActor(Actor actor) {
+        if (actor != null) {
+            adjacentActor = actor;
+            isAdjacent = true;
         } else {
-            this.adjacentActor = null;
-            setIsAdjacent(false);
+            adjacentActor = null;
+            isAdjacent = false;
         }
     }
 

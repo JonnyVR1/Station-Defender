@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SelfDestructUnitTests {
+public class KamikazeUnitTest {
     private Alien testKamikaze;
 
     @Before
@@ -29,6 +29,7 @@ public class SelfDestructUnitTests {
     @Test
     public void testAlienSelfDestruct() {
         assertEquals(true, testKamikaze.getExists());
+        testKamikaze.setAdjacentActor(new Alien());
         testKamikaze.act(0);
         assertEquals(false, testKamikaze.getExists());
     }
