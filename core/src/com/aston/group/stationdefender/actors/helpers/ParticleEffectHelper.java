@@ -2,8 +2,8 @@ package com.aston.group.stationdefender.actors.helpers;
 
 import com.aston.group.stationdefender.utils.SoundManager;
 import com.aston.group.stationdefender.utils.TextureManager;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Helper class to deal with the explosion animation effect.
@@ -34,7 +34,7 @@ public class ParticleEffectHelper {
      * @param x     The X co-ordinate to render the ParticleEffect at
      * @param y     The Y co-ordinate to render the ParticleEffect at
      */
-    public void renderParticleEffect(float delta, SpriteBatch batch, int x, int y) {
+    public void renderParticleEffect(float delta, Batch batch, int x, int y) {
         if (particleEffect != null) {
             particleEffect.update(delta);
             particleEffect.setPosition(x, y);

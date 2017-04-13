@@ -10,7 +10,7 @@ import com.aston.group.stationdefender.actors.Weapon;
  * @author Mohammad Foysal
  */
 public class HudUnit extends HudContainer {
-    private Unit unit;
+    private final Unit unit;
     private int yPos;
 
     /**

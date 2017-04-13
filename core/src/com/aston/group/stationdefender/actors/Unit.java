@@ -10,7 +10,7 @@ import com.aston.group.stationdefender.utils.hud.HudUnit;
 import com.aston.group.stationdefender.utils.indicators.IndicatorManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.Random;
 
@@ -223,7 +223,7 @@ public abstract class Unit implements Actor {
      * @return true if there is a Unit adjacent to the current Unit,
      * false if there is not a Unit adjacent to the current Unit
      */
-    public boolean isUnitAdjacent(Unit unit) {
+    public boolean isUnitAdjacent(Actor unit) {
         if (unit == this)
             return false;
         if (facingLeft) {
@@ -346,7 +346,7 @@ public abstract class Unit implements Actor {
      * @param delta The time in seconds since the last render
      * @param batch The SpriteBatch to render the particle effect on
      */
-    void renderParticleEffect(float delta, SpriteBatch batch) {
+    void renderParticleEffect(float delta, Batch batch) {
         particleEffectHelper.renderParticleEffect(delta, batch, x, y);
     }
 

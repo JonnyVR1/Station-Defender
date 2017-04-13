@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * This class allows the Items to be stacked into a QuickSlot Inventory
@@ -18,7 +19,7 @@ import java.util.Iterator;
  */
 public class ItemStack<T extends Item> implements Iterable<T> {
     private final int maxItems = 64;
-    private final ArrayList<T> items = new ArrayList<>();
+    private final List<T> items = new ArrayList<>();
     private final SpriteBatch batch;
     private final BitmapFont font;
     private final int width = 32;

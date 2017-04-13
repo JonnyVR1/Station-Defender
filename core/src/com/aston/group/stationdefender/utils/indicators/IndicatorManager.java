@@ -179,7 +179,7 @@ public class IndicatorManager {
          *
          * @return The damage text of the Indicator
          */
-        String getText() {
+        CharSequence getText() {
             return text;
         }
 

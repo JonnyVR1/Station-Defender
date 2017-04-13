@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -107,7 +108,7 @@ public class TwoTextScreen implements Screen {
             continueButton.setPosition((Gdx.graphics.getWidth() / 2) - 210, (Gdx.graphics.getHeight() / 2) - 175);
         }
         stage.addActor(backButton);
-        ChangeListener buttonListener = new ChangeListener() {
+        EventListener buttonListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (Objects.equals(actor, backButton)) {
