@@ -76,7 +76,7 @@ public class Weapon extends Unit {
                             overloaded = rapidFireHelper();
                         } else {
                             overloaded = false;
-                            unitFireHelper(40, 0);
+                            unitFireHelper(40, 1);
                         }
                     }
                 } else {
@@ -85,7 +85,7 @@ public class Weapon extends Unit {
             default:
                 if (built && !checkZeroHealth()) {
                     if (!isAdjacent) {
-                        unitFireHelper(40, 0);
+                        unitFireHelper(40, 1);
                     } else {
                         adjacentActor.takeDamage(fire());
                     }

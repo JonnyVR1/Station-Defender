@@ -6,9 +6,9 @@ import com.aston.group.stationdefender.callbacks.QuickSlotCallback;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.gamesetting.items.Item;
-import com.aston.group.stationdefender.gamesetting.items.ItemBlank;
-import com.aston.group.stationdefender.gamesetting.items.ItemTurret;
+import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
 import com.aston.group.stationdefender.gamesetting.items.helpers.ItemStack;
+import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.aston.group.stationdefender.utils.FileUtils;
 import com.aston.group.stationdefender.utils.FontManager;
 import com.aston.group.stationdefender.utils.MouseInput;
@@ -65,7 +65,7 @@ public class Player implements InputProcessor, ItemCallback {
         });
         if (!itemsLoaded) {
             for (int i = 0; i < 4; i++) {
-                inventory.addItem(new ItemTurret());
+                inventory.addItem(ItemFactory.getItem(Items.TURRET));
             }
         }
 
@@ -73,7 +73,7 @@ public class Player implements InputProcessor, ItemCallback {
         int slotX = 0;
         for (int i = 0; i < 8; i++) {
             QuickSlot quickSlot = new QuickSlot(slotX);
-            quickSlot.setItemStack(new ItemStack<>(new ItemBlank()));
+            quickSlot.setItemStack(new ItemStack<>(ItemFactory.getItem(Items.UNKNOWN)));
             quickSlots.add(quickSlot);
             slotX += 48;
         }
@@ -255,7 +255,7 @@ public class Player implements InputProcessor, ItemCallback {
             if (i < inventory.getItemStacks().size && inventory.getItemStacks().get(i) != null) {
                 quickSlots.get(i).setItemStack(inventory.getItemStacks().get(i));
             } else {
-                quickSlots.get(i).setItemStack(new ItemStack<>(new ItemBlank()));
+                quickSlots.get(i).setItemStack(new ItemStack<>(ItemFactory.getItem(Items.UNKNOWN)));
             }
         }
     }
@@ -304,7 +304,7 @@ public class Player implements InputProcessor, ItemCallback {
      * @param amount The score to be added to the Player's score total
      */
     public void addScore(int amount) {
-        this.score += amount;
+        score += amount;
     }
 
     /**
@@ -313,7 +313,7 @@ public class Player implements InputProcessor, ItemCallback {
      * @param amount The amount of money to be added to the money Player's total
      */
     public void addMoney(int amount) {
-        this.money += amount;
+        money += amount;
         moneyIndicator.addIndicator("+" + Integer.toString(amount), Color.YELLOW);
     }
 

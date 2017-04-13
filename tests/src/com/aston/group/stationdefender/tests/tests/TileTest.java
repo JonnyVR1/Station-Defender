@@ -1,5 +1,6 @@
 package com.aston.group.stationdefender.tests.tests;
 
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.actors.Alien;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.gamesetting.helpers.Tile;
@@ -33,7 +34,7 @@ public class TileTest {
 
     @Test
     public void testIsCollidingUnit() {
-        Alien unit = new Alien();
+        Actor unit = new Alien();
         assertTrue(tile.isColliding(unit));
         unit.setX(500);
         unit.setY(500);

@@ -90,4 +90,12 @@ public interface Actor {
      * @return name of the Actor.
      */
     String getName();
+
+    /**
+     * Returns whether the Actor is a Unit or not
+     *
+     * @return Whether the Actor is a Unit or not
+     */
+    @SuppressWarnings("SameReturnValue")
+    boolean isUnit();
 }

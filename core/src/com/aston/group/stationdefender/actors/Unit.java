@@ -111,6 +111,11 @@ public abstract class Unit implements Actor {
         return name;
     }
 
+    @Override
+    public boolean isUnit() {
+        return true;
+    }
+
     /**
      * Returns the speed of the Unit
      *

@@ -17,6 +17,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
@@ -174,7 +175,7 @@ public class Lane implements UnitCallback {
         //Units
         for (Actor actor : actors) {
             actor.render(delta);
-            if (actor instanceof Unit) {
+            if (actor.isUnit()) {
                 Unit unit = (Unit) actor;
                 unit.setUnitCallback(this);
             }
@@ -183,13 +184,13 @@ public class Lane implements UnitCallback {
         //Check if Units are adjacent. if they are, share the adjacent actor with each other
         for (int i = 0; i < actors.size; i++) {
             boolean isUnitAdjacent = false;
-            if (actors.get(i) instanceof Unit) {
+            if (actors.get(i).isUnit()) {
                 Unit actor1 = (Unit) actors.get(i);
                 Unit unit = null;
                 for (int j = 0; j < actors.size; j++) {
-                    if (i != j && actors.get(j) instanceof Unit) {
+                    if (i != j && actors.get(j).isUnit()) {
                         Unit actor2 = (Unit) actors.get(j);
-                        if (actor1.isUnitAdjacent(actor2) && !(actor2.getName().equalsIgnoreCase("Mine"))) {
+                        if (actor1.isUnitAdjacent(actor2) && !Objects.equals(actor2.getName(), "Mine")) {
                             isUnitAdjacent = true;
                             unit = actor2;
                             break;
@@ -197,7 +198,7 @@ public class Lane implements UnitCallback {
                     }
                 }
 
-                if (!(actor1.getName().equalsIgnoreCase("Mine"))) {
+                if (!Objects.equals(actor1.getName(), "Mine")) {
                     if (isUnitAdjacent) {
                         actor1.setIsAdjacent(true);
                     } else {
@@ -222,7 +223,7 @@ public class Lane implements UnitCallback {
         while (unitsIterator.hasNext()) {
             Actor actor = unitsIterator.next();
             Unit unit;
-            if (actor instanceof Unit) {
+            if (actor.isUnit()) {
                 unit = (Unit) actor;
                 if (!unit.getExists()) {
                     dropItem(ItemFactory.getItemByChance(), unit.getX(), unit.getY());

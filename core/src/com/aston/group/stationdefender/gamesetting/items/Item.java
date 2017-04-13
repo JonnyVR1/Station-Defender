@@ -1,9 +1,12 @@
 package com.aston.group.stationdefender.gamesetting.items;
 
 import com.aston.group.stationdefender.actors.Actor;
+import com.aston.group.stationdefender.actors.Weapon;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
+import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
+import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -13,16 +16,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *
  * @author Mohammed Foysal
  */
-public abstract class Item {
+public class Item {
     private final SpriteBatch batch;
     private final String name;
-    Items sku = Items.UNKNOWN;
-    int id;
-    boolean placeable;
-    Texture texture;
-    int cost = 0;
-    int value = 0;
-    int health = 0;
+    private final int id;
+    private final boolean placeable;
+    private final Texture texture;
+    private final Items sku;
+    private int cost = 0;
+    private int value = 0;
+    private int health = 0;
     private boolean justSpawned;
     private int x, y;
     private int width = 32;
@@ -33,8 +36,15 @@ public abstract class Item {
      *
      * @param name The name of the Item
      */
-    Item(String name) {
+    public Item(String name, int id, int cost, int health, int value, int textureId, boolean placeable, Items sku) {
         this.name = name;
+        this.id = id;
+        this.cost = cost;
+        this.health = health;
+        this.value = value;
+        this.placeable = placeable;
+        this.sku = sku;
+        texture = TextureManager.INSTANCE.loadTexture(textureId);
         batch = GameEngine.getBatch();
     }
 
@@ -58,14 +68,28 @@ public abstract class Item {
      *
      * @param itemCallback The ItemCallBack associated with the Item
      */
-    public abstract void useItem(ItemCallback itemCallback);
+    public void useItem(ItemCallback itemCallback) {
+        if (itemCallback != null)
+            itemCallback.onUse(placeable, cost, value, health);
+    }
 
     /**
      * Abstract method to return whether the Item can be placed on the Level
      *
      * @return An Actor that can be placed on the Level, null if the Actor cannot be placed on the Level
      */
-    public abstract Actor getPlaceableActor();
+    public Actor getPlaceableActor() {
+        switch (sku) {
+            case TURRET:
+                return new Weapon();
+            case CLOSE_COMBAT_WEAPON:
+                return new Weapon("Close Combat Weapon", 25, 50.0, 2.0, Constants.UNIT_HEALTH, 4.0, 7.0, 2.0, 15, 25, 25);
+            case RAPID_FIRE_WEAPON:
+                return new Weapon("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 1.0, 15, 25, 13);
+            default:
+                return null;
+        }
+    }
 
     /**
      * Returns the ID of the Item
@@ -107,7 +131,7 @@ public abstract class Item {
      * Sets whether the Item has just been created or not
      */
     public void setJustSpawned() {
-        this.justSpawned = true;
+        justSpawned = true;
     }
 
     /**

@@ -24,7 +24,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
     private final BitmapFont font;
     private final int width = 32;
     private final int height = 32;
-    private final Class<? extends Item> itemClass;
+    private final String itemName;
     private int x;
     private int y;
 
@@ -34,7 +34,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
      * @param item The specific Item to add to the ItemStack
      */
     public ItemStack(T item) {
-        itemClass = item.getClass();
+        itemName = item.getName();
         addItem(item);
         batch = GameEngine.getBatch();
         font = FontManager.getFont(16);
@@ -81,12 +81,12 @@ public class ItemStack<T extends Item> implements Iterable<T> {
     }
 
     /**
-     * Return the Class of the Item the ItemStack holds
+     * Return the Name of the Item the ItemStack holds
      *
-     * @return The Class of the Item the ItemStack holds
+     * @return The name of the Item the ItemStack holds
      */
-    public Class<? extends Item> getItemClass() {
-        return itemClass;
+    public String getItemName() {
+        return itemName;
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.aston.group.stationdefender.tests.tests;
 
-import com.aston.group.stationdefender.gamesetting.items.ItemCredit;
+import com.aston.group.stationdefender.gamesetting.items.Item;
+import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
+import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.junit.Test;
 
@@ -14,7 +16,7 @@ public class ItemTest {
     @Test
     public void testConstructor() {
         SpriteBatch batch = new SpriteBatch();
-        ItemCredit itemCredit = new ItemCredit();
+        Item itemCredit = ItemFactory.getItem(Items.CREDIT);
         assertNotNull(batch);
         assertNotNull(itemCredit);
 

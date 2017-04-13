@@ -47,5 +47,4 @@ public class CloseCombatWeaponTest {
         assertEquals(0, weapon.getHealth(), 0);
         assertEquals(true, weapon.checkZeroHealth());
     }
-
 }

@@ -4,6 +4,8 @@ import com.aston.group.stationdefender.gamesetting.items.Item;
 import com.aston.group.stationdefender.gamesetting.items.helpers.ItemStack;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Objects;
+
 /**
  * StackableInventory is an Inventory that allows Items to be stacked to allow more than one of the same type of item
  * per slot
@@ -52,7 +54,7 @@ public class StackableInventory {
      */
     private ItemStack<Item> findStack(Item item) {
         for (ItemStack<Item> itemStack : itemStacks) {
-            if (itemStack.getItemClass() == item.getClass() && !itemStack.isFull()) {
+            if (Objects.equals(itemStack.getItemName(), item.getName()) && !itemStack.isFull()) {
                 return itemStack;
             }
         }

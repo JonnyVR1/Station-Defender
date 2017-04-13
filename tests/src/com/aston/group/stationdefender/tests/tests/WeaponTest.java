@@ -1,5 +1,6 @@
 package com.aston.group.stationdefender.tests.tests;
 
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.actors.Alien;
 import com.aston.group.stationdefender.actors.Weapon;
 import com.aston.group.stationdefender.tests.utils.ThreadSleep;
@@ -21,7 +22,7 @@ public class WeaponTest {
 
     @Test
     public void testConstructor() {
-        Weapon weapon = new Weapon();
+        Actor weapon = new Weapon();
         assertEquals(0, weapon.getX());
         assertEquals(0, weapon.getY());
         assertEquals("Weapon", testWep.getName());
@@ -76,7 +77,7 @@ public class WeaponTest {
     @Test
     public void testAdjacent() {
         testWep = new Weapon();
-        Weapon adjacentWeapon = new Weapon();
+        Actor adjacentWeapon = new Weapon();
         assertEquals(false, testWep.isAdjacent());
         assertEquals(null, testWep.getAdjacentActor());
         testWep.setAdjacentActor(adjacentWeapon);

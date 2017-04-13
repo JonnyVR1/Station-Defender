@@ -6,5 +6,5 @@ package com.aston.group.stationdefender.gamesetting.items.helpers;
  * @author Mohammad Foysal
  */
 public enum Items {
-    CREDIT, TURRET, CLOSE_COMBAT_WEAPON, RAPID_FIRE_WEAPON, HEALTH, UNKNOWN
+    CREDIT, TURRET, CLOSE_COMBAT_WEAPON, RAPID_FIRE_WEAPON, HEALTH, /*BANDAGES, BRICKS, CEMENT, WATER, WOOD_BLOCK,*/ UNKNOWN
 }

@@ -13,7 +13,6 @@ public class SelfDestructUnitTests {
     @Before
     public void setUp() {
         testKamikaze = new Alien("Kamikaze Alien", -100, 100, 1, Constants.UNIT_HEALTH, 1.0, 0.9, 100, 38, 14);
-        ;
     }
 
     @Test

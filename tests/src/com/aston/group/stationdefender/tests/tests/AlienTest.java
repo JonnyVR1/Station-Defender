@@ -1,5 +1,6 @@
 package com.aston.group.stationdefender.tests.tests;
 
+import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.actors.Alien;
 import com.aston.group.stationdefender.actors.Weapon;
 import org.junit.Before;
@@ -48,7 +49,7 @@ public class AlienTest {
 
     @Test
     public void testAdjacent() {
-        Alien adjacentAlien = new Alien();
+        Actor adjacentAlien = new Alien();
         assertEquals(false, alien.isAdjacent());
         assertEquals(null, alien.getAdjacentActor());
         alien.setAdjacentActor(adjacentWep);
