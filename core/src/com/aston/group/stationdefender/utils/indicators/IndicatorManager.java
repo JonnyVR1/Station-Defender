@@ -90,9 +90,9 @@ public class IndicatorManager {
         private final Color color;
         private int x, y;
         private int destX, destY;
-        private float fadeElapsed = 0;
-        private float yElapsed = 0;
-        private float xElapsed = 0;
+        private float fadeElapsed;
+        private float yElapsed;
+        private float xElapsed;
 
         /**
          * Create a new Indicator object

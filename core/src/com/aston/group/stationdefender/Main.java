@@ -26,7 +26,7 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
     private MenuScreen menuScreen;
     private GameScreen gameScreen;
     private int levelNumber = 1;
-    private int totalScore = 0;
+    private int totalScore;
 
     @Override
     public void create() {
@@ -68,9 +68,9 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
 
     @Override
     public void onWinLost(StackableInventory inventory, boolean won, int score, int money) {
+        FileUtils.deleteLevelInfo();
         TwoTextScreen postLevelScreen;
         String title;
-        FileUtils.deleteLevelInfo();
         if (won) {
             FileUtils.saveLevel(score, money, levelNumber, inventory);
             title = "Level Cleared";

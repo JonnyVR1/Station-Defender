@@ -27,7 +27,7 @@ public class Tower implements Actor {
     private final BitmapFont font = FontManager.getFont(16);
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final IndicatorManager indicatorManager = new IndicatorManager();
-    private int x = 0;
+    private int x;
     private int y = 100;
     private int health = Constants.TOWER_HEALTH;
     private boolean exists = true;

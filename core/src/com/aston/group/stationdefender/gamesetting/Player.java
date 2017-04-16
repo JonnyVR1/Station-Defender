@@ -42,11 +42,11 @@ public class Player implements InputProcessor, ItemCallback {
     private final IndicatorManager moneyIndicator = new IndicatorManager();
     private final StackableInventory inventory = new StackableInventory();
     private Item currentItem;
-    private int score = 0;
+    private int score;
     private int money = Constants.START_MONEY;
     private PlayerCallback playerCallback;
-    private int selectedSlot = 0;
-    private boolean itemsLoaded = false;
+    private int selectedSlot;
+    private boolean itemsNotLoaded = true;
 
     /**
      * Construct a new Player
@@ -58,12 +58,12 @@ public class Player implements InputProcessor, ItemCallback {
             if (money < 20)
                 this.money = money + 20;
             if (items.size >= 4)
-                itemsLoaded = true;
+                itemsNotLoaded = false;
             for (Item item : items) {
                 inventory.addItem(item);
             }
         });
-        if (!itemsLoaded) {
+        if (itemsNotLoaded) {
             for (int i = 0; i < 4; i++) {
                 inventory.addItem(ItemFactory.getItem(Items.TURRET));
             }

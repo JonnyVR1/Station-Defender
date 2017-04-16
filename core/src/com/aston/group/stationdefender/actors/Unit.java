@@ -36,10 +36,10 @@ public abstract class Unit implements Actor {
     private final double chanceToHit; //Chance of a hit
     private final boolean facingLeft; //Whether the Unit is facing left or not
     double damage; //How much damage each successful hit causes.
-    int x = 0; //Unit's position on the X-Axis
-    int y = 0; //Unit's position on the Y-Axis
-    boolean isAdjacent = false; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
-    Actor adjacentActor = null; //The Unit that this Unit is adjacent to.
+    int x; //Unit's position on the X-Axis
+    int y; //Unit's position on the Y-Axis
+    boolean isAdjacent; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
+    Actor adjacentActor; //The Unit that this Unit is adjacent to.
     private UnitCallback unitCallback; //The UnitCallBack used for the Unit
     private boolean exists = true; //Whether the Unit is alive or dead.
     private double health; //How much damage the Unit can take before being destroyed.
@@ -60,6 +60,7 @@ public abstract class Unit implements Actor {
      * @param width       The width of the Unit
      * @param height      The height of the Unit
      * @param texture     The texture graphic of the Unit
+     * @param facingLeft  Whether the Unit is facing left or not
      */
     Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture, boolean facingLeft) {
         this.name = name;

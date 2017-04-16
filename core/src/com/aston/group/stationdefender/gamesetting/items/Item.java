@@ -19,26 +19,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Item {
     private final SpriteBatch batch = GameEngine.getBatch();
     private final String name;
-    private final int id;
     private final boolean placeable;
     private final Texture texture;
     private final Items sku;
     private final int width = 32;
     private final int height = 32;
-    private int cost = 0;
-    private int value = 0;
-    private int health = 0;
+    private final int cost;
+    private final int value;
+    private final int health;
     private boolean justSpawned;
     private int x, y;
 
     /**
      * Construct a new Item with a name
      *
-     * @param name The name of the Item
+     * @param name      The name of the Item
+     * @param cost      The cost of the Item
+     * @param health    The additional health of the Item
+     * @param value     The money value of the Item
+     * @param textureId The Texture ID to use to get the Item graphic
+     * @param placeable Whether the Item is placeable on a Tile or not
+     * @param sku       The unique SKU of the Item
      */
-    public Item(String name, int id, int cost, int health, int value, int textureId, boolean placeable, Items sku) {
+    public Item(String name, int cost, int health, int value, int textureId, boolean placeable, Items sku) {
         this.name = name;
-        this.id = id;
         this.cost = cost;
         this.health = health;
         this.value = value;
@@ -55,7 +59,6 @@ public class Item {
             batch.begin();
             batch.draw(texture, x + 2, y + 1, width, height);
             batch.end();
-
             batch.begin();
             batch.draw(texture, x, y, width, height);
             batch.end();
@@ -88,15 +91,6 @@ public class Item {
             default:
                 return null;
         }
-    }
-
-    /**
-     * Returns the ID of the Item
-     *
-     * @return The ID of the item
-     */
-    public int getId() {
-        return id;
     }
 
     /**
@@ -221,7 +215,7 @@ public class Item {
      */
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Item{" + "SKU=" + sku + ", name='" + name + '\'' + '}';
     }
 
     /**

@@ -15,6 +15,8 @@ public class HudUnit extends HudContainer {
 
     /**
      * Creates a new HudWeapon with default X and Y co-ordinates of '0'
+     *
+     * @param actor The Actor to assign the HUD to
      */
     public HudUnit(Actor actor) {
         super();

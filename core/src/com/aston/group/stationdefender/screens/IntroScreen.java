@@ -44,7 +44,7 @@ public class IntroScreen implements Screen {
     private final TextButton[] buttons;
     private final GameEngine gameEngine;
     private MenuCallback menuCallback;
-    private float fadeElapsed = 0;
+    private float fadeElapsed;
 
     /**
      * Construct a new IntroScreen

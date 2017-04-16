@@ -9,7 +9,7 @@ import com.aston.group.stationdefender.config.Constants;
  * @version 01/11/2016
  */
 public class Alien extends Unit {
-    private boolean overloaded = false;
+    private boolean overloaded;
 
     /**
      * Construct a new Alien with default X and Y co-ordinates of '0'
@@ -69,14 +69,15 @@ public class Alien extends Unit {
                     }
                     break;
                 case "Rapid Fire Alien":
-                    if (!overloaded) {
+                    if (overloaded)
+                        overloaded = false;
+                    else {
                         if (isAdjacent) {
                             overloaded = rapidFireHelper();
                         } else {
                             move(delta);
                         }
-                    } else
-                        overloaded = false;
+                    }
                     break;
                 default:
                     if (isAdjacent) {

@@ -26,7 +26,7 @@ import java.util.Random;
  * @author Jonathon Fitch
  */
 public class Level implements LaneCallback {
-    private static final int[] backgroundTextures = new int[]{3, 19, 20, 21};
+    private static final int[] backgroundTextures = {3, 19, 20, 21};
     private final SpriteBatch batch;
     private final Texture texture;
     private final LevelCallback levelCallback;
@@ -35,8 +35,8 @@ public class Level implements LaneCallback {
     private final int levelNumber;
     private final Tower tower = new Tower();
     private Actor bossEnemy;
-    private boolean isBossCreated = false;
-    private boolean isBossDestroyed = false;
+    private boolean isBossCreated;
+    private boolean isBossDestroyed;
     private boolean hasWon;
     private boolean hasLost;
 

@@ -15,11 +15,11 @@ import com.badlogic.gdx.utils.Pool;
 public class Projectile implements Pool.Poolable {
     private final SpriteBatch batch;
     private final Texture texture;
-    private int x = 0;
-    private int y = 0;
+    private int x;
+    private int y;
     private int width = 10;
     private int height = 8;
-    private boolean alive = false;
+    private boolean alive;
     private double damage, speed;
 
     /**

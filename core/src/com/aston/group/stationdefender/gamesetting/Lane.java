@@ -48,7 +48,7 @@ public class Lane implements UnitCallback {
      * @param y            The Y co-ordinate of the Lane
      * @param difficulty   The difficulty of the Level
      */
-    public Lane(LaneCallback laneCallback, int y, double difficulty) {
+    Lane(LaneCallback laneCallback, int y, double difficulty) {
         this.laneCallback = laneCallback;
         this.x = 100;
         this.y = y;
@@ -148,11 +148,10 @@ public class Lane implements UnitCallback {
                 ((Unit) actor).setAdjacentActor(adjacentActor);
 
                 //Check if aliens are near tower
-                adjacentActor = actor;
-                if (((Unit) adjacentActor).isFacingLeft() && laneCallback.isTowerColliding(adjacentActor.getX(), adjacentActor.getY(), adjacentActor.getWidth(), adjacentActor.getHeight())) {
-                    laneCallback.towerTakeDamage(((Unit) adjacentActor).getDamage());
+                if (((Unit) actor).isFacingLeft() && laneCallback.isTowerColliding(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight())) {
+                    laneCallback.towerTakeDamage(((Unit) actor).getDamage());
                     overrun = true;
-                    ((Unit) adjacentActor).destroy();
+                    ((Unit) actor).destroy();
                     actors.removeIndex(i);
                 }
             }
@@ -238,7 +237,7 @@ public class Lane implements UnitCallback {
      */
     private boolean isLaneCleared() {
         return IntStream.range(0, actors.size).noneMatch(i -> {
-            if (actors.get(i) instanceof Unit) {
+            if (actors.get(i).isUnit()) {
                 Unit unit = (Unit) actors.get(i);
                 return unit.isFacingLeft();
             }
@@ -319,7 +318,7 @@ public class Lane implements UnitCallback {
      *
      * @return true if a Lane is overrun with Aliens, false if the Lane is not overrun by Aliens
      */
-    public boolean isOverrun() {
+    boolean isOverrun() {
         return overrun;
     }
 
@@ -328,7 +327,7 @@ public class Lane implements UnitCallback {
      *
      * @return true if a Lane is cleared, false if a Lane is not cleared
      */
-    public boolean isCleared() {
+    boolean isCleared() {
         return cleared;
     }
 
@@ -342,7 +341,7 @@ public class Lane implements UnitCallback {
         for (int i = 0; i < projectileFactory.getProjectiles().size; i++) {
             if (actors != null) {
                 for (int j = 0; j < actors.size; j++) {
-                    if (actors.get(i) instanceof Unit) {
+                    if (actors.get(i).isUnit()) {
                         Actor actor = actors.get(j);
                         projectileCollisionHelper(projectileFactory.getProjectiles().get(i), actor, false);
                     }

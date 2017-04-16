@@ -11,11 +11,11 @@ import com.aston.group.stationdefender.config.Constants;
  */
 public class Weapon extends Unit {
     private final int cost;
-    private boolean built = false;
+    private boolean built;
     private int costToUpgrade;
     private double remainingBuildTime;
     private long startTime;
-    private boolean overloaded = false;
+    private boolean overloaded;
 
     /**
      * Construct a new Weapon with default X and Y co-ordinates of '0'
@@ -63,19 +63,20 @@ public class Weapon extends Unit {
         if (built && checkIsNotZeroHealth()) {
             switch (name) {
                 case "Rapid Fire Weapon":
-                    if (!overloaded) {
+                    if (overloaded) {
+                        overloaded = false;
+                    } else {
                         if (isAdjacent) {
                             overloaded = rapidFireHelper();
                         } else {
-                            overloaded = false;
                             unitFireHelper(40, 0);
                         }
                     }
                 default:
-                    if (!isAdjacent) {
-                        unitFireHelper(40, 0);
-                    } else {
+                    if (isAdjacent) {
                         adjacentActor.takeDamage(fire());
+                    } else {
+                        unitFireHelper(40, 0);
                     }
                     break;
             }

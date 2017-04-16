@@ -47,7 +47,7 @@ public class TwoTextScreen implements Screen {
     private final Label bodyLabel;
     private TextButton continueButton;
     private TwoTextCallback twoTextCallback;
-    private float fadeElapsed = 0;
+    private float fadeElapsed;
     private String title;
     private String body;
 

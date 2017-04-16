@@ -24,8 +24,8 @@ public class Tile {
     private final SpriteBatch batch;
     private final Texture texture;
     private final ShapeRenderer shapeRenderer;
-    private boolean hasItem = false;
-    private boolean invalid = false;
+    private boolean hasItem;
+    private boolean invalid;
 
     /**
      * Construct a new Tile with given X and Y co-ordinates
