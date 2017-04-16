@@ -77,8 +77,8 @@ public class TwoTextScreen implements Screen {
         Image image = new Image();
         image.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         image.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
-
         background.addActor(image);
+
         titleLabel = new Label(title, new Label.LabelStyle(titleFont, Color.WHITE));
         titleLabel.setAlignment(Align.center);
         bodyLabel = new Label(body, new Label.LabelStyle(bodyFont, Color.WHITE));
@@ -201,7 +201,7 @@ public class TwoTextScreen implements Screen {
      */
     public void setTitle(String title) {
         this.title = title;
-        this.titleLabel.setText(title);
+        titleLabel.setText(title);
     }
 
     /**
@@ -211,7 +211,7 @@ public class TwoTextScreen implements Screen {
      */
     public void setBody(String body) {
         this.body = body;
-        this.bodyLabel.setText(body);
+        bodyLabel.setText(body);
     }
 
     /**

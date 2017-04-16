@@ -17,19 +17,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Mohammed Foysal
  */
 public class Item {
-    private final SpriteBatch batch;
+    private final SpriteBatch batch = GameEngine.getBatch();
     private final String name;
     private final int id;
     private final boolean placeable;
     private final Texture texture;
     private final Items sku;
+    private final int width = 32;
+    private final int height = 32;
     private int cost = 0;
     private int value = 0;
     private int health = 0;
     private boolean justSpawned;
     private int x, y;
-    private int width = 32;
-    private int height = 32;
 
     /**
      * Construct a new Item with a name
@@ -45,7 +45,6 @@ public class Item {
         this.placeable = placeable;
         this.sku = sku;
         texture = TextureManager.INSTANCE.loadTexture(textureId);
-        batch = GameEngine.getBatch();
     }
 
     /**
@@ -180,30 +179,12 @@ public class Item {
     }
 
     /**
-     * Sets the width of the Item
-     *
-     * @param width The width of the Item
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
      * Returns the height of the Item
      *
      * @return The height of the Item
      */
     public int getHeight() {
         return height;
-    }
-
-    /**
-     * Sets the height of the Item
-     *
-     * @param height The height of the Item
-     */
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     /**

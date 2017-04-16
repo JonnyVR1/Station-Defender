@@ -34,7 +34,7 @@ public class Level implements LaneCallback {
     private final Array<Lane> lanes = new Array<>();
     private final int levelNumber;
     private final Tower tower = new Tower();
-    private Unit bossEnemy;
+    private Actor bossEnemy;
     private boolean isBossCreated = false;
     private boolean isBossDestroyed = false;
     private boolean hasWon;
@@ -60,7 +60,7 @@ public class Level implements LaneCallback {
 
         int laneY = 110;
         for (int i = 0; i < Constants.LANE_AMOUNT; i++) {
-            lanes.add(new Lane(this, 100, laneY, Constants.TILE_AMOUNT, difficulty));
+            lanes.add(new Lane(this, laneY, difficulty));
             laneY += (Constants.TILE_HEIGHT + (Constants.TILE_HEIGHT / 4));
         }
 
@@ -102,12 +102,12 @@ public class Level implements LaneCallback {
                 lane.projectileCollision(null, bossEnemy);
             }
             if (tower.isColliding(bossEnemy.getX() - 25, bossEnemy.getY(), bossEnemy.getWidth(), bossEnemy.getHeight())) {
-                towerTakeDamage(bossEnemy.getDamage());
-                bossEnemy.destroy();
+                towerTakeDamage(((Unit) bossEnemy).getDamage());
+                ((Unit) bossEnemy).destroy();
                 isBossDestroyed = true;
             }
-            if (bossEnemy.getHealth() == 0) {
-                bossEnemy.destroy();
+            if (((Unit) bossEnemy).getHealth() == 0) {
+                ((Unit) bossEnemy).destroy();
                 isBossDestroyed = true;
                 addMoney(20);
             }
@@ -119,49 +119,6 @@ public class Level implements LaneCallback {
 
         if (tower != null)
             tower.render(delta);
-    }
-
-    /**
-     * Adds a Lane to the Level
-     *
-     * @param lane The Lane to add to the Level
-     */
-    public void addLane(Lane lane) {
-        lanes.add(lane);
-    }
-
-    /**
-     * Returns all the Lanes in an Array
-     *
-     * @return An Array of all the Lanes
-     */
-    public Array<Lane> getAllLanes() {
-        return lanes;
-    }
-
-    /**
-     * Removes a Lane from the Level by lane number
-     *
-     * @param index The Lane number to remove from the Level
-     */
-    public void removeLaneByIndex(int index) {
-        lanes.removeIndex(index - 1);
-    }
-
-    /**
-     * Removes a Lane from the Level by Lane Object
-     *
-     * @param lane The Lane Object to be removed from the Level
-     */
-    public void removeLaneByObject(Lane lane) {
-        lanes.removeValue(lane, true);
-    }
-
-    /**
-     * Empty the Level
-     **/
-    public void clear() {
-        lanes.clear();
     }
 
     /**
@@ -208,24 +165,6 @@ public class Level implements LaneCallback {
         }
     }
 
-    /**
-     * Returns whether the Player has won the game or not
-     *
-     * @return true if the Player has won, false if the Player has not won
-     */
-    public boolean isHasWon() {
-        return hasWon;
-    }
-
-    /**
-     * Returns whether the Player has lost the game or not
-     *
-     * @return true if the Player has lost, false if the Player has not lost
-     */
-    public boolean isHasLost() {
-        return hasLost;
-    }
-
     @Override
     public void addMoney(int money) {
         levelCallback.addMoney(money);
@@ -264,7 +203,7 @@ public class Level implements LaneCallback {
      * Create the Boss Enemy
      */
     private void createBoss() {
-        bossEnemy = (Unit) UnitFactory.getBossEnemy();
+        bossEnemy = UnitFactory.getBossEnemy();
         bossEnemy.setX(Gdx.graphics.getWidth());
         bossEnemy.setY(Gdx.graphics.getHeight() / 2 - (bossEnemy.getHeight() / 2));
         isBossCreated = true;

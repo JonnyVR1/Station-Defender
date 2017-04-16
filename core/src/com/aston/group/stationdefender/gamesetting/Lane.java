@@ -44,23 +44,21 @@ public class Lane implements UnitCallback {
     /**
      * Construct a new Lane
      *
-     * @param laneCallback  THe LaneCallback to be used for the Lane
-     * @param x             The X co-ordinate of the Lane
-     * @param y             The Y co-ordinate of the Lane
-     * @param numberOfTiles The Number of tiles in the lane
-     * @param difficulty    The difficulty of the Level
+     * @param laneCallback THe LaneCallback to be used for the Lane
+     * @param y            The Y co-ordinate of the Lane
+     * @param difficulty   The difficulty of the Level
      */
-    public Lane(LaneCallback laneCallback, int x, int y, int numberOfTiles, double difficulty) {
+    public Lane(LaneCallback laneCallback, int y, double difficulty) {
         this.laneCallback = laneCallback;
-        this.x = x;
+        this.x = 100;
         this.y = y;
 
-        Tile[] tile = new Tile[numberOfTiles];
-        int tileX = x;
+        Tile[] tile = new Tile[Constants.TILE_AMOUNT];
+        int tileX = 100;
         int itemTileProbability = 2 * laneCallback.getLevelNumber();
         int invalidTileProbability = 14 / laneCallback.getLevelNumber();
         Random rand = new Random();
-        for (int i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i < Constants.TILE_AMOUNT; i++) {
             tile[i] = new Tile(tileX, y);
 
             // Probability will be 1 / tileProbability
@@ -111,59 +109,6 @@ public class Lane implements UnitCallback {
     }
 
     /**
-     * Returns a tile by the specific tile number
-     *
-     * @param index The lane number of the lane to get
-     * @return The lane of the specific lane number
-     */
-    public Tile getTile(int index) {
-        return tiles.get(index);
-    }
-
-    /**
-     * Returns all the Lanes in an Array
-     *
-     * @return An Array of all the Lanes
-     */
-    public Array<Tile> getAllTiles() {
-        return tiles;
-    }
-
-    /**
-     * Empty the Lane of Tiles
-     */
-    public void clear() {
-        tiles.clear();
-    }
-
-    /**
-     * Adds a tile to the Level
-     *
-     * @param tile The tile to add to the Level
-     */
-    public void addTile(Tile tile) {
-        tiles.add(tile);
-    }
-
-    /**
-     * Removes a tile from the Level by Tile number
-     *
-     * @param index The tile number to remove from the Level
-     */
-    public void removeTileByIndex(int index) {
-        tiles.removeIndex(index);
-    }
-
-    /**
-     * Removes a tile from the Level by Tile Object
-     *
-     * @param tile The tile Object to be removed from the Level
-     */
-    public void removeTileByObject(Tile tile) {
-        tiles.removeValue(tile, true);
-    }
-
-    /**
      * Render the Lane.
      *
      * @param delta - The time in seconds since the last render.
@@ -176,43 +121,38 @@ public class Lane implements UnitCallback {
         for (Actor actor : actors) {
             actor.render(delta);
             if (actor.isUnit()) {
-                Unit unit = (Unit) actor;
-                unit.setUnitCallback(this);
+                ((Unit) actor).setUnitCallback(this);
             }
         }
 
         //Check if Units are adjacent. if they are, share the adjacent actor with each other
         for (int i = 0; i < actors.size; i++) {
-            boolean isUnitAdjacent = false;
             if (actors.get(i).isUnit()) {
-                Unit actor1 = (Unit) actors.get(i);
-                Unit unit = null;
+                Actor actor = actors.get(i);
+                Actor adjacentActor = null;
                 for (int j = 0; j < actors.size; j++) {
                     if (i != j && actors.get(j).isUnit()) {
-                        Unit actor2 = (Unit) actors.get(j);
-                        if (actor1.isUnitAdjacent(actor2) && !Objects.equals(actor2.getName(), "Mine")) {
-                            isUnitAdjacent = true;
-                            unit = actor2;
+                        Actor temp = actors.get(j);
+                        if (((Unit) actor).isUnitAdjacent(temp)) {
+                            adjacentActor = temp;
                             break;
                         }
                     }
                 }
 
-                if (!Objects.equals(actor1.getName(), "Mine")) {
-                    if (isUnitAdjacent) {
-                        actor1.setIsAdjacent(true);
-                    } else {
-                        actor1.setIsAdjacent(false);
-                    }
-                    actor1.setAdjacentActor(unit);
+                if (adjacentActor != null) {
+                    ((Unit) actor).setIsAdjacent(true);
+                } else {
+                    ((Unit) actor).setIsAdjacent(false);
                 }
+                ((Unit) actor).setAdjacentActor(adjacentActor);
 
                 //Check if aliens are near tower
-                unit = actor1;
-                if (unit.isFacingLeft() && laneCallback.isTowerColliding(unit.getX(), unit.getY(), unit.getWidth(), unit.getHeight())) {
-                    laneCallback.towerTakeDamage(unit.getDamage());
+                adjacentActor = actor;
+                if (((Unit) adjacentActor).isFacingLeft() && laneCallback.isTowerColliding(adjacentActor.getX(), adjacentActor.getY(), adjacentActor.getWidth(), adjacentActor.getHeight())) {
+                    laneCallback.towerTakeDamage(((Unit) adjacentActor).getDamage());
                     overrun = true;
-                    unit.destroy();
+                    ((Unit) adjacentActor).destroy();
                     actors.removeIndex(i);
                 }
             }
@@ -222,14 +162,12 @@ public class Lane implements UnitCallback {
         Iterator<Actor> unitsIterator = actors.iterator();
         while (unitsIterator.hasNext()) {
             Actor actor = unitsIterator.next();
-            Unit unit;
             if (actor.isUnit()) {
-                unit = (Unit) actor;
-                if (!unit.getExists()) {
-                    dropItem(ItemFactory.getItemByChance(), unit.getX(), unit.getY());
-                    unit.setHealth(-1);
+                if (!actor.getExists()) {
+                    dropItem(ItemFactory.getItemByChance(), actor.getX(), actor.getY());
+                    ((Unit) actor).setHealth(-1);
                 }
-                if (unit.getHealth() <= 0) {
+                if (((Unit) actor).getHealth() <= 0) {
                     unitsIterator.remove();
                 }
             }
@@ -238,13 +176,13 @@ public class Lane implements UnitCallback {
         //Spawn New Aliens
         if (System.currentTimeMillis() - lastRenderTime > 2200 + Math.random() * 3000) {
             if (alienAmount > 0) {
-                Actor unit = UnitFactory.getRandomEnemy();
-                if (unit.getName().equalsIgnoreCase("Mine"))
-                    unit.setX(getRandomTileCenterX() - (unit.getHeight() / 2));
+                Actor actor = UnitFactory.getRandomEnemy();
+                if (Objects.equals(actor.getName(), "Mine"))
+                    actor.setX(getRandomTileCenterX() - (actor.getHeight() / 2));
                 else
-                    unit.setX(getLastTileCenterX() - (unit.getWidth() / 2));
-                unit.setY(getLastTileCenterY() - (unit.getHeight() / 2));
-                actors.add(unit);
+                    actor.setX(getLastTileCenterX() - (actor.getWidth() / 2));
+                actor.setY(getLastTileCenterY() - (actor.getHeight() / 2));
+                actors.add(actor);
                 alienAmount--;
             }
             lastRenderTime = System.currentTimeMillis();
@@ -386,15 +324,6 @@ public class Lane implements UnitCallback {
     }
 
     /**
-     * Sets whether a Lane is overrun by Aliens or not
-     *
-     * @param overrun Whether a Lane is overrun by Aliens or not
-     */
-    public void setOverrun(boolean overrun) {
-        this.overrun = overrun;
-    }
-
-    /**
      * Returns whether a Lane is cleared or not and there are no more Aliens onscreen
      *
      * @return true if a Lane is cleared, false if a Lane is not cleared
@@ -404,27 +333,18 @@ public class Lane implements UnitCallback {
     }
 
     /**
-     * Sets whether a Lane is cleared or not and there are no more Aliens onscreen
-     *
-     * @param cleared Whether a Lane is cleared or not and there are no more Aliens onscreen
-     */
-    public void setCleared(boolean cleared) {
-        this.cleared = cleared;
-    }
-
-    /**
      * Checks if projectiles are colliding with a Unit or an array of Units
      *
-     * @param actorsArray The array of Units to cycle through
-     * @param bossUnit    The singular boss Unit to check for collisions
+     * @param actors   The array of Units to cycle through
+     * @param bossUnit The singular boss Unit to check for collisions
      */
-    void projectileCollision(Array<Actor> actorsArray, Unit bossUnit) {
+    void projectileCollision(Array<Actor> actors, Actor bossUnit) {
         for (int i = 0; i < projectileFactory.getProjectiles().size; i++) {
-            if (actorsArray != null) {
-                for (int j = 0; j < actorsArray.size; j++) {
-                    if (actorsArray.get(i) instanceof Unit) {
-                        Unit unit = (Unit) actorsArray.get(j);
-                        projectileCollisionHelper(projectileFactory.getProjectiles().get(i), unit, false);
+            if (actors != null) {
+                for (int j = 0; j < actors.size; j++) {
+                    if (actors.get(i) instanceof Unit) {
+                        Actor actor = actors.get(j);
+                        projectileCollisionHelper(projectileFactory.getProjectiles().get(i), actor, false);
                     }
                 }
             } else {
@@ -437,14 +357,14 @@ public class Lane implements UnitCallback {
      * Helper method to avoid duplicate code in projectileCollision()
      *
      * @param projectile  The Projectile to check for collisions
-     * @param unit        The Unit to check for collisions against the Projectile
+     * @param actor       The Unit to check for collisions against the Projectile
      * @param isBossEnemy Whether the Unit is a Boss Enemy or not
      */
-    private void projectileCollisionHelper(Projectile projectile, Unit unit, boolean isBossEnemy) {
-        if (unit.isFacingLeft() && projectile.isColliding(unit.getX(), unit.getY(), unit.getWidth(), unit.getHeight())) {
+    private void projectileCollisionHelper(Projectile projectile, Actor actor, boolean isBossEnemy) {
+        if (projectile.isColliding(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight())) {
             projectile.setDead();
             double damage = projectile.getDamage();
-            if (unit.getHealth() - damage <= 0) {
+            if (((Unit) actor).getHealth() - damage <= 0) {
                 if (isBossEnemy)
                     laneCallback.addMoney(Constants.BOSS_DESTROY_MONEY_REGENERATION);
                 else {
@@ -452,7 +372,7 @@ public class Lane implements UnitCallback {
                     laneCallback.addScore(Constants.ADD_SCORE_AMOUNT);
                 }
             }
-            unit.takeDamage(damage);
+            actor.takeDamage(damage);
         }
         if (laneCallback.isTowerColliding(projectile.getX(), projectile.getY(), projectile.getWidth(), projectile.getHeight())) {
             laneCallback.towerTakeDamage(projectile.getDamage());

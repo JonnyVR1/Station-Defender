@@ -10,7 +10,6 @@ import com.aston.group.stationdefender.config.Constants;
  * @version 01/11/2016
  */
 public class Weapon extends Unit {
-    private final double buildTime;
     private final int cost;
     private boolean built = false;
     private int costToUpgrade;
@@ -44,7 +43,6 @@ public class Weapon extends Unit {
     public Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit,
                   double buildTime, int cost, int costToUpgrade, int texture) {
         super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, texture, false);
-        this.buildTime = buildTime;
         this.cost = cost;
         this.costToUpgrade = costToUpgrade;
         remainingBuildTime = buildTime;
@@ -57,13 +55,12 @@ public class Weapon extends Unit {
         renderParticleEffect(delta, batch);
         batch.draw(texture, x, y, width, height);
         batch.end();
-        act(delta);
+        act();
         checkInput();
     }
 
-    @Override
-    public void act(float delta) {
-        if (built && !checkZeroHealth()) {
+    private void act() {
+        if (built && checkIsNotZeroHealth()) {
             switch (name) {
                 case "Rapid Fire Weapon":
                     if (!overloaded) {
@@ -92,7 +89,7 @@ public class Weapon extends Unit {
      * if the time since the last call to the method is greater than or equal to 500 milliseconds.
      * If afterwards the build timer is less than or equal to 0 then built is set to true.
      */
-    public void decrementBuildTimer() {
+    private void decrementBuildTimer() {
         if (System.currentTimeMillis() - startTime >= 500) {
             if (remainingBuildTime > 0) {
                 remainingBuildTime -= 0.5;
@@ -105,24 +102,6 @@ public class Weapon extends Unit {
     }
 
     /**
-     * Returns the build time for the Weapon
-     *
-     * @return buildTime
-     */
-    public double getBuildTime() {
-        return buildTime;
-    }
-
-    /**
-     * Returns the remaining build time of the Weapon.
-     *
-     * @return remainingBuildTime
-     */
-    public double getRemainingBuildTime() {
-        return remainingBuildTime;
-    }
-
-    /**
      * Returns the cost of building the weapon.
      *
      * @return cost.
@@ -132,47 +111,12 @@ public class Weapon extends Unit {
     }
 
     /**
-     * Returns the cost to upgrade the weapon.
-     *
-     * @return costToUpgrade
-     */
-    public int getCostToUpgrade() {
-        return costToUpgrade;
-    }
-
-    /**
-     * Returns a boolean stating if the Unit has been built or not.
-     *
-     * @return built
-     */
-    public boolean getBuilt() {
-        return built;
-    }
-
-    /**
      * Upgrades the weapon's damage by 10%, and increases cost to upgrade 25%.
      */
+    @SuppressWarnings("unused")
     public void upgradeWeapon() {
         Double newUpgradeCost = Math.ceil((costToUpgrade * 1.25));
         costToUpgrade = newUpgradeCost.intValue();
         damage = Math.ceil((damage * 1.1));
-    }
-
-    /**
-     * Returns if the Weapon is overloaded.
-     *
-     * @return Overloaded state of the Weapon.
-     */
-    public boolean getOverloaded() {
-        return overloaded;
-    }
-
-    /**
-     * Sets if the Weapon is overloaded or not.
-     *
-     * @param overloaded state of the Weapon.
-     */
-    public void setOverloaded(boolean overloaded) {
-        this.overloaded = overloaded;
     }
 }

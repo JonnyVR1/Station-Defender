@@ -33,7 +33,7 @@ public class HudUnit extends HudContainer {
         restartBatch();
         font.draw(batch, "Health: " + unit.getHealth(), x + 5, yPos);
         restartBatch();
-        if (unit instanceof Weapon) {
+        if (unit.getClass().isAssignableFrom(Weapon.class)) {
             font.draw(batch, "Cost: " + ((Weapon) unit).getCost(), x + 5, yPos);
             restartBatch();
         }

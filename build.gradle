@@ -41,7 +41,6 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
-        compile "com.google.code.gson:gson:$gsonVersion"
     }
 }
 
@@ -55,15 +54,6 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-        compile "com.google.code.gson:gson:$gsonVersion"
-    }
-}
-
-project(":tests") {
-    dependencies {
-        compile project(":core")
-        compile "junit:junit:$jUnitVersion"
-        compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.google.code.gson:gson:$gsonVersion"
     }
 }

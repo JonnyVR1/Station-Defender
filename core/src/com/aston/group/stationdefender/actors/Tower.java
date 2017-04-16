@@ -45,10 +45,6 @@ public class Tower implements Actor {
         indicatorManager.render(delta, x, y);
     }
 
-    @Override
-    public void act(float delta) {
-    }
-
     /**
      * Check if an objects X &amp; Y co-ordinates or width &amp; height
      * overlaps the Towers X &amp; Y co-ordinates, or width &amp; height
@@ -96,8 +92,10 @@ public class Tower implements Actor {
      * @param health The amount of health to add to the Tower
      */
     public void addHealth(int health) {
-        this.health += health;
-        indicatorManager.addIndicator("+" + Integer.toString(health), Color.YELLOW);
+        if (health != 0) {
+            this.health += health;
+            indicatorManager.addIndicator("+" + Integer.toString(health), Color.YELLOW);
+        }
     }
 
     @Override

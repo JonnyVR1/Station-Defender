@@ -304,7 +304,8 @@ public class Player implements InputProcessor, ItemCallback {
      * @param amount The score to be added to the Player's score total
      */
     public void addScore(int amount) {
-        score += amount;
+        if (amount != 0)
+            score += amount;
     }
 
     /**
@@ -313,8 +314,10 @@ public class Player implements InputProcessor, ItemCallback {
      * @param amount The amount of money to be added to the money Player's total
      */
     public void addMoney(int amount) {
-        money += amount;
-        moneyIndicator.addIndicator("+" + Integer.toString(amount), Color.YELLOW);
+        if (amount != 0) {
+            money += amount;
+            moneyIndicator.addIndicator("+" + Integer.toString(amount), Color.YELLOW);
+        }
     }
 
     /**
@@ -323,7 +326,7 @@ public class Player implements InputProcessor, ItemCallback {
      * @param amount The amount of money to be removed from the Player's money total
      */
     private void removeMoney(int amount) {
-        if (money - amount >= 0)
+        if (money - amount >= 0 && amount != 0)
             money -= amount;
     }
 

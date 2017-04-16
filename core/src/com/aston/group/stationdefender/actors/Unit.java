@@ -29,7 +29,7 @@ public abstract class Unit implements Actor {
     final int height; //Unit's height
     final Texture texture;
     final String name; //Name of the type of unit.
-    final SpriteBatch batch;
+    final SpriteBatch batch = GameEngine.getBatch();
     private final double rateOfFire; //How many times the unit fires per "tick".
     private final double range; //How many tiles forward the Unit can fire.
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
@@ -73,7 +73,6 @@ public abstract class Unit implements Actor {
         this.chanceToHit = chanceToHit;
         this.texture = TextureManager.INSTANCE.loadTexture(texture);
         this.facingLeft = facingLeft;
-        batch = GameEngine.getBatch();
     }
 
     /**
@@ -92,9 +91,6 @@ public abstract class Unit implements Actor {
     public boolean getExists() {
         return exists;
     }
-
-    @Override
-    public abstract void act(float delta);
 
     public void destroy() {
         if (hudElement != null) {
@@ -119,15 +115,6 @@ public abstract class Unit implements Actor {
     @Override
     public boolean isUnit() {
         return true;
-    }
-
-    /**
-     * Returns the speed of the Unit
-     *
-     * @return Speed of the Unit.
-     */
-    public double getSpeed() {
-        return speed;
     }
 
     /**
@@ -185,7 +172,7 @@ public abstract class Unit implements Actor {
      *
      * @return Boolean which says if the Unit is adjacent to another entity.
      */
-    public boolean isAdjacent() {
+    boolean isAdjacent() {
         return isAdjacent;
     }
 
@@ -203,7 +190,7 @@ public abstract class Unit implements Actor {
      *
      * @return The Actor that the Unit is adjacent to, null if no Actor is adjacent to the Unit
      */
-    public Actor getAdjacentActor() {
+    Actor getAdjacentActor() {
         if (isAdjacent()) {
             return adjacentActor;
         } else {
@@ -229,17 +216,17 @@ public abstract class Unit implements Actor {
     /**
      * Returns whether there is a Unit adjacent to the current Unit
      *
-     * @param unit The Unit to check whether Unit is adjacent to the current Unit
+     * @param actor The Unit to check whether Unit is adjacent to the current Unit
      * @return true if there is a Unit adjacent to the current Unit,
      * false if there is not a Unit adjacent to the current Unit
      */
-    public boolean isUnitAdjacent(Actor unit) {
-        if (unit == this)
+    public boolean isUnitAdjacent(Actor actor) {
+        if (actor == this)
             return false;
         if (facingLeft) {
-            return unit.getX() + unit.getWidth() > x && unit.getX() < x + width && y + height > y && y < y + height;
+            return actor.getX() + actor.getWidth() > x && actor.getX() < x + width && y + height > y && y < y + height;
         } else {
-            return unit.getX() + unit.getWidth() > x && unit.getX() < x + width && y + height > y && y < y + height;
+            return actor.getX() + actor.getWidth() > x && actor.getX() < x + width && y + height > y && y < y + height;
         }
     }
 
@@ -247,10 +234,9 @@ public abstract class Unit implements Actor {
      * Checks if the Health of the Unit is less than 1.
      *
      * @return true if health is above 0, false if health is 0 or below
-     * @see #act(float delta)
      */
-    public boolean checkZeroHealth() {
-        return health < 1;
+    boolean checkIsNotZeroHealth() {
+        return health >= 1;
     }
 
     /**
@@ -258,7 +244,7 @@ public abstract class Unit implements Actor {
      *
      * @return The total damage done by the number of fires
      */
-    public double fire() {
+    double fire() {
         Random rng = new Random();
         int hit = 0;
         for (int i = 0; i < rateOfFire; i++) {
@@ -339,15 +325,6 @@ public abstract class Unit implements Actor {
      */
     public void setUnitCallback(UnitCallback unitCallback) {
         this.unitCallback = unitCallback;
-    }
-
-    /**
-     * Returns the likelihood of a Unit hitting its target, per shot.
-     *
-     * @return The likelihood of a Unit hitting its target, per shot
-     */
-    public double getChanceToHit() {
-        return chanceToHit;
     }
 
     /**

@@ -2,8 +2,6 @@ package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
 
-import java.util.Objects;
-
 /**
  * Superclass for different Alien types.
  *
@@ -54,12 +52,11 @@ public class Alien extends Unit {
         indicatorManager.render(delta, x, y);
     }
 
-    @Override
-    public void act(float delta) {
-        if (!checkZeroHealth()) {
+    private void act(float delta) {
+        if (checkIsNotZeroHealth()) {
             switch (name) {
                 case "Kamikaze Alien":
-                    if (isAdjacent && !Objects.equals(getAdjacentActor().getName(), "Mine")) {
+                    if (isAdjacent) {
                         adjacentActor.takeDamage(fire());
                         destroy();
                     } else {
@@ -73,7 +70,7 @@ public class Alien extends Unit {
                     break;
                 case "Rapid Fire Alien":
                     if (!overloaded) {
-                        if (isAdjacent && !Objects.equals(getAdjacentActor().getName(), "Mine")) {
+                        if (isAdjacent) {
                             overloaded = rapidFireHelper();
                         } else {
                             move(delta);
@@ -107,23 +104,5 @@ public class Alien extends Unit {
                 getAdjacentActor().takeDamage(getDamage());
             }
         }
-    }
-
-    /**
-     * Returns if the Alien is overloaded.
-     *
-     * @return Overloaded state of the Alien.
-     */
-    public boolean getOverloaded() {
-        return overloaded;
-    }
-
-    /**
-     * Sets if the Alien is overloaded or not.
-     *
-     * @param overloaded state of the Alien.
-     */
-    public void setOverloaded(boolean overloaded) {
-        this.overloaded = overloaded;
     }
 }

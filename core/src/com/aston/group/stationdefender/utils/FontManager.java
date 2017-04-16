@@ -9,7 +9,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
  *
  * @author Jonathon Fitch
  */
-public class FontManager {
+public enum FontManager {
+    ;
     private static final FreeTypeFontGenerator fontGenerator;
     private static final FreeTypeFontGenerator.FreeTypeFontParameter params;
 

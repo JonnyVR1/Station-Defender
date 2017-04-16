@@ -17,13 +17,6 @@ public interface Actor {
     void render(float delta);
 
     /**
-     * Makes the Actor act
-     *
-     * @param delta - The time in seconds since the last render.
-     */
-    void act(float delta);
-
-    /**
      * Returns the exist state of the Actor
      *
      * @return true if the Actor exists, false if the Actor does not exist
