@@ -92,12 +92,10 @@ public class Weapon extends Unit {
      */
     private void decrementBuildTimer() {
         if (System.currentTimeMillis() - startTime >= 500) {
-            if (remainingBuildTime > 0) {
+            if (remainingBuildTime > 0)
                 remainingBuildTime -= 0.5;
-            }
-            if (remainingBuildTime <= 0) {
+            if (remainingBuildTime <= 0)
                 built = true;
-            }
             startTime = System.currentTimeMillis();
         }
     }

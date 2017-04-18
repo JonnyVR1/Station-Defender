@@ -42,11 +42,9 @@ public class TwoTextScreen implements Screen {
     private final BitmapFont bodyFont;
     private final TextButton backButton;
     private final boolean continueBool;
-    private final GameEngine gameEngine;
     private final Label titleLabel;
     private final Label bodyLabel;
     private TextButton continueButton;
-    private TwoTextCallback twoTextCallback;
     private float fadeElapsed;
     private String title;
     private String body;
@@ -55,19 +53,19 @@ public class TwoTextScreen implements Screen {
      * Constructor sets the camera, viewpoint and
      * initializes the font and button(s).
      *
-     * @param continueBool true if the continue button should be displayed.
+     * @param twoTextCallback The TwoTextCallback to use
+     * @param continueBool True if the continue button should be displayed.
      *                     False if the continue button should not be displayed.
      */
-    public TwoTextScreen(boolean continueBool) {
+    public TwoTextScreen(TwoTextCallback twoTextCallback, boolean continueBool) {
         this.continueBool = continueBool;
-        gameEngine = GameEngine.INSTANCE;
         batch = GameEngine.getBatch();
         bodyFont = FontManager.getFont(30);
         titleFont = FontManager.getFont(50);
         BitmapFont buttonFont = FontManager.getFont(18);
 
         //Background
-        Texture texture = TextureManager.INSTANCE.loadTexture(2);
+        Texture texture = TextureManager.loadTexture(2);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -142,7 +140,7 @@ public class TwoTextScreen implements Screen {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameEngine.render();
+        GameEngine.render();
 
         // Draw things on screen
         batch.begin();
@@ -161,7 +159,7 @@ public class TwoTextScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gameEngine.update(width, height);
+        GameEngine.update(width, height);
         stage.getViewport().update(width, height, true);
     }
 
@@ -183,15 +181,6 @@ public class TwoTextScreen implements Screen {
         bodyFont.dispose();
         titleFont.dispose();
         batch.dispose();
-    }
-
-    /**
-     * Sets the TwoTextCallback to be used within this class
-     *
-     * @param twoTextCallback The TwoTextCallback supplied in Main.java
-     */
-    public void setTwoTextCallback(TwoTextCallback twoTextCallback) {
-        this.twoTextCallback = twoTextCallback;
     }
 
     /**
@@ -221,5 +210,4 @@ public class TwoTextScreen implements Screen {
         batch.end();
         batch.begin();
     }
-
 }

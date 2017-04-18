@@ -48,7 +48,7 @@ public class Item {
         this.value = value;
         this.placeable = placeable;
         this.sku = sku;
-        texture = TextureManager.INSTANCE.loadTexture(textureId);
+        texture = TextureManager.loadTexture(textureId);
     }
 
     /**
@@ -71,8 +71,7 @@ public class Item {
      * @param itemCallback The ItemCallBack associated with the Item
      */
     public void useItem(ItemCallback itemCallback) {
-        if (itemCallback != null)
-            itemCallback.onUse(placeable, cost, value, health);
+        itemCallback.onUse(placeable, cost, value, health);
     }
 
     /**
@@ -209,13 +208,13 @@ public class Item {
     }
 
     /**
-     * Returns the Item ID and Name
+     * Returns the Item SKU and Name
      *
-     * @return The Item ID and Name
+     * @return The Item SKU and Name
      */
     @Override
     public String toString() {
-        return "Item{" + "SKU=" + sku + ", name='" + name + '\'' + '}';
+        return "Item{" + "SKU=" + sku + ", Name='" + name + '\'' + '}';
     }
 
     /**

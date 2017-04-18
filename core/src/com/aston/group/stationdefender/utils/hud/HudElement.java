@@ -6,8 +6,7 @@ package com.aston.group.stationdefender.utils.hud;
  * @author Mohammad Foysal
  */
 public abstract class HudElement {
-    int x;
-    int y;
+    int x, y;
     int width = 400;
     int height = 200;
     String title = "Blank Container";

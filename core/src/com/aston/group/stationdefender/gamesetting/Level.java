@@ -27,18 +27,16 @@ import java.util.Random;
  */
 public class Level implements LaneCallback {
     private static final int[] backgroundTextures = {3, 19, 20, 21};
-    private final SpriteBatch batch;
+    private final SpriteBatch batch = GameEngine.getBatch();
     private final Texture texture;
     private final LevelCallback levelCallback;
-    private final BitmapFont font;
+    private final BitmapFont font = FontManager.getFont(50);
     private final Array<Lane> lanes = new Array<>();
     private final int levelNumber;
     private final Tower tower = new Tower();
     private Actor bossEnemy;
-    private boolean isBossCreated;
-    private boolean isBossDestroyed;
-    private boolean hasWon;
-    private boolean hasLost;
+    private boolean isBossCreated, isBossDestroyed;
+    private boolean hasWon, hasLost;
 
     /**
      * Construct a new Level with a given level number.
@@ -49,12 +47,11 @@ public class Level implements LaneCallback {
     public Level(LevelCallback levelCallback, int levelNumber) {
         this.levelNumber = levelNumber;
         this.levelCallback = levelCallback;
-        batch = GameEngine.getBatch();
         if (levelNumber == 1)
-            texture = TextureManager.INSTANCE.loadTexture(3);
+            texture = TextureManager.loadTexture(3);
         else {
             int randomTexture = new Random().nextInt(backgroundTextures.length);
-            texture = TextureManager.INSTANCE.loadTexture(backgroundTextures[randomTexture]);
+            texture = TextureManager.loadTexture(backgroundTextures[randomTexture]);
         }
         double difficulty = (2 + (levelNumber / 10)) * 3;
 
@@ -63,8 +60,6 @@ public class Level implements LaneCallback {
             lanes.add(new Lane(this, laneY, difficulty));
             laneY += (Constants.TILE_HEIGHT + (Constants.TILE_HEIGHT / 4));
         }
-
-        font = FontManager.getFont(50);
     }
 
     /**

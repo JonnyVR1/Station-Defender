@@ -9,7 +9,7 @@ import com.badlogic.gdx.audio.Music;
  * @author Mohammed Foysal
  */
 public enum SoundManager {
-    INSTANCE;
+    ;
     private static final int BACKGROUND_MUSIC_ID = 1;
     private static final int GUN_SHOT_SOUND_ID = 2;
     private static final int EXPLOSION_SOUND_ID = 3;
@@ -19,7 +19,7 @@ public enum SoundManager {
      *
      * @param id The id number of the sound to play
      */
-    public void playSound(int id) {
+    public static void playSound(int id) {
         Music music = null;
         float volume = 0.2f;
         switch (id) {

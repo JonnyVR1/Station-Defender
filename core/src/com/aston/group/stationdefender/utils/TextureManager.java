@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
  * @author Jonathon Fitch
  */
 public enum TextureManager {
-    INSTANCE;
+    ;
     private static final int BACKGROUND_TITLE_TEXTURE = 1;
     private static final int BACKGROUND_TEXTURE = 2;
     private static final int LEVEL_TEXTURE = 3;
@@ -49,7 +49,7 @@ public enum TextureManager {
      * @param id The ID number of the texture to load
      * @return The texture matching the ID
      */
-    public Texture loadTexture(int id) {
+    public static Texture loadTexture(int id) {
         Texture texture = null;
         switch (id) {
             case BACKGROUND_TITLE_TEXTURE:
@@ -151,7 +151,7 @@ public enum TextureManager {
      *
      * @return The animation matching the given ID
      */
-    public ParticleEffect loadParticleEffect() {
+    public static ParticleEffect loadParticleEffect() {
         ParticleEffect particleEffect = new ParticleEffect();
         particleEffect.load(Gdx.files.internal("textures/explosion.animation"), Gdx.files.internal(""));
         return particleEffect;

@@ -35,24 +35,26 @@ import com.badlogic.gdx.utils.Array;
 public class Player implements InputProcessor, ItemCallback {
     private final Array<QuickSlot> quickSlots = new Array<>();
     private final QuickSlotCallback quickSlotCallback;
-    private final SpriteBatch batch;
+    private final SpriteBatch batch = GameEngine.getBatch();
     private final BitmapFont font;
     private final Stage stage = new Stage();
     private final TextButton menuButton;
     private final IndicatorManager moneyIndicator = new IndicatorManager();
     private final StackableInventory inventory = new StackableInventory();
+    private final PlayerCallback playerCallback;
     private Item currentItem;
     private int score;
     private int money = Constants.START_MONEY;
-    private PlayerCallback playerCallback;
     private int selectedSlot;
     private boolean itemsNotLoaded = true;
 
     /**
      * Construct a new Player
+     *
+     * @param playerCallback The PlayerCallback to use
      */
-    public Player() {
-        batch = GameEngine.getBatch();
+    public Player(PlayerCallback playerCallback) {
+        this.playerCallback = playerCallback;
         FileUtils.loadLevel((score, money, levelNumber, items) -> {
             this.score = score;
             if (money < 20)
@@ -337,15 +339,6 @@ public class Player implements InputProcessor, ItemCallback {
      */
     private void addHealth(int health) {
         playerCallback.addHealth(health);
-    }
-
-    /**
-     * Sets the PlayerCallback for the Player
-     *
-     * @param playerCallback The PlayerCallback to set for the Player
-     */
-    public void setPlayerCallback(PlayerCallback playerCallback) {
-        this.playerCallback = playerCallback;
     }
 
     /**

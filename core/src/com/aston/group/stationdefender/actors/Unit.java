@@ -72,7 +72,7 @@ public abstract class Unit implements Actor {
         this.width = width;
         this.height = height;
         this.chanceToHit = chanceToHit;
-        this.texture = TextureManager.INSTANCE.loadTexture(texture);
+        this.texture = TextureManager.loadTexture(texture);
         this.facingLeft = facingLeft;
     }
 

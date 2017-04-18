@@ -20,10 +20,9 @@ import com.badlogic.gdx.math.Vector2;
  * @author Mohammad Foysal
  */
 public class GameScreen implements Screen, PlayerCallback, LevelCallback {
-    private final Player player = new Player();
+    private final Player player = new Player(this);
     private final GameCallback gameCallback;
     private final Level level;
-    private final GameEngine gameEngine;
 
     /**
      * Create a new GameScreen with a specified GameCallBack and LevelNumber
@@ -33,8 +32,6 @@ public class GameScreen implements Screen, PlayerCallback, LevelCallback {
      */
     public GameScreen(final GameCallback gameCallback, int levelNumber) {
         this.gameCallback = gameCallback;
-        gameEngine = GameEngine.INSTANCE;
-        player.setPlayerCallback(this);
         level = new Level(this, levelNumber);
         MouseInput.setPosition(new Vector2());
     }
@@ -48,15 +45,14 @@ public class GameScreen implements Screen, PlayerCallback, LevelCallback {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        gameEngine.render();
+        GameEngine.render();
         level.render(delta);
         player.render(delta);
     }
 
     @Override
     public void resize(int width, int height) {
-        gameEngine.update(width, height);
+        GameEngine.update(width, height);
     }
 
     @Override

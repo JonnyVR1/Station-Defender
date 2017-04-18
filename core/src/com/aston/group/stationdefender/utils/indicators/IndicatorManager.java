@@ -17,18 +17,10 @@ import java.util.Iterator;
  * @author Mohammad Foysal
  */
 public class IndicatorManager {
-    private final SpriteBatch batch;
-    private final BitmapFont font;
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final BitmapFont font = FontManager.getFont(18);
     private final Array<Indicator> indicators = new Array<>();
     private int x, y;
-
-    /**
-     * Create a new IndicatorManager
-     */
-    public IndicatorManager() {
-        batch = GameEngine.getBatch();
-        font = FontManager.getFont(18);
-    }
 
     /**
      * Add a new Indicator with a specified damage and colour

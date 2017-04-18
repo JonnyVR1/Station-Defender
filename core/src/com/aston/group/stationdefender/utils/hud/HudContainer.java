@@ -14,18 +14,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  * @author Mohammad Foysal
  */
 public class HudContainer extends HudElement {
-    final BitmapFont font;
-    final SpriteBatch batch;
-    private final ShapeRenderer shapeRenderer;
-
-    /**
-     * Create a new HudContainer at with default X and Y co-ordinates of '0'
-     */
-    HudContainer() {
-        shapeRenderer = GameEngine.getShapeRenderer();
-        batch = GameEngine.getBatch();
-        font = FontManager.getFont(16);
-    }
+    final BitmapFont font = FontManager.getFont(16);
+    final SpriteBatch batch = GameEngine.getBatch();
+    private final ShapeRenderer shapeRenderer = GameEngine.getShapeRenderer();
 
     @Override
     public void render(float delta) {

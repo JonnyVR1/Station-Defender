@@ -29,17 +29,17 @@ import java.util.stream.IntStream;
  * @author Twba Alshaghdari
  */
 public class Lane implements UnitCallback {
-    private final int x, y;
+    private final int y;
     private final Array<Tile> tiles = new Array<>();
     private final Array<Actor> actors = new Array<>();
     private final Array<Item> itemDrops = new Array<>();
-    private final ProjectileFactory projectileFactory;
+    private final ProjectileFactory projectileFactory = new ProjectileFactory();
     private final LaneCallback laneCallback;
     private int width;
     private boolean overrun;
     private boolean cleared;
     private int alienAmount;
-    private long lastRenderTime;
+    private long lastRenderTime = System.currentTimeMillis();
 
     /**
      * Construct a new Lane
@@ -50,7 +50,6 @@ public class Lane implements UnitCallback {
      */
     Lane(LaneCallback laneCallback, int y, double difficulty) {
         this.laneCallback = laneCallback;
-        this.x = 100;
         this.y = y;
 
         Tile[] tile = new Tile[Constants.TILE_AMOUNT];
@@ -70,8 +69,6 @@ public class Lane implements UnitCallback {
         tiles.addAll(tile);
 
         alienAmount = (int) difficulty;
-        lastRenderTime = System.currentTimeMillis();
-        projectileFactory = new ProjectileFactory();
     }
 
     /**
@@ -268,7 +265,8 @@ public class Lane implements UnitCallback {
      */
     boolean isColliding(int x, int y) {
         int height = Constants.TILE_HEIGHT;
-        return x + 1 > this.x && x < this.x + this.width && y + 1 > this.y && y < this.y + height;
+        int laneX = 100;
+        return x + 1 > laneX && x < laneX + this.width && y + 1 > this.y && y < this.y + height;
     }
 
     @Override

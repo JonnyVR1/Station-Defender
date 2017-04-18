@@ -20,13 +20,12 @@ import java.util.List;
 public class ItemStack<T extends Item> implements Iterable<T> {
     private final int maxItems = 64;
     private final List<T> items = new ArrayList<>();
-    private final SpriteBatch batch;
-    private final BitmapFont font;
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final BitmapFont font = FontManager.getFont(16);
     private final int width = 32;
     private final int height = 32;
     private final String itemName;
-    private int x;
-    private int y;
+    private int x, y;
 
     /**
      * Construct a new ItemStack with a specific Item
@@ -36,8 +35,6 @@ public class ItemStack<T extends Item> implements Iterable<T> {
     public ItemStack(T item) {
         itemName = item.getName();
         addItem(item);
-        batch = GameEngine.getBatch();
-        font = FontManager.getFont(16);
     }
 
     /**

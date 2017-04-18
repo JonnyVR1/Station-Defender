@@ -20,8 +20,8 @@ public class ParticleEffectHelper {
      * @param y The start Y co-ordinate of the ParticleEffect
      */
     public void destroy(int x, int y) {
-        SoundManager.INSTANCE.playSound(3);
-        particleEffect = TextureManager.INSTANCE.loadParticleEffect();
+        SoundManager.playSound(3);
+        particleEffect = TextureManager.loadParticleEffect();
         particleEffect.getEmitters().first().setPosition(x, y);
         particleEffect.start();
     }

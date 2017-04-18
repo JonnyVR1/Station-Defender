@@ -33,7 +33,7 @@ public class ProjectileFactory {
         projectile.init(x, y, speed, damage);
         projectiles.add(projectile);
         if (projectiles.size < 20)
-            SoundManager.INSTANCE.playSound(2);
+            SoundManager.playSound(2);
     }
 
     /**

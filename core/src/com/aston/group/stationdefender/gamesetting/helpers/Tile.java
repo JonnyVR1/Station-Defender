@@ -37,7 +37,7 @@ public class Tile {
         this.x = x;
         this.y = y;
         batch = GameEngine.getBatch();
-        texture = TextureManager.INSTANCE.loadTexture(4);
+        texture = TextureManager.loadTexture(4);
         shapeRenderer = GameEngine.getShapeRenderer();
     }
 

@@ -30,10 +30,10 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
 
     @Override
     public void create() {
-        backgroundScreen = new TwoTextScreen(false);
-        instructionScreen = new TwoTextScreen(false);
-        introScreen = new IntroScreen();
-        menuScreen = new MenuScreen();
+        backgroundScreen = new TwoTextScreen(this, false);
+        instructionScreen = new TwoTextScreen(this, false);
+        introScreen = new IntroScreen(this);
+        menuScreen = new MenuScreen(this);
         initGame();
 
         // Setup title and body text
@@ -42,19 +42,13 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
         instructionScreen.setTitle(Constants.MENU_ITEMS[1]);
         instructionScreen.setBody(Constants.INSTRUCTIONS);
 
-        // Setup callbacks
-        introScreen.setMenuCallback(this);
-        backgroundScreen.setTwoTextCallback(this);
-        instructionScreen.setTwoTextCallback(this);
-        menuScreen.setMenuCallback(this);
-
         //Set the screen to intro upon creation if debug flag is not set
         if (!Constants.DEBUG) {
             setScreen(introScreen);
         } else {
             setScreen(gameScreen);
         }
-        SoundManager.INSTANCE.playSound(1);
+        SoundManager.playSound(1);
     }
 
     /**
@@ -74,16 +68,15 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
         if (won) {
             FileUtils.saveLevel(score, money, levelNumber, inventory);
             title = "Level Cleared";
-            postLevelScreen = new TwoTextScreen(true);
+            postLevelScreen = new TwoTextScreen(this, true);
             levelNumber++;
         } else {
             title = "You Failed!";
-            postLevelScreen = new TwoTextScreen(false);
+            postLevelScreen = new TwoTextScreen(this, false);
         }
         totalScore += score;
         postLevelScreen.setTitle(title);
         postLevelScreen.setBody("Level Score: " + score + "\nMoney: £" + money + "\n\nTotal Score: " + totalScore);
-        postLevelScreen.setTwoTextCallback(this);
         if (!won)
             totalScore = 0;
         setScreen(postLevelScreen);

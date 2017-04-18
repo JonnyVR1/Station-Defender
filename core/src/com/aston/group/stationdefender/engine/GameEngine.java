@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * @author Mohammad Foysal
  */
 public enum GameEngine {
-    INSTANCE;
+    ;
     private static final SpriteBatch batch;
     private static final ShapeRenderer shapeRenderer;
     private static final OrthographicCamera camera;
@@ -57,7 +57,7 @@ public enum GameEngine {
     /**
      * Render the camera and set the properties for the ShapeRenderer and SpriteBatch
      */
-    public void render() {
+    public static void render() {
         mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
         mousePosition = camera.unproject(mousePosition);
         MouseInput.getPosition().set(mousePosition.x, mousePosition.y);
@@ -72,7 +72,7 @@ public enum GameEngine {
      * @param width  The current width of the viewport
      * @param height The current height of the viewport
      */
-    public void update(int width, int height) {
+    public static void update(int width, int height) {
         viewport.update(width, height, false);
         viewport.apply();
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);

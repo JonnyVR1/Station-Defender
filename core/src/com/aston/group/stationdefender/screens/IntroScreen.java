@@ -36,26 +36,22 @@ import java.util.Objects;
  * @author Jonathon Fitch
  */
 public class IntroScreen implements Screen {
-    private final SpriteBatch batch;
+    private final SpriteBatch batch = GameEngine.getBatch();
     private final Stage stage;
-    private final BitmapFont font;
-    private final BitmapFont smallerFont;
+    private final BitmapFont font = FontManager.getFont(50);
+    private final BitmapFont smallerFont = FontManager.getFont(16);
     private final TextButton backgroundButton, instructionButton, playButton, exitButton;
     private final TextButton[] buttons;
-    private final GameEngine gameEngine;
-    private MenuCallback menuCallback;
     private float fadeElapsed;
 
     /**
      * Construct a new IntroScreen
+     *
+     * @param menuCallback The MenuCallback to use
      */
-    public IntroScreen() {
-        gameEngine = GameEngine.INSTANCE;
-        batch = GameEngine.getBatch();
-        font = FontManager.getFont(50);
-        smallerFont = FontManager.getFont(16);
-        Texture texture = TextureManager.INSTANCE.loadTexture(1);
-        Texture hoverTexture = TextureManager.INSTANCE.loadTexture(23);
+    public IntroScreen(MenuCallback menuCallback) {
+        Texture texture = TextureManager.loadTexture(1);
+        Texture hoverTexture = TextureManager.loadTexture(23);
         Table table = new Table();
         table.setFillParent(true);
 
@@ -130,7 +126,7 @@ public class IntroScreen implements Screen {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameEngine.render();
+        GameEngine.render();
         stage.act(delta);
         batch.begin();
         stage.draw();
@@ -149,7 +145,7 @@ public class IntroScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gameEngine.update(width, height);
+        GameEngine.update(width, height);
         stage.getViewport().update(width, height, true);
     }
 
@@ -170,14 +166,5 @@ public class IntroScreen implements Screen {
         stage.dispose();
         font.dispose();
         batch.dispose();
-    }
-
-    /**
-     * Sets the MenuCallback to be used for the IntroScreen
-     *
-     * @param menuCallback The MenuCallback to be used for the IntroScreen
-     */
-    public void setMenuCallback(MenuCallback menuCallback) {
-        this.menuCallback = menuCallback;
     }
 }

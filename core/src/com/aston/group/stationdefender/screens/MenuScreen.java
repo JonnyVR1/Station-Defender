@@ -32,22 +32,18 @@ import java.util.Objects;
  * @author Jonathon Fitch
  */
 public class MenuScreen implements Screen {
-    private final SpriteBatch batch;
-    private final BitmapFont font;
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final BitmapFont font = FontManager.getFont(50);
     private final TextButton playButton, exitButton;
     private final Stage stage = new Stage();
-    private final Texture texture;
-    private final GameEngine gameEngine;
-    private MenuCallback menuCallback;
+    private final Texture texture = TextureManager.loadTexture(1);
 
     /**
      * Construct a new MenuScreen
+     *
+     * @param menuCallback The MenuCallback to use
      */
-    public MenuScreen() {
-        gameEngine = GameEngine.INSTANCE;
-        batch = GameEngine.getBatch();
-        font = FontManager.getFont(50);
-
+    public MenuScreen(MenuCallback menuCallback) {
         EventListener buttonListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -60,7 +56,7 @@ public class MenuScreen implements Screen {
             }
         };
 
-        Texture hoverTexture = TextureManager.INSTANCE.loadTexture(23);
+        Texture hoverTexture = TextureManager.loadTexture(23);
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(hoverTexture));
@@ -73,8 +69,6 @@ public class MenuScreen implements Screen {
         exitButton.addListener(buttonListener);
         table.add(playButton).row();
         table.add(exitButton).row();
-
-        texture = TextureManager.INSTANCE.loadTexture(1);
 
         Group background = new Group();
         background.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -96,7 +90,7 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameEngine.render();
+        GameEngine.render();
         batch.begin();
         batch.draw(texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
@@ -108,7 +102,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gameEngine.update(width, height);
+        GameEngine.update(width, height);
         stage.getViewport().update(width, height, true);
     }
 
@@ -128,14 +122,5 @@ public class MenuScreen implements Screen {
     public void dispose() {
         font.dispose();
         batch.dispose();
-    }
-
-    /**
-     * Sets the MenuCallBack to be used for the MenuScreen
-     *
-     * @param menuCallback The MenuCallBack to be used for the MenuScreen
-     */
-    public void setMenuCallback(MenuCallback menuCallback) {
-        this.menuCallback = menuCallback;
     }
 }
