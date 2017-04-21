@@ -8,11 +8,9 @@ import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.gamesetting.Level;
 import com.aston.group.stationdefender.gamesetting.Player;
 import com.aston.group.stationdefender.gamesetting.items.Item;
-import com.aston.group.stationdefender.utils.MouseInput;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * This screen holds the main game loop
@@ -33,7 +31,6 @@ public class GameScreen implements Screen, PlayerCallback, LevelCallback {
     public GameScreen(final GameCallback gameCallback, int levelNumber) {
         this.gameCallback = gameCallback;
         level = new Level(this, levelNumber);
-        MouseInput.setPosition(new Vector2());
     }
 
     @Override

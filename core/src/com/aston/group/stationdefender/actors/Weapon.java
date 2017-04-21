@@ -1,6 +1,7 @@
 package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
+import com.aston.group.stationdefender.utils.TextureManager;
 
 /**
  * Weapon is a class that represents a weapon object
@@ -21,7 +22,7 @@ public class Weapon extends Unit {
      * Construct a new Weapon with default X and Y co-ordinates of '0'
      */
     public Weapon() {
-        this("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 1.5, 10, 10, 8);
+        this("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 1.5, 10, 10, TextureManager.WEAPON);
     }
 
     /**
@@ -41,7 +42,7 @@ public class Weapon extends Unit {
      * @param texture       The texture graphic of the Weapon
      */
     public Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit,
-                  double buildTime, int cost, int costToUpgrade, int texture) {
+                  double buildTime, int cost, int costToUpgrade, TextureManager texture) {
         super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, texture, false);
         this.cost = cost;
         this.costToUpgrade = costToUpgrade;
@@ -69,14 +70,14 @@ public class Weapon extends Unit {
                         if (isAdjacent) {
                             overloaded = rapidFireHelper();
                         } else {
-                            unitFireHelper(40, 0);
+                            unitFireHelper(80, 0);
                         }
                     }
                 default:
                     if (isAdjacent) {
                         adjacentActor.takeDamage(fire());
                     } else {
-                        unitFireHelper(40, 0);
+                        unitFireHelper(80, 0);
                     }
                     break;
             }

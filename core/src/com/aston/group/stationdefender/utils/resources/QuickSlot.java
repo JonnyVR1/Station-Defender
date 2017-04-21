@@ -18,10 +18,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @author Mohammed Foysal
  */
 public class QuickSlot {
-    private final SpriteBatch batch;
+    private final SpriteBatch batch = GameEngine.getBatch();
     private final TextureRegion trQuickSlot;
     private final TextureRegion trQuickSlotHovered;
-    private final BitmapFont font;
+    private final BitmapFont font = FontManager.getFont(16);
     private final int x;
     private final int y = 0;
     private final int width = 48;
@@ -36,11 +36,9 @@ public class QuickSlot {
      */
     public QuickSlot(int x) {
         this.x = x;
-        batch = GameEngine.getBatch();
-        Texture texture = TextureManager.loadTexture(5);
+        Texture texture = TextureManager.loadTexture(TextureManager.QUICK_SLOT);
         trQuickSlot = new TextureRegion(texture, 78, 29, 20, 20);
         trQuickSlotHovered = new TextureRegion(texture, 57, 29, 20, 20);
-        font = FontManager.getFont(16);
     }
 
     /**

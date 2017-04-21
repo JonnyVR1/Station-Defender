@@ -4,7 +4,6 @@ import com.aston.group.stationdefender.callbacks.LevelInfoCallback;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.gamesetting.items.Item;
 import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
-import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
 import com.aston.group.stationdefender.utils.resources.StackableInventory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -19,7 +18,8 @@ import com.google.gson.JsonObject;
  *
  * @author Mohammed Foysal
  */
-public class FileUtils {
+public enum FileUtils {
+    ;
 
     /**
      * Save the Player's Level information
@@ -83,7 +83,7 @@ public class FileUtils {
             for (int i = 0; i < jsonItems.size(); i++) {
                 JsonObject itemObject = jsonItems.get(i).getAsJsonObject();
                 String skuText = itemObject.get("sku").getAsString();
-                Items sku = Items.valueOf(skuText);
+                ItemFactory sku = ItemFactory.valueOf(skuText);
                 Item item = ItemFactory.getItem(sku);
                 items.add(item);
             }

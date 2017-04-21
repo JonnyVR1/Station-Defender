@@ -36,10 +36,10 @@ import java.util.Objects;
  * @author Jonathon Fitch
  */
 public class TwoTextScreen implements Screen {
-    private final SpriteBatch batch;
+    private final SpriteBatch batch = GameEngine.getBatch();
     private final Stage stage = new Stage();
-    private final BitmapFont titleFont;
-    private final BitmapFont bodyFont;
+    private final BitmapFont titleFont = FontManager.getFont(50);
+    private final BitmapFont bodyFont = FontManager.getFont(30);
     private final TextButton backButton;
     private final boolean continueBool;
     private final Label titleLabel;
@@ -54,26 +54,18 @@ public class TwoTextScreen implements Screen {
      * initializes the font and button(s).
      *
      * @param twoTextCallback The TwoTextCallback to use
-     * @param continueBool True if the continue button should be displayed.
-     *                     False if the continue button should not be displayed.
+     * @param continueBool    True if the continue button should be displayed.
+     *                        False if the continue button should not be displayed.
      */
     public TwoTextScreen(TwoTextCallback twoTextCallback, boolean continueBool) {
         this.continueBool = continueBool;
-        batch = GameEngine.getBatch();
-        bodyFont = FontManager.getFont(30);
-        titleFont = FontManager.getFont(50);
         BitmapFont buttonFont = FontManager.getFont(18);
-
-        //Background
-        Texture texture = TextureManager.loadTexture(2);
-
-        Table table = new Table();
-        table.setFillParent(true);
 
         Group background = new Group();
         background.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Image image = new Image();
         image.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Texture texture = TextureManager.loadTexture(TextureManager.BACKGROUND_2);
         image.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
         background.addActor(image);
 
@@ -83,6 +75,9 @@ public class TwoTextScreen implements Screen {
 
         bodyLabel.setColor(1, 1, 1, 0);
         titleLabel.setColor(1, 1, 1, 0);
+
+        Table table = new Table();
+        table.setFillParent(true);
         table.add(titleLabel).expandX().padTop(16).row();
         table.add(bodyLabel).expandY();
 

@@ -48,7 +48,7 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
         } else {
             setScreen(gameScreen);
         }
-        SoundManager.playSound(1);
+        SoundManager.playSound(SoundManager.BACKGROUND_MUSIC);
     }
 
     /**

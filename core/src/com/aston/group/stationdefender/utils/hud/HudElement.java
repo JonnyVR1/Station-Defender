@@ -1,15 +1,28 @@
 package com.aston.group.stationdefender.utils.hud;
 
+import com.aston.group.stationdefender.utils.MouseInput;
+
 /**
  * Abstract class for HudElements
  *
  * @author Mohammad Foysal
  */
 public abstract class HudElement {
-    int x, y;
+    final int x, y;
     int width = 400;
     int height = 200;
     String title = "Blank Container";
+
+    /**
+     * Creates a new HudElement with given X and Y co-ordinates
+     *
+     * @param x The X co-ordinate of the HudElement
+     * @param y The Y co-ordinate of the HudElement
+     */
+    HudElement(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     /**
      * Render the HudElement
@@ -23,23 +36,7 @@ public abstract class HudElement {
      *
      * @return True if the HudElement is colliding with another object, false if it isn't
      */
-    public abstract boolean isColliding();
-
-    /**
-     * Sets the X co-ordinate of the HudElement
-     *
-     * @param x The X co-ordinate of the HudElement
-     */
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    /**
-     * Sets the Y co-ordinate of the HudElement
-     *
-     * @param y The Y co-ordinate of the HudElement
-     */
-    public void setY(int y) {
-        this.y = y;
+    public boolean isColliding() {
+        return MouseInput.isColliding(x, y, width, height);
     }
 }

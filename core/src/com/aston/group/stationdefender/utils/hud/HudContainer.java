@@ -3,7 +3,6 @@ package com.aston.group.stationdefender.utils.hud;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.utils.FontManager;
-import com.aston.group.stationdefender.utils.MouseInput;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -18,6 +17,16 @@ public class HudContainer extends HudElement {
     final SpriteBatch batch = GameEngine.getBatch();
     private final ShapeRenderer shapeRenderer = GameEngine.getShapeRenderer();
 
+    /**
+     * Creates a new HudContainer with given X and Y co-ordinates
+     *
+     * @param x The X co-ordinate of the HudContainer
+     * @param y The Y co-ordinate of the HudContainer
+     */
+    HudContainer(int x, int y) {
+        super(x, y);
+    }
+
     @Override
     public void render(float delta) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -29,10 +38,5 @@ public class HudContainer extends HudElement {
         batch.begin();
         font.draw(batch, title, x + 5, (height + y) - 5);
         batch.end();
-    }
-
-    @Override
-    public boolean isColliding() {
-        return MouseInput.isColliding(x, y, width, height);
     }
 }

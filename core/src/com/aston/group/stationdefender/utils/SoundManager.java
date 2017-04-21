@@ -9,29 +9,28 @@ import com.badlogic.gdx.audio.Music;
  * @author Mohammed Foysal
  */
 public enum SoundManager {
-    ;
-    private static final int BACKGROUND_MUSIC_ID = 1;
-    private static final int GUN_SHOT_SOUND_ID = 2;
-    private static final int EXPLOSION_SOUND_ID = 3;
+    BACKGROUND_MUSIC,
+    GUN_SHOT,
+    EXPLOSION;
 
     /**
-     * Play the sound matching a given ID
+     * Play the sound matching a given Enum value
      *
-     * @param id The id number of the sound to play
+     * @param soundManager The Enum value of the sound to play
      */
-    public static void playSound(int id) {
+    public static void playSound(SoundManager soundManager) {
         Music music = null;
         float volume = 0.2f;
-        switch (id) {
-            case BACKGROUND_MUSIC_ID:
+        switch (soundManager) {
+            case BACKGROUND_MUSIC:
                 music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Background_Music.ogg"));
                 music.setLooping(true);
                 volume = 0.1f;
                 break;
-            case GUN_SHOT_SOUND_ID:
+            case GUN_SHOT:
                 music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Gun_Shot.mp3"));
                 break;
-            case EXPLOSION_SOUND_ID:
+            case EXPLOSION:
                 music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Explosion.mp3"));
                 break;
         }

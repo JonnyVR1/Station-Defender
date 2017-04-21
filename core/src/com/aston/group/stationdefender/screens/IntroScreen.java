@@ -50,11 +50,6 @@ public class IntroScreen implements Screen {
      * @param menuCallback The MenuCallback to use
      */
     public IntroScreen(MenuCallback menuCallback) {
-        Texture texture = TextureManager.loadTexture(1);
-        Texture hoverTexture = TextureManager.loadTexture(23);
-        Table table = new Table();
-        table.setFillParent(true);
-
         EventListener buttonListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -78,6 +73,7 @@ public class IntroScreen implements Screen {
         stage = new Stage();
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = font;
+        Texture hoverTexture = TextureManager.loadTexture(TextureManager.BLACK_HOVER);
         textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(hoverTexture));
         backgroundButton = new TextButton(Constants.MENU_ITEMS[0], textButtonStyle);
         instructionButton = new TextButton(Constants.MENU_ITEMS[1], textButtonStyle);
@@ -94,6 +90,8 @@ public class IntroScreen implements Screen {
         playButton.addListener(buttonListener);
         exitButton.addListener(buttonListener);
 
+        Table table = new Table();
+        table.setFillParent(true);
         table.add(backgroundButton).row();
         table.add(instructionButton).row();
         table.add(playButton).row();
@@ -104,6 +102,7 @@ public class IntroScreen implements Screen {
 
         Image image = new Image();
         image.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Texture texture = TextureManager.loadTexture(TextureManager.BACKGROUND_TITLE);
         image.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
 
         background.addActor(image);

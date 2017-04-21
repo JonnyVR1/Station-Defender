@@ -7,8 +7,9 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author Mohammad Foysal
  */
-public class MouseInput {
-    private static Vector2 position;
+public enum MouseInput {
+    ;
+    private static final Vector2 position = new Vector2();
 
     /**
      * Returns the Vector2 position of the mouse
@@ -17,15 +18,6 @@ public class MouseInput {
      */
     public static Vector2 getPosition() {
         return position;
-    }
-
-    /**
-     * Sets the Vector2 position of the mouse
-     *
-     * @param position The Vector2 position to set
-     */
-    public static void setPosition(Vector2 position) {
-        MouseInput.position = position;
     }
 
     /**
@@ -57,6 +49,6 @@ public class MouseInput {
      * @return true if the values overlap, false if the values do not overlap
      */
     public static boolean isColliding(int x, int y, int width, int height) {
-        return x + width > MouseInput.getX() && x < MouseInput.getX() && y + height > MouseInput.getY() && y < MouseInput.getY();
+        return x + width > getX() && x < getX() && y + height > getY() && y < getY();
     }
 }

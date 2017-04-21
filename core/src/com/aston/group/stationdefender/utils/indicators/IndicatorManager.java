@@ -29,7 +29,7 @@ public class IndicatorManager {
      * @param color The colour the Indicator will appear in
      */
     public void addIndicator(String text, Color color) {
-        indicators.add(new Indicator(text, x, y, x, y + 100, color));
+        indicators.add(new Indicator(text, x, y, color));
     }
 
     /**
@@ -49,8 +49,8 @@ public class IndicatorManager {
             indicator.setXElapsed(indicator.getXElapsed() + delta);
             indicator.setYElapsed(indicator.getYElapsed() + delta);
             indicator.setFadeElapsed(indicator.getFadeElapsed() + delta);
-            indicator.setX((int) Interpolation.linear.apply(indicator.getStartX(), indicator.getDestX(), MathUtils.clamp(indicator.getXElapsed(), 0, 1)));
-            indicator.setY((int) Interpolation.linear.apply(indicator.getStartY(), indicator.getDestY(), MathUtils.clamp(indicator.getYElapsed(), 0, 1)));
+            indicator.setX((int) Interpolation.linear.apply(0, indicator.getDestX(), MathUtils.clamp(indicator.getXElapsed(), 0, 1)));
+            indicator.setY((int) Interpolation.linear.apply(0, indicator.getDestY(), MathUtils.clamp(indicator.getYElapsed(), 0, 1)));
 
             batch.begin();
             font.setColor(indicator.getColor());
@@ -76,12 +76,11 @@ public class IndicatorManager {
      */
     private class Indicator {
         private final String text;
-        private final int startX;
-        private final int startY;
         private final long timeDisplayed;
         private final Color color;
+        private final int destX = (int) (Math.random() * 50) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
+        private final int destY = (int) (Math.random() * 50) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
         private int x, y;
-        private int destX, destY;
         private float fadeElapsed;
         private float yElapsed;
         private float xElapsed;
@@ -92,23 +91,13 @@ public class IndicatorManager {
          * @param text  The damage to be displayed on the Indicator
          * @param x     The X co-ordinate of the Indicator
          * @param y     The Y co-ordinate of the Indicator
-         * @param destX The destination X co-ordinate of the Indicator
-         * @param destY The destination Y co-ordinate of the Indicator
          * @param color The colour of the Indicator
          */
-        Indicator(String text, int x, int y, int destX, int destY, Color color) {
+        Indicator(String text, int x, int y, Color color) {
             this.text = text;
             this.color = color;
             this.x = x;
             this.y = y;
-            this.destX = destX;
-            this.destY = destY;
-            startX = 0;
-            startY = 0;
-            this.destX = (int) (Math.random() * 50);
-            this.destY = (int) (Math.random() * 50);
-            this.destX *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-            this.destY *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
             timeDisplayed = System.currentTimeMillis();
         }
 
@@ -237,24 +226,6 @@ public class IndicatorManager {
          */
         long getTimeDisplayed() {
             return timeDisplayed;
-        }
-
-        /**
-         * Returns the start X co-ordinate of the Indicator
-         *
-         * @return The start X co-ordinate of the Indicator
-         */
-        int getStartX() {
-            return startX;
-        }
-
-        /**
-         * Returns the start Y co-ordinate of the Indicator
-         *
-         * @return The start Y co-ordinate of the Indicator
-         */
-        int getStartY() {
-            return startY;
         }
 
         /**

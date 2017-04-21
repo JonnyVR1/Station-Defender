@@ -36,7 +36,7 @@ public class MenuScreen implements Screen {
     private final BitmapFont font = FontManager.getFont(50);
     private final TextButton playButton, exitButton;
     private final Stage stage = new Stage();
-    private final Texture texture = TextureManager.loadTexture(1);
+    private final Texture texture = TextureManager.loadTexture(TextureManager.BACKGROUND_TITLE);
 
     /**
      * Construct a new MenuScreen
@@ -56,17 +56,17 @@ public class MenuScreen implements Screen {
             }
         };
 
-        Texture hoverTexture = TextureManager.loadTexture(23);
+        Texture hoverTexture = TextureManager.loadTexture(TextureManager.BLACK_HOVER);
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(hoverTexture));
         playButton = new TextButton(Constants.MENU_ITEMS[2], textButtonStyle);
         exitButton = new TextButton(Constants.MENU_ITEMS[3], textButtonStyle);
+        playButton.addListener(buttonListener);
+        exitButton.addListener(buttonListener);
 
         Table table = new Table();
         table.setFillParent(true);
-        playButton.addListener(buttonListener);
-        exitButton.addListener(buttonListener);
         table.add(playButton).row();
         table.add(exitButton).row();
 

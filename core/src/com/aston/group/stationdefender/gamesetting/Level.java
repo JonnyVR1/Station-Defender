@@ -21,12 +21,11 @@ import com.badlogic.gdx.utils.Array;
 import java.util.Random;
 
 /**
- * Skeleton Level class
+ * Level class represents a Level within the game
  *
  * @author Jonathon Fitch
  */
 public class Level implements LaneCallback {
-    private static final int[] backgroundTextures = {3, 19, 20, 21};
     private final SpriteBatch batch = GameEngine.getBatch();
     private final Texture texture;
     private final LevelCallback levelCallback;
@@ -48,8 +47,15 @@ public class Level implements LaneCallback {
         this.levelNumber = levelNumber;
         this.levelCallback = levelCallback;
         if (levelNumber == 1)
-            texture = TextureManager.loadTexture(3);
+            texture = TextureManager.loadTexture(TextureManager.BACKGROUND_1);
         else {
+            TextureManager[] backgroundTextures = {
+                    TextureManager.BACKGROUND_1,
+                    TextureManager.BACKGROUND_2,
+                    TextureManager.BACKGROUND_3,
+                    TextureManager.BACKGROUND_4,
+                    TextureManager.BACKGROUND_5
+            };
             int randomTexture = new Random().nextInt(backgroundTextures.length);
             texture = TextureManager.loadTexture(backgroundTextures[randomTexture]);
         }
@@ -78,10 +84,8 @@ public class Level implements LaneCallback {
 
         for (Lane lane : lanes) {
             lane.render(delta);
-            if (lane.isOverrun()) {
-                if (!tower.getExists())
-                    hasLost = true;
-            }
+            if (lane.isOverrun() && !tower.getExists())
+                hasLost = true;
         }
 
         if (isAllLanesCleared()) {
@@ -104,7 +108,7 @@ public class Level implements LaneCallback {
             if (((Unit) bossEnemy).getHealth() == 0) {
                 ((Unit) bossEnemy).destroy();
                 isBossDestroyed = true;
-                addMoney(20);
+                addMoney(25);
             }
         }
         if (hasLost)

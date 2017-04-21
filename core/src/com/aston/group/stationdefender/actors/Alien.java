@@ -1,6 +1,7 @@
 package com.aston.group.stationdefender.actors;
 
 import com.aston.group.stationdefender.config.Constants;
+import com.aston.group.stationdefender.utils.TextureManager;
 
 /**
  * Superclass for different Alien types.
@@ -15,7 +16,7 @@ public class Alien extends Unit {
      * Construct a new Alien with default X and Y co-ordinates of '0'
      */
     public Alien() {
-        this("Alien", -120, Constants.DEFAULT_DAMAGE, 5, Constants.UNIT_HEALTH, 5.0, 12, 100, 38, 7);
+        this("Alien", -120, Constants.DEFAULT_DAMAGE, 5, Constants.UNIT_HEALTH, 5.0, 12, 100, 38, TextureManager.ALIEN);
     }
 
     /**
@@ -33,7 +34,7 @@ public class Alien extends Unit {
      * @param height      The height of the Alien
      * @param texture     The texture graphic of the Alien
      */
-    public Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture) {
+    public Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, TextureManager texture) {
         super(name, speed, damage, rateOfFire, health, range, chanceToHit, width, height, texture, true);
     }
 

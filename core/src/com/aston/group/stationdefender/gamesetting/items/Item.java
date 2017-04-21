@@ -5,7 +5,7 @@ import com.aston.group.stationdefender.actors.Weapon;
 import com.aston.group.stationdefender.callbacks.ItemCallback;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
-import com.aston.group.stationdefender.gamesetting.items.helpers.Items;
+import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
 import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,7 +21,7 @@ public class Item {
     private final String name;
     private final boolean placeable;
     private final Texture texture;
-    private final Items sku;
+    private final ItemFactory sku;
     private final int width = 32;
     private final int height = 32;
     private final int cost;
@@ -37,18 +37,18 @@ public class Item {
      * @param cost      The cost of the Item
      * @param health    The additional health of the Item
      * @param value     The money value of the Item
-     * @param textureId The Texture ID to use to get the Item graphic
+     * @param texture   The Texture ID to use to get the Item graphic
      * @param placeable Whether the Item is placeable on a Tile or not
      * @param sku       The unique SKU of the Item
      */
-    public Item(String name, int cost, int health, int value, int textureId, boolean placeable, Items sku) {
+    public Item(String name, int cost, int health, int value, TextureManager texture, boolean placeable, ItemFactory sku) {
         this.name = name;
         this.cost = cost;
         this.health = health;
         this.value = value;
         this.placeable = placeable;
         this.sku = sku;
-        texture = TextureManager.loadTexture(textureId);
+        this.texture = TextureManager.loadTexture(texture);
     }
 
     /**
@@ -81,12 +81,12 @@ public class Item {
      */
     public Actor getPlaceableActor() {
         switch (sku) {
-            case TURRET:
+            case WEAPON:
                 return new Weapon();
             case CLOSE_COMBAT_WEAPON:
-                return new Weapon("Close Combat Weapon", 25, 50.0, 2.0, Constants.UNIT_HEALTH, 4.0, 7.0, 2.0, 15, 25, 25);
+                return new Weapon("Close Combat Weapon", 25, 50.0, 2.0, Constants.UNIT_HEALTH, 4.0, 7.0, 2.0, 15, 25, TextureManager.CLOSE_COMBAT_WEAPON);
             case RAPID_FIRE_WEAPON:
-                return new Weapon("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 1.0, 15, 25, 13);
+                return new Weapon("Rapid Fire Weapon", 25, 5.0, 15.0, 10, 10, 0.5, 1.0, 15, 25, TextureManager.RAPID_FIRE_WEAPON);
             default:
                 return null;
         }
@@ -222,7 +222,7 @@ public class Item {
      *
      * @return The unique SKU identifier of the Item
      */
-    public Items getSku() {
+    public ItemFactory getSku() {
         return sku;
     }
 }

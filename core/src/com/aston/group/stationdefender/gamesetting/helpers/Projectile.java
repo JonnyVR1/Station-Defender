@@ -13,23 +13,14 @@ import com.badlogic.gdx.utils.Pool;
  * @author Mohammed Foysal
  */
 public class Projectile implements Pool.Poolable {
-    private final SpriteBatch batch;
-    private final Texture texture;
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final Texture texture = TextureManager.loadTexture(TextureManager.PROJECTILE);
+    private final int width = 10;
+    private final int height = 8;
     private int x;
     private int y;
-    private int width = 10;
-    private int height = 8;
     private boolean alive;
     private double damage, speed;
-
-    /**
-     * Construct a new Projectile with a default
-     * X and Y co-ordinates of '0'
-     */
-    public Projectile() {
-        batch = GameEngine.getBatch();
-        texture = TextureManager.loadTexture(9);
-    }
 
     /**
      * Initiate the Projectile moving
@@ -51,8 +42,6 @@ public class Projectile implements Pool.Poolable {
     public void reset() {
         x = 0;
         y = 0;
-        width = 5;
-        height = 4;
         alive = false;
     }
 

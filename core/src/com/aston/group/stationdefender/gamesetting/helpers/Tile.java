@@ -21,9 +21,9 @@ public class Tile {
     private final int x, y;
     private final int width = Constants.TILE_WIDTH;
     private final int height = Constants.TILE_HEIGHT;
-    private final SpriteBatch batch;
-    private final Texture texture;
-    private final ShapeRenderer shapeRenderer;
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final Texture texture = TextureManager.loadTexture(TextureManager.TILE);
+    private final ShapeRenderer shapeRenderer = GameEngine.getShapeRenderer();
     private boolean hasItem;
     private boolean invalid;
 
@@ -36,9 +36,6 @@ public class Tile {
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
-        batch = GameEngine.getBatch();
-        texture = TextureManager.loadTexture(4);
-        shapeRenderer = GameEngine.getShapeRenderer();
     }
 
     /**
@@ -87,13 +84,11 @@ public class Tile {
      * Render the Tile.
      */
     public void render() {
-        boolean hovered = isColliding(MouseInput.getX(), MouseInput.getY(), 1, 1);
-
         batch.begin();
         batch.draw(texture, x, y, width, height);
         batch.end();
 
-        if (hovered) {
+        if (isColliding(MouseInput.getX(), MouseInput.getY(), 1, 1)) {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

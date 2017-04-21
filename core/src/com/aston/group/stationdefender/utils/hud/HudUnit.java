@@ -14,12 +14,14 @@ public class HudUnit extends HudContainer {
     private int yPos;
 
     /**
-     * Creates a new HudWeapon with default X and Y co-ordinates of '0'
+     * Creates a new HudUnit with given X and Y co-ordinates
      *
      * @param actor The Actor to assign the HUD to
+     * @param x     The X co-ordinate of the HudUnit
+     * @param y     The Y co-ordinate of the HudUnit
      */
-    public HudUnit(Actor actor) {
-        super();
+    public HudUnit(Actor actor, int x, int y) {
+        super(x, y);
         unit = (Unit) actor;
         title = unit.getName();
         width = 150;

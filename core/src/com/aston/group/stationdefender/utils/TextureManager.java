@@ -10,89 +10,92 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
  * @author Jonathon Fitch
  */
 public enum TextureManager {
-    ;
-    private static final int BACKGROUND_TITLE_TEXTURE = 1;
-    private static final int BACKGROUND_TEXTURE = 2;
-    private static final int LEVEL_TEXTURE = 3;
-    private static final int TILE_TEXTURE = 4;
-    private static final int QUICK_SLOT_TEXTURE = 5;
-    private static final int DEFAULT_TOWER_TEXTURE = 6;
-    private static final int DEFAULT_ALIEN_TEXTURE = 7;
-    private static final int DEFAULT_WEAPON_TEXTURE = 8;
-    private static final int DEFAULT_PROJECTILE_TEXTURE = 9;
-    private static final int ITEM_CREDIT_TEXTURE = 10;
-    private static final int MINE_WEAPON_TEXTURE = 11;
-    private static final int RF_ALIEN_TEXTURE = 12;
-    private static final int RF_WEAPON_TEXTURE = 13;
-    private static final int KAMIKAZE_ALIEN_TEXTURE = 14;
-    private static final int BOSS_ALIEN_1 = 15;
-    private static final int BOSS_ALIEN_2 = 16;
-    private static final int BOSS_ALIEN_3 = 17;
-    private static final int BOSS_ALIEN_4 = 18;
-    private static final int BACKGROUND_TEXTURE_2 = 19;
-    private static final int BACKGROUND_TEXTURE_3 = 20;
-    private static final int BACKGROUND_TEXTURE_4 = 21;
-    private static final int CLOSE_COMBAT_ALIEN_TEXTURE = 22;
-    private static final int BLACK_HOVER_TEXTURE = 23;
-    private static final int ITEM_HEALTH_TEXTURE = 24;
-    private static final int CLOSE_COMBAT_WEAPON_TEXTURE = 25;
-    private static final int ITEM_BANDAGES_TEXTURE = 26;
-    private static final int ITEM_WOOD_TEXTURE = 27;
-    private static final int ITEM_BRICKS_TEXTURE = 28;
-    private static final int ITEM_WATER_TEXTURE = 29;
-    private static final int ITEM_CEMENT_TEXTURE = 30;
+    BACKGROUND_TITLE,
+    BACKGROUND_1,
+    BACKGROUND_2,
+    BACKGROUND_3,
+    BACKGROUND_4,
+    BACKGROUND_5,
+    BLACK_HOVER,
+    QUICK_SLOT,
+    TILE,
+    TOWER,
+    ALIEN,
+    CLOSE_COMBAT_ALIEN,
+    KAMIKAZE_ALIEN,
+    MINE_ALIEN,
+    RAPID_FIRE_ALIEN,
+    WEAPON,
+    CLOSE_COMBAT_WEAPON,
+    RAPID_FIRE_WEAPON,
+    BOSS_ALIEN_1,
+    BOSS_ALIEN_2,
+    BOSS_ALIEN_3,
+    BOSS_ALIEN_4,
+    PROJECTILE,
+    ITEM_BANDAGES,
+    ITEM_BRICKS,
+    ITEM_CEMENT,
+    ITEM_CREDIT,
+    ITEM_HEALTH,
+    ITEM_WATER,
+    ITEM_WOOD,
+    UNKNOWN;
 
 
     /**
      * Load the texture matching a given ID
      *
-     * @param id The ID number of the texture to load
+     * @param textureManager The ID number of the texture to load
      * @return The texture matching the ID
      */
-    public static Texture loadTexture(int id) {
+    public static Texture loadTexture(TextureManager textureManager) {
         Texture texture = null;
-        switch (id) {
-            case BACKGROUND_TITLE_TEXTURE:
+        switch (textureManager) {
+            case BACKGROUND_TITLE:
                 texture = new Texture(Gdx.files.internal("textures/intro-back.jpg"));
                 break;
-            case BACKGROUND_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/back.jpg"));
-                break;
-            case LEVEL_TEXTURE:
+            case BACKGROUND_1:
                 texture = new Texture(Gdx.files.internal("textures/level-background.png"));
                 break;
-            case TILE_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/tile.png"));
+            case BACKGROUND_2:
+                texture = new Texture(Gdx.files.internal("textures/back.jpg"));
                 break;
-            case QUICK_SLOT_TEXTURE:
+            case BACKGROUND_3:
+                texture = new Texture(Gdx.files.internal("textures/space.png"));
+                break;
+            case BACKGROUND_4:
+                texture = new Texture(Gdx.files.internal("textures/space2.png"));
+                break;
+            case BACKGROUND_5:
+                texture = new Texture(Gdx.files.internal("textures/space3.png"));
+                break;
+            case BLACK_HOVER:
+                texture = new Texture(Gdx.files.internal("textures/black.jpg"));
+                break;
+            case QUICK_SLOT:
                 texture = new Texture(Gdx.files.internal("data/uiskin.png"));
                 break;
-            case DEFAULT_TOWER_TEXTURE:
+            case TILE:
+                texture = new Texture(Gdx.files.internal("textures/tile.png"));
+                break;
+            case TOWER:
                 texture = new Texture(Gdx.files.internal("textures/tower.png"));
                 break;
-            case DEFAULT_ALIEN_TEXTURE:
+            case ALIEN:
                 texture = new Texture(Gdx.files.internal("textures/enemy.png"));
                 break;
-            case DEFAULT_WEAPON_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/turret.png"));
+            case CLOSE_COMBAT_ALIEN:
+                texture = new Texture(Gdx.files.internal("textures/CloseCombatAlien.png"));
                 break;
-            case DEFAULT_PROJECTILE_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/projectile.png"));
+            case KAMIKAZE_ALIEN:
+                texture = new Texture(Gdx.files.internal("textures/bomber-enemy.png"));
                 break;
-            case ITEM_CREDIT_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/item-credits.png"));
-                break;
-            case MINE_WEAPON_TEXTURE:
+            case MINE_ALIEN:
                 texture = new Texture(Gdx.files.internal("textures/landmine.png"));
                 break;
-            case RF_ALIEN_TEXTURE:
+            case RAPID_FIRE_ALIEN:
                 texture = new Texture(Gdx.files.internal("textures/rf-enemy.png"));
-                break;
-            case RF_WEAPON_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/rf-turret.png"));
-                break;
-            case KAMIKAZE_ALIEN_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/bomber-enemy.png"));
                 break;
             case BOSS_ALIEN_1:
                 texture = new Texture(Gdx.files.internal("textures/boss1.png"));
@@ -106,41 +109,38 @@ public enum TextureManager {
             case BOSS_ALIEN_4:
                 texture = new Texture(Gdx.files.internal("textures/boss4.png"));
                 break;
-            case BACKGROUND_TEXTURE_2:
-                texture = new Texture(Gdx.files.internal("textures/space.png"));
+            case WEAPON:
+                texture = new Texture(Gdx.files.internal("textures/turret.png"));
                 break;
-            case BACKGROUND_TEXTURE_3:
-                texture = new Texture(Gdx.files.internal("textures/space2.png"));
-                break;
-            case BACKGROUND_TEXTURE_4:
-                texture = new Texture(Gdx.files.internal("textures/space3.png"));
-                break;
-            case CLOSE_COMBAT_ALIEN_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/CloseCombatAlien.png"));
-                break;
-            case BLACK_HOVER_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/black.jpg"));
-                break;
-            case ITEM_HEALTH_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/item-health.png"));
-                break;
-            case CLOSE_COMBAT_WEAPON_TEXTURE:
+            case CLOSE_COMBAT_WEAPON:
                 texture = new Texture(Gdx.files.internal("textures/cc-turret.png"));
                 break;
-            case ITEM_BANDAGES_TEXTURE:
+            case RAPID_FIRE_WEAPON:
+                texture = new Texture(Gdx.files.internal("textures/rf-turret.png"));
+                break;
+            case PROJECTILE:
+                texture = new Texture(Gdx.files.internal("textures/projectile.png"));
+                break;
+            case ITEM_BANDAGES:
                 texture = new Texture(Gdx.files.internal("textures/item-bandages.png"));
                 break;
-            case ITEM_WOOD_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/item-wood.png"));
-                break;
-            case ITEM_BRICKS_TEXTURE:
+            case ITEM_BRICKS:
                 texture = new Texture(Gdx.files.internal("textures/item-bricks.png"));
                 break;
-            case ITEM_WATER_TEXTURE:
+            case ITEM_CEMENT:
+                texture = new Texture(Gdx.files.internal("textures/item-cement.png"));
+                break;
+            case ITEM_CREDIT:
+                texture = new Texture(Gdx.files.internal("textures/item-credits.png"));
+                break;
+            case ITEM_HEALTH:
+                texture = new Texture(Gdx.files.internal("textures/item-health.png"));
+                break;
+            case ITEM_WATER:
                 texture = new Texture(Gdx.files.internal("textures/item-water.png"));
                 break;
-            case ITEM_CEMENT_TEXTURE:
-                texture = new Texture(Gdx.files.internal("textures/item-cement.png"));
+            case ITEM_WOOD:
+                texture = new Texture(Gdx.files.internal("textures/item-wood.png"));
                 break;
         }
         return texture;

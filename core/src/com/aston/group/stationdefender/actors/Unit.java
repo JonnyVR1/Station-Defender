@@ -62,7 +62,7 @@ public abstract class Unit implements Actor {
      * @param texture     The texture graphic of the Unit
      * @param facingLeft  Whether the Unit is facing left or not
      */
-    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, int texture, boolean facingLeft) {
+    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, TextureManager texture, boolean facingLeft) {
         this.name = name;
         this.speed = speed;
         this.damage = damage;
@@ -378,9 +378,7 @@ public abstract class Unit implements Actor {
     void checkInput() {
         if (MouseInput.isColliding(x, y, width, height)) {
             if (hudElement == null) {
-                hudElement = new HudUnit(this);
-                hudElement.setX(x);
-                hudElement.setY(y);
+                hudElement = new HudUnit(this, x, y);
                 Hud.addHudElement(hudElement);
             }
         } else if (Hud.isNotColliding()) {

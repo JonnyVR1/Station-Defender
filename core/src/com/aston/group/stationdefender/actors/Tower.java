@@ -23,7 +23,7 @@ public class Tower implements Actor {
     private final int height = 400;
     private final int width = 100;
     private final SpriteBatch batch = GameEngine.getBatch();
-    private final Texture texture = TextureManager.loadTexture(6);
+    private final Texture texture = TextureManager.loadTexture(TextureManager.TOWER);
     private final BitmapFont font = FontManager.getFont(16);
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
     private final IndicatorManager indicatorManager = new IndicatorManager();

@@ -32,8 +32,7 @@ public class ProjectileFactory {
         Projectile projectile = projectilePool.obtain();
         projectile.init(x, y, speed, damage);
         projectiles.add(projectile);
-        if (projectiles.size < 20)
-            SoundManager.playSound(2);
+        SoundManager.playSound(SoundManager.GUN_SHOT);
     }
 
     /**
@@ -42,8 +41,8 @@ public class ProjectileFactory {
      * @param delta - The time in seconds since the last render.
      */
     public void render(float delta) {
-        for (Projectile projectile1 : projectiles) {
-            projectile1.render(delta);
+        for (Projectile projectile : projectiles) {
+            projectile.render(delta);
         }
 
         //Remove Dead Projectiles
