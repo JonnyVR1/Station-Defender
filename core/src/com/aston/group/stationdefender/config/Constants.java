@@ -64,7 +64,7 @@ public final class Constants {
     public static final Color primaryColor = Color.valueOf("#37474F");
     public static final Color primaryDarkColor = Color.valueOf("#263238");
 
-    public static final float VERSION = 2.3f;
+    public static final float VERSION = 3.0f;
 
     public static final String prefs = "PREFS";
 }
