@@ -137,15 +137,6 @@ public abstract class Unit implements Actor {
     }
 
     /**
-     * Sets the health of the Unit
-     *
-     * @param health The new health value for the Unit
-     */
-    public void setHealth(double health) {
-        this.health = health;
-    }
-
-    /**
      * Returns the range that the Unit can fire
      *
      * @return The range that the Unit can fire.

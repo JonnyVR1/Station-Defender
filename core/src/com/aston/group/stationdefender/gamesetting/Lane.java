@@ -33,7 +33,7 @@ public class Lane implements UnitCallback {
     private final Array<Tile> tiles = new Array<>();
     private final Array<Actor> actors = new Array<>();
     private final Array<Item> itemDrops = new Array<>();
-    private final ProjectileFactory projectileFactory = ProjectileFactory.INSTANCE;
+    private final ProjectileFactory projectileFactory = new ProjectileFactory();
     private final LaneCallback laneCallback;
     private int width;
     private boolean cleared;
@@ -159,9 +159,6 @@ public class Lane implements UnitCallback {
             if (actor.isUnit()) {
                 if (!actor.getExists()) {
                     dropItem(ItemFactory.getItemByChance(), actor.getX(), actor.getY());
-                    ((Unit) actor).setHealth(-1);
-                }
-                if (((Unit) actor).getHealth() <= 0) {
                     unitsIterator.remove();
                 }
             }

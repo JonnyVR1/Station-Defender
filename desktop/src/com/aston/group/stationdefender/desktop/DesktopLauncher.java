@@ -2,20 +2,21 @@ package com.aston.group.stationdefender.desktop;
 
 import com.aston.group.stationdefender.Main;
 import com.aston.group.stationdefender.config.Constants;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
 /**
  * The Launcher class for the game on Desktop PC.
  *
  * @author Jonathon Fitch
  */
-public class DesktopLauncher {
+public enum DesktopLauncher {
+    ;
+
     public static void main(String... arg) {
-        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.title = Constants.GAME_NAME;
-        config.width = Constants.SCREEN_WIDTH;
-        config.height = Constants.SCREEN_HEIGHT;
-        new LwjglApplication(new Main(), config);
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setTitle(Constants.GAME_NAME);
+        config.setWindowedMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        new Lwjgl3Application(new Main(), config);
     }
 }
