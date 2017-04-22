@@ -8,7 +8,7 @@ import com.aston.group.stationdefender.utils.FontManager;
 import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -53,7 +53,7 @@ public class IntroScreen implements Screen {
         EventListener buttonListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
+                Gdx.graphics.setSystemCursor(SystemCursor.Hand);
                 if (Objects.equals(actor, backgroundButton)) {
                     menuCallback.onDisplayBackground();
                 } else if (Objects.equals(actor, instructionButton)) {

@@ -89,6 +89,5 @@ public interface Actor {
      *
      * @return Whether the Actor is a Unit or not
      */
-    @SuppressWarnings("SameReturnValue")
     boolean isUnit();
 }

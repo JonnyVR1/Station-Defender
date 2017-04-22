@@ -13,7 +13,7 @@ import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
 import com.aston.group.stationdefender.utils.MouseInput;
 import com.aston.group.stationdefender.utils.ProjectileFactory;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
@@ -33,10 +33,9 @@ public class Lane implements UnitCallback {
     private final Array<Tile> tiles = new Array<>();
     private final Array<Actor> actors = new Array<>();
     private final Array<Item> itemDrops = new Array<>();
-    private final ProjectileFactory projectileFactory = new ProjectileFactory();
+    private final ProjectileFactory projectileFactory = ProjectileFactory.INSTANCE;
     private final LaneCallback laneCallback;
     private int width;
-    private boolean overrun;
     private boolean cleared;
     private int alienAmount;
     private long lastRenderTime = System.currentTimeMillis();
@@ -147,7 +146,6 @@ public class Lane implements UnitCallback {
                 //Check if aliens are near tower
                 if (((Unit) actor).isFacingLeft() && laneCallback.isTowerColliding(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight())) {
                     laneCallback.towerTakeDamage(((Unit) actor).getDamage());
-                    overrun = true;
                     ((Unit) actor).destroy();
                     actors.removeIndex(i);
                 }
@@ -196,7 +194,7 @@ public class Lane implements UnitCallback {
         //Render item drops
         for (int i = 0; i < itemDrops.size; i++) {
             itemDrops.get(i).render();
-            if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && itemDrops.get(i).isJustSpawned() && MouseInput.isColliding(itemDrops.get(i).getX(), itemDrops.get(i).getY(), itemDrops.get(i).getWidth(), itemDrops.get(i).getHeight())) {
+            if (Gdx.input.isButtonPressed(Buttons.RIGHT) && itemDrops.get(i).isJustSpawned() && MouseInput.isColliding(itemDrops.get(i).getX(), itemDrops.get(i).getY(), itemDrops.get(i).getWidth(), itemDrops.get(i).getHeight())) {
                 laneCallback.collectItem(itemDrops.get(i));
                 removeItem(i);
             }
@@ -266,7 +264,7 @@ public class Lane implements UnitCallback {
     boolean isColliding(int x, int y) {
         int height = Constants.TILE_HEIGHT;
         int laneX = 100;
-        return x + 1 > laneX && x < laneX + this.width && y + 1 > this.y && y < this.y + height;
+        return x + 1 > laneX && x < laneX + width && y + 1 > this.y && y < this.y + height;
     }
 
     @Override
@@ -312,15 +310,6 @@ public class Lane implements UnitCallback {
     }
 
     /**
-     * Returns whether a Lane is overrun with Aliens or not
-     *
-     * @return true if a Lane is overrun with Aliens, false if the Lane is not overrun by Aliens
-     */
-    boolean isOverrun() {
-        return overrun;
-    }
-
-    /**
      * Returns whether a Lane is cleared or not and there are no more Aliens onscreen
      *
      * @return true if a Lane is cleared, false if a Lane is not cleared
@@ -339,7 +328,7 @@ public class Lane implements UnitCallback {
         for (int i = 0; i < projectileFactory.getProjectiles().size; i++) {
             if (actors != null) {
                 for (int j = 0; j < actors.size; j++) {
-                    if (actors.get(i).isUnit()) {
+                    if (actors.get(j).isUnit()) {
                         Actor actor = actors.get(j);
                         projectileCollisionHelper(projectileFactory.getProjectiles().get(i), actor, false);
                     }

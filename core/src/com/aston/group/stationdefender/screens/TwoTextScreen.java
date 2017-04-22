@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -69,9 +70,9 @@ public class TwoTextScreen implements Screen {
         image.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
         background.addActor(image);
 
-        titleLabel = new Label(title, new Label.LabelStyle(titleFont, Color.WHITE));
+        titleLabel = new Label(title, new LabelStyle(titleFont, Color.WHITE));
         titleLabel.setAlignment(Align.center);
-        bodyLabel = new Label(body, new Label.LabelStyle(bodyFont, Color.WHITE));
+        bodyLabel = new Label(body, new LabelStyle(bodyFont, Color.WHITE));
 
         bodyLabel.setColor(1, 1, 1, 0);
         titleLabel.setColor(1, 1, 1, 0);

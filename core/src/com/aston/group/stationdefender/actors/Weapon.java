@@ -19,15 +19,15 @@ public class Weapon extends Unit {
     private boolean overloaded;
 
     /**
-     * Construct a new Weapon with default X and Y co-ordinates of '0'
+     * Construct a new default Weapon
      */
     public Weapon() {
         this("Weapon", 50, Constants.DEFAULT_DAMAGE, 10.0, Constants.WEAPON_HEALTH, 12, 5.0, 1.5, 10, 10, TextureManager.WEAPON);
     }
 
     /**
-     * Construct a new Weapon with given name, speed, damage, rateOfFile, health, range, x co-ordinate, y co-ordinate,
-     * width, height, buildTime, cost and costToUpgrade parameters
+     * Construct a new Weapon with given name, speed, damage, rateOfFile, health, range, chance to hit, build time cost,
+     * costToUpgrade and texture parameters
      *
      * @param name          The name of the Weapon
      * @param speed         The speed of the Weapon
@@ -43,7 +43,7 @@ public class Weapon extends Unit {
      */
     public Weapon(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit,
                   double buildTime, int cost, int costToUpgrade, TextureManager texture) {
-        super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, texture, false);
+        super(name, speed, damage, rateOfFire, health, range, chanceToHit, 60, 60, false, texture);
         this.cost = cost;
         this.costToUpgrade = costToUpgrade;
         remainingBuildTime = buildTime;

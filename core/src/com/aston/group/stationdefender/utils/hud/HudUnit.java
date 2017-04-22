@@ -11,7 +11,7 @@ import com.aston.group.stationdefender.actors.Weapon;
  */
 public class HudUnit extends HudContainer {
     private final Unit unit;
-    private int yPos;
+    private int textY;
 
     /**
      * Creates a new HudUnit with given X and Y co-ordinates
@@ -26,24 +26,26 @@ public class HudUnit extends HudContainer {
         title = unit.getName();
         width = 150;
         height = 110;
+        if (title.contains("Weapon"))
+            height += 20;
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
         batch.begin();
-        yPos = (height + y) - 25;
-        font.draw(batch, "Damage: " + unit.getDamage(), x + 5, yPos);
+        textY = (height + y) - 25;
+        font.draw(batch, "Damage: " + unit.getDamage(), x + 5, textY);
         restartBatch();
-        font.draw(batch, "Health: " + unit.getHealth(), x + 5, yPos);
+        font.draw(batch, "Health: " + unit.getHealth(), x + 5, textY);
         restartBatch();
-        if (unit.getClass().isAssignableFrom(Weapon.class)) {
-            font.draw(batch, "Cost: " + ((Weapon) unit).getCost(), x + 5, yPos);
+        if (title.contains("Weapon")) {
+            font.draw(batch, "Cost: " + ((Weapon) unit).getCost(), x + 5, textY);
             restartBatch();
         }
-        font.draw(batch, "Range: " + unit.getRange(), x + 5, yPos);
+        font.draw(batch, "Range: " + unit.getRange(), x + 5, textY);
         restartBatch();
-        font.draw(batch, "ROF: " + unit.getRateOfFire(), x + 5, yPos);
+        font.draw(batch, "ROF: " + unit.getRateOfFire(), x + 5, textY);
         batch.end();
     }
 
@@ -53,6 +55,6 @@ public class HudUnit extends HudContainer {
     private void restartBatch() {
         batch.end();
         batch.begin();
-        yPos -= 20;
+        textY -= 20;
     }
 }

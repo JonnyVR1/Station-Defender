@@ -5,14 +5,14 @@ import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pool.Poolable;
 
 /**
  * Projectile is a reusable game object
  *
  * @author Mohammed Foysal
  */
-public class Projectile implements Pool.Poolable {
+public class Projectile implements Poolable {
     private final SpriteBatch batch = GameEngine.getBatch();
     private final Texture texture = TextureManager.loadTexture(TextureManager.PROJECTILE);
     private final int width = 10;

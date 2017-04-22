@@ -13,15 +13,14 @@ public class Alien extends Unit {
     private boolean overloaded;
 
     /**
-     * Construct a new Alien with default X and Y co-ordinates of '0'
+     * Construct a new default Alien
      */
     public Alien() {
         this("Alien", -120, Constants.DEFAULT_DAMAGE, 5, Constants.UNIT_HEALTH, 5.0, 12, 100, 38, TextureManager.ALIEN);
     }
 
     /**
-     * Construct a new Alien with given name, speed, damage, rateOfFile, health, range, x co-ordinate, y co-ordinate,
-     * width and height
+     * Construct a new Alien with given name, speed, damage, rateOfFile, health, range, chance to hit, width and height and texture parameters
      *
      * @param name        The name of the Alien
      * @param speed       The speed of the Alien
@@ -35,7 +34,7 @@ public class Alien extends Unit {
      * @param texture     The texture graphic of the Alien
      */
     public Alien(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, TextureManager texture) {
-        super(name, speed, damage, rateOfFire, health, range, chanceToHit, width, height, texture, true);
+        super(name, speed, damage, rateOfFire, health, range, chanceToHit, width, height, true, texture);
     }
 
     @Override

@@ -84,7 +84,7 @@ public class Level implements LaneCallback {
 
         for (Lane lane : lanes) {
             lane.render(delta);
-            if (lane.isOverrun() && !tower.getExists())
+            if (!tower.getExists())
                 hasLost = true;
         }
 

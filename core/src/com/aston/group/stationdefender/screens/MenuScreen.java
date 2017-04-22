@@ -7,7 +7,7 @@ import com.aston.group.stationdefender.utils.FontManager;
 import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -47,7 +48,7 @@ public class MenuScreen implements Screen {
         EventListener buttonListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Hand);
+                Gdx.graphics.setSystemCursor(SystemCursor.Hand);
                 if (Objects.equals(actor, playButton)) {
                     menuCallback.onPlay(false);
                 } else if (Objects.equals(actor, exitButton)) {
@@ -57,7 +58,7 @@ public class MenuScreen implements Screen {
         };
 
         Texture hoverTexture = TextureManager.loadTexture(TextureManager.BLACK_HOVER);
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(hoverTexture));
         playButton = new TextButton(Constants.MENU_ITEMS[2], textButtonStyle);

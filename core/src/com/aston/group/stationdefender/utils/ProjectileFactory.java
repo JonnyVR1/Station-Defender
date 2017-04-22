@@ -11,7 +11,8 @@ import java.util.Iterator;
  *
  * @author Mohammed Foysal
  */
-public class ProjectileFactory {
+public enum ProjectileFactory {
+    INSTANCE;
     private final Pool<Projectile> projectilePool = new Pool<Projectile>() {
         @Override
         protected Projectile newObject() {

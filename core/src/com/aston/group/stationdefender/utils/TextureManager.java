@@ -42,7 +42,6 @@ public enum TextureManager {
     ITEM_WOOD,
     UNKNOWN;
 
-
     /**
      * Load the texture matching a given ID
      *

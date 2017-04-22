@@ -16,13 +16,15 @@ import com.aston.group.stationdefender.utils.indicators.IndicatorManager;
 import com.aston.group.stationdefender.utils.resources.QuickSlot;
 import com.aston.group.stationdefender.utils.resources.StackableInventory;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -85,7 +87,7 @@ public class Player implements InputProcessor, ItemCallback {
         BitmapFont buttonFont = FontManager.getFont(22);
 
         //Buttons
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = buttonFont;
         menuButton = new TextButton(Constants.MENU, textButtonStyle);
         menuButton.setColor(0, 0, 0, 0);
@@ -162,30 +164,30 @@ public class Player implements InputProcessor, ItemCallback {
     @Override
     public boolean keyUp(int keycode) {
         switch (keycode) {
-            case Input.Keys.ESCAPE:
+            case Keys.ESCAPE:
                 playerCallback.onPause();
-            case Input.Keys.NUM_1:
+            case Keys.NUM_1:
                 selectedSlot = 0;
                 break;
-            case Input.Keys.NUM_2:
+            case Keys.NUM_2:
                 selectedSlot = 1;
                 break;
-            case Input.Keys.NUM_3:
+            case Keys.NUM_3:
                 selectedSlot = 2;
                 break;
-            case Input.Keys.NUM_4:
+            case Keys.NUM_4:
                 selectedSlot = 3;
                 break;
-            case Input.Keys.NUM_5:
+            case Keys.NUM_5:
                 selectedSlot = 4;
                 break;
-            case Input.Keys.NUM_6:
+            case Keys.NUM_6:
                 selectedSlot = 5;
                 break;
-            case Input.Keys.NUM_7:
+            case Keys.NUM_7:
                 selectedSlot = 6;
                 break;
-            case Input.Keys.NUM_8:
+            case Keys.NUM_8:
                 selectedSlot = 7;
                 break;
         }
@@ -205,7 +207,7 @@ public class Player implements InputProcessor, ItemCallback {
 
     @Override
     public boolean touchUp(final int screenX, final int screenY, int pointer, int button) {
-        if (button == Input.Buttons.LEFT) {
+        if (button == Buttons.LEFT) {
             if (Hud.isNotColliding()) {
                 if (currentItem != null && money >= currentItem.getCost()) {
                     currentItem.useItem(this);
@@ -316,7 +318,7 @@ public class Player implements InputProcessor, ItemCallback {
     public void addMoney(int amount) {
         if (amount != 0) {
             money += amount;
-            moneyIndicator.addIndicator("+" + Integer.toString(amount), Color.YELLOW);
+            moneyIndicator.addIndicator('+' + Integer.toString(amount), Color.YELLOW);
         }
     }
 

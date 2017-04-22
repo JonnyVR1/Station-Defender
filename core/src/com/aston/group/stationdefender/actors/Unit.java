@@ -47,8 +47,8 @@ public abstract class Unit implements Actor {
     private HudElement hudElement;
 
     /**
-     * Construct a new Unit with given name, speed, damage, rateOfFile, health, range, x co-ordinate, y co-ordinate,
-     * width and height
+     * Construct a new Unit with given name, speed, damage, rateOfFile, health, range, chance to hit width, height,
+     * facing left and texture parameters
      *
      * @param name        The name of the Unit
      * @param speed       The speed of the Unit
@@ -59,10 +59,10 @@ public abstract class Unit implements Actor {
      * @param chanceToHit The chance of the Weapon to score a hit
      * @param width       The width of the Unit
      * @param height      The height of the Unit
-     * @param texture     The texture graphic of the Unit
      * @param facingLeft  Whether the Unit is facing left or not
+     * @param texture     The texture graphic of the Unit
      */
-    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, TextureManager texture, boolean facingLeft) {
+    Unit(String name, double speed, double damage, double rateOfFire, double health, double range, double chanceToHit, int width, int height, boolean facingLeft, TextureManager texture) {
         this.name = name;
         this.speed = speed;
         this.damage = damage;
@@ -72,8 +72,8 @@ public abstract class Unit implements Actor {
         this.width = width;
         this.height = height;
         this.chanceToHit = chanceToHit;
-        this.texture = TextureManager.loadTexture(texture);
         this.facingLeft = facingLeft;
+        this.texture = TextureManager.loadTexture(texture);
     }
 
     /**
@@ -165,7 +165,7 @@ public abstract class Unit implements Actor {
             health = 0;
         } else
             health -= damage;
-        indicatorManager.addIndicator("-" + Integer.toString((int) damage), Color.RED);
+        indicatorManager.addIndicator('-' + Integer.toString((int) damage), Color.RED);
     }
 
     /**
@@ -345,15 +345,11 @@ public abstract class Unit implements Actor {
      */
     boolean rapidFireHelper() {
         boolean result = false;
-        try {
-            double damageDealt = fire();
-            if ((damageDealt / getDamage()) == getRateOfFire()) {
-                result = true;
-            } else {
-                adjacentActor.takeDamage(damageDealt);
-            }
-        } catch (Exception e) {
-            System.out.println("Null values are not allowed");
+        double damageDealt = fire();
+        if ((damageDealt / getDamage()) == getRateOfFire()) {
+            result = true;
+        } else {
+            adjacentActor.takeDamage(damageDealt);
         }
         return result;
     }

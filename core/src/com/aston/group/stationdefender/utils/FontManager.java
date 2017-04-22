@@ -3,6 +3,7 @@ package com.aston.group.stationdefender.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 /**
  * This enum manages fonts for the game
@@ -12,11 +13,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 public enum FontManager {
     ;
     private static final FreeTypeFontGenerator fontGenerator;
-    private static final FreeTypeFontGenerator.FreeTypeFontParameter params;
+    private static final FreeTypeFontParameter params;
 
     static {
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Roboto-Regular.ttf"));
-        params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params = new FreeTypeFontParameter();
     }
 
     /**

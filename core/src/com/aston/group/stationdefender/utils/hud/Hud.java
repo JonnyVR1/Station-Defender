@@ -3,11 +3,12 @@ package com.aston.group.stationdefender.utils.hud;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * This class is responsible for the HUD
+ * This enum is responsible for the HUD
  *
  * @author Mohammad Foysal
  */
-public class Hud {
+public enum Hud {
+    ;
     private static final Array<HudElement> hudElements = new Array<>();
 
     /**

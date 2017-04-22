@@ -3,11 +3,12 @@ package com.aston.group.stationdefender.config;
 import com.badlogic.gdx.graphics.Color;
 
 /**
- * This class is for constant known variables used throughout the game
+ * This enum is for constant known variables used throughout the game
  *
  * @author Mohammed Foysal
  */
-public final class Constants {
+public enum Constants {
+    ;
     public static final boolean DEBUG = false;
 
     // 16/9 Aspect Ratio

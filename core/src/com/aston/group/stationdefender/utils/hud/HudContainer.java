@@ -6,6 +6,7 @@ import com.aston.group.stationdefender.utils.FontManager;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
  * This class is a container for the HUD
@@ -29,7 +30,7 @@ public class HudContainer extends HudElement {
 
     @Override
     public void render(float delta) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.begin(ShapeType.Filled);
         shapeRenderer.setColor(Constants.primaryColor);
         shapeRenderer.rect(x, y, width, height);
         shapeRenderer.setColor(Constants.primaryDarkColor);

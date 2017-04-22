@@ -77,7 +77,7 @@ public class Tower implements Actor {
      * @param damage Causes the Unit's health to deplete.
      */
     public void takeDamage(double damage) {
-        indicatorManager.addIndicator("-" + Integer.toString((int) damage), Color.RED);
+        indicatorManager.addIndicator('-' + Integer.toString((int) damage), Color.RED);
         if (health - damage <= 0) {
             health = 0;
             exists = false;
@@ -94,7 +94,7 @@ public class Tower implements Actor {
     public void addHealth(int health) {
         if (health != 0) {
             this.health += health;
-            indicatorManager.addIndicator("+" + Integer.toString(health), Color.YELLOW);
+            indicatorManager.addIndicator('+' + Integer.toString(health), Color.YELLOW);
         }
     }
 

@@ -74,7 +74,7 @@ public class IndicatorManager {
      *
      * @author Mohammad Foysal
      */
-    private class Indicator {
+    private static class Indicator {
         private final String text;
         private final long timeDisplayed;
         private final Color color;

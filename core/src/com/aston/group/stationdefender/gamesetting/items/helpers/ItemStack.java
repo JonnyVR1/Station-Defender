@@ -71,7 +71,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
      * @return The Item if it is in the ItemStack, null if it is not
      */
     public T getItem() {
-        if (items.size() > 0)
+        if (!items.isEmpty())
             return items.get(items.size() - 1);
         else
             return null;
@@ -157,6 +157,6 @@ public class ItemStack<T extends Item> implements Iterable<T> {
      * @return isColliding - returns true if params collide, false if not
      */
     private boolean isColliding(int x, int y) {
-        return x + 1 > this.x && x < this.x + this.width && y + 1 > this.y && y < this.y + this.height;
+        return x + 1 > this.x && x < this.x + width && y + 1 > this.y && y < this.y + height;
     }
 }

@@ -56,7 +56,7 @@ public enum ItemFactory {
             case WOOD_BLOCK:
                 item = new Item("Wooden Blocks", 3, 0, 0, TextureManager.ITEM_WOOD, true, WOOD_BLOCK);*/
             case UNKNOWN:
-                return new Item("Empty", 0, 0, 0, TextureManager.UNKNOWN, false, ItemFactory.UNKNOWN);
+                return new Item("Empty", 0, 0, 0, TextureManager.UNKNOWN, false, UNKNOWN);
         }
         return item;
     }
