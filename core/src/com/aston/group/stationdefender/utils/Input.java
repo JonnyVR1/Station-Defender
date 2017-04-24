@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author Mohammad Foysal
  */
-public enum MouseInput {
+public enum Input {
     ;
     private static final Vector2 position = new Vector2();
 

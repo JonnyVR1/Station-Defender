@@ -10,7 +10,7 @@ import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
 import com.aston.group.stationdefender.gamesetting.items.helpers.ItemStack;
 import com.aston.group.stationdefender.utils.FileUtils;
 import com.aston.group.stationdefender.utils.FontManager;
-import com.aston.group.stationdefender.utils.MouseInput;
+import com.aston.group.stationdefender.utils.Input;
 import com.aston.group.stationdefender.utils.hud.Hud;
 import com.aston.group.stationdefender.utils.indicators.IndicatorManager;
 import com.aston.group.stationdefender.utils.resources.QuickSlot;
@@ -108,8 +108,8 @@ public class Player implements InputProcessor, ItemCallback {
     public void render(float delta) {
         //Render Player's current item (if any)
         if (currentItem != null) {
-            currentItem.setX(MouseInput.getX() - (currentItem.getWidth() / 2));
-            currentItem.setY(MouseInput.getY() - (currentItem.getHeight() / 2));
+            currentItem.setX(Input.getX() - (currentItem.getWidth() / 2));
+            currentItem.setY(Input.getY() - (currentItem.getHeight() / 2));
             currentItem.render();
         }
 
@@ -216,12 +216,12 @@ public class Player implements InputProcessor, ItemCallback {
 
             for (int i = 0; i < quickSlots.size; i++) {
                 QuickSlot quickSlot = quickSlots.get(i);
-                if (MouseInput.isColliding(quickSlot.getX(), quickSlot.getY(), quickSlot.getWidth(), quickSlot.getHeight())) {
+                if (Input.isColliding(quickSlot.getX(), quickSlot.getY(), quickSlot.getWidth(), quickSlot.getHeight())) {
                     selectedSlot = i;
                     quickSlotCallback.onSelectedItemChanged(quickSlots.get(selectedSlot).getItem());
                 }
             }
-            if (MouseInput.isColliding((int) menuButton.getX(), (int) menuButton.getY(), (int) menuButton.getWidth(), (int) menuButton.getHeight())) {
+            if (Input.isColliding((int) menuButton.getX(), (int) menuButton.getY(), (int) menuButton.getWidth(), (int) menuButton.getHeight())) {
                 playerCallback.onPause();
             }
         }
@@ -353,7 +353,7 @@ public class Player implements InputProcessor, ItemCallback {
     @Override
     public void onUse(boolean placeable, int cost, int value, int health) {
         if (placeable) {
-            if (playerCallback.placeActor(currentItem.getPlaceableActor(), MouseInput.getX(), MouseInput.getY())) {
+            if (playerCallback.placeActor(currentItem.getPlaceableActor(), Input.getX(), Input.getY())) {
                 useItemProperties(cost, value, health);
                 inventory.removeItem(currentItem);
                 updateQuickSlots();

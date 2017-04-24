@@ -3,7 +3,7 @@ package com.aston.group.stationdefender.gamesetting.helpers;
 import com.aston.group.stationdefender.actors.Actor;
 import com.aston.group.stationdefender.config.Constants;
 import com.aston.group.stationdefender.engine.GameEngine;
-import com.aston.group.stationdefender.utils.MouseInput;
+import com.aston.group.stationdefender.utils.Input;
 import com.aston.group.stationdefender.utils.TextureManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -89,7 +89,7 @@ public class Tile {
         batch.draw(texture, x, y, width, height);
         batch.end();
 
-        if (isColliding(MouseInput.getX(), MouseInput.getY(), 1, 1)) {
+        if (isColliding(Input.getX(), Input.getY(), 1, 1)) {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             shapeRenderer.begin(ShapeType.Filled);

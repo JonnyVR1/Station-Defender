@@ -3,7 +3,7 @@ package com.aston.group.stationdefender.actors;
 import com.aston.group.stationdefender.actors.helpers.ParticleEffectHelper;
 import com.aston.group.stationdefender.callbacks.UnitCallback;
 import com.aston.group.stationdefender.engine.GameEngine;
-import com.aston.group.stationdefender.utils.MouseInput;
+import com.aston.group.stationdefender.utils.Input;
 import com.aston.group.stationdefender.utils.TextureManager;
 import com.aston.group.stationdefender.utils.hud.Hud;
 import com.aston.group.stationdefender.utils.hud.HudElement;
@@ -359,11 +359,11 @@ public abstract class Unit implements Actor {
     }
 
     /**
-     * Checks whether the MouseInput is colliding with the Weapon.
+     * Checks whether the Input is colliding with the Weapon.
      * If it does then create a new HUD element for the Weapon
      */
     void checkInput() {
-        if (MouseInput.isColliding(x, y, width, height)) {
+        if (Input.isColliding(x, y, width, height)) {
             if (hudElement == null) {
                 hudElement = new HudUnit(this, x, y);
                 Hud.addHudElement(hudElement);

@@ -1,6 +1,6 @@
 package com.aston.group.stationdefender.utils.hud;
 
-import com.aston.group.stationdefender.utils.MouseInput;
+import com.aston.group.stationdefender.utils.Input;
 
 /**
  * Abstract class for HudElements
@@ -37,6 +37,6 @@ public abstract class HudElement {
      * @return True if the HudElement is colliding with another object, false if it isn't
      */
     public boolean isColliding() {
-        return MouseInput.isColliding(x, y, width, height);
+        return Input.isColliding(x, y, width, height);
     }
 }

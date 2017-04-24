@@ -41,9 +41,9 @@ public enum Hud {
     }
 
     /**
-     * Checks whether a HudElement is colliding with the MouseInput
+     * Checks whether a HudElement is colliding with the Input
      *
-     * @return true if the HudElement is not colliding with the MouseInput, false if it is
+     * @return true if the HudElement is not colliding with the Input, false if it is
      */
     public static boolean isNotColliding() {
         for (HudElement hudElement : hudElements) {

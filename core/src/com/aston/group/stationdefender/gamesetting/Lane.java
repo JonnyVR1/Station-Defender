@@ -10,7 +10,7 @@ import com.aston.group.stationdefender.gamesetting.helpers.Projectile;
 import com.aston.group.stationdefender.gamesetting.helpers.Tile;
 import com.aston.group.stationdefender.gamesetting.items.Item;
 import com.aston.group.stationdefender.gamesetting.items.helpers.ItemFactory;
-import com.aston.group.stationdefender.utils.MouseInput;
+import com.aston.group.stationdefender.utils.Input;
 import com.aston.group.stationdefender.utils.ProjectileFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
@@ -191,7 +191,7 @@ public class Lane implements UnitCallback {
         //Render item drops
         for (int i = 0; i < itemDrops.size; i++) {
             itemDrops.get(i).render();
-            if (Gdx.input.isButtonPressed(Buttons.RIGHT) && itemDrops.get(i).isJustSpawned() && MouseInput.isColliding(itemDrops.get(i).getX(), itemDrops.get(i).getY(), itemDrops.get(i).getWidth(), itemDrops.get(i).getHeight())) {
+            if (Gdx.input.isButtonPressed(Buttons.RIGHT) && itemDrops.get(i).isJustSpawned() && Input.isColliding(itemDrops.get(i).getX(), itemDrops.get(i).getY(), itemDrops.get(i).getWidth(), itemDrops.get(i).getHeight())) {
                 laneCallback.collectItem(itemDrops.get(i));
                 removeItem(i);
             }

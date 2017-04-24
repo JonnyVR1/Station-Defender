@@ -3,7 +3,7 @@ package com.aston.group.stationdefender.gamesetting.items.helpers;
 import com.aston.group.stationdefender.engine.GameEngine;
 import com.aston.group.stationdefender.gamesetting.items.Item;
 import com.aston.group.stationdefender.utils.FontManager;
-import com.aston.group.stationdefender.utils.MouseInput;
+import com.aston.group.stationdefender.utils.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -101,7 +101,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
             batch.end();
         }
 
-        if (isColliding(MouseInput.getX(), MouseInput.getY())) {
+        if (isColliding(Input.getX(), Input.getY())) {
             String name;
             if (getItem() == null) {
                 name = "Empty";
