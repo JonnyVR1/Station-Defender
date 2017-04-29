@@ -41,6 +41,7 @@ public class Player implements InputProcessor, ItemCallback {
     private final Stage stage = new Stage();
     private final TextButton menuButton;
     private final IndicatorManager moneyIndicator = new IndicatorManager();
+    private final IndicatorManager itemIndicator = new IndicatorManager();
     private final StackableInventory inventory = new StackableInventory();
     private final PlayerCallback playerCallback;
     private Item currentItem;
@@ -137,6 +138,7 @@ public class Player implements InputProcessor, ItemCallback {
 
         //Draw Money Indicators
         moneyIndicator.render(delta, Gdx.graphics.getWidth() - 50, 30);
+        itemIndicator.render(delta, Input.getX(), Input.getY());
 
         //Draw HUD
         Hud.render(delta);
@@ -208,9 +210,11 @@ public class Player implements InputProcessor, ItemCallback {
     @Override
     public boolean touchUp(final int screenX, final int screenY, int pointer, int button) {
         if (button == Buttons.LEFT) {
-            if (Hud.isNotColliding()) {
-                if (currentItem != null && money >= currentItem.getCost()) {
+            if (Hud.isNotColliding() && currentItem != null) {
+                if (money >= currentItem.getCost()) {
                     currentItem.useItem(this);
+                } else {
+                    itemIndicator.addIndicator("Not enough money!", Color.RED);
                 }
             }
 
