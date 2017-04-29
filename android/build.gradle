@@ -21,6 +21,9 @@ android {
         applicationId "com.aston.group.stationdefender"
         minSdkVersion 24
         targetSdkVersion 25
+        jackOptions {
+            enabled true
+        }
     }
     compileOptions {
         sourceCompatibility 1.8
