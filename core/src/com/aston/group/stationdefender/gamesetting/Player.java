@@ -60,7 +60,7 @@ public class Player implements InputProcessor, ItemCallback {
         FileUtils.loadLevel((score, money, levelNumber, items) -> {
             this.score = score;
             if (money < 20)
-                this.money = money + 20;
+                this.money += 20;
             if (items.size >= 4)
                 itemsNotLoaded = false;
             for (Item item : items) {
@@ -156,6 +156,8 @@ public class Player implements InputProcessor, ItemCallback {
         for (QuickSlot quickSlot : quickSlots) {
             quickSlot.dispose();
         }
+        moneyIndicator.dispose();
+        itemIndicator.dispose();
     }
 
     @Override

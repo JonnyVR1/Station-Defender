@@ -162,6 +162,9 @@ public class Level implements LaneCallback {
         for (Lane lane : lanes) {
             lane.dispose();
         }
+        tower.dispose();
+        if (bossEnemy != null)
+            bossEnemy.dispose();
     }
 
     @Override
