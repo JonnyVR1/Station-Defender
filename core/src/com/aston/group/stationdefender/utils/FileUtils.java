@@ -30,8 +30,6 @@ public enum FileUtils {
      * @param inventory   The Inventory the Player had
      */
     public static void saveLevel(int score, int money, int levelNumber, StackableInventory inventory) {
-
-        //PLAYER PARAMS
         JsonObject playerObject = new JsonObject();
         playerObject.addProperty("score", score);
         playerObject.addProperty("money", money);
@@ -47,14 +45,12 @@ public enum FileUtils {
         }
         playerObject.add("items", items);
 
-        //LEVEL PARAMS
         JsonObject levelObject = new JsonObject();
         levelObject.addProperty("number", levelNumber);
         JsonObject dataObject = new JsonObject();
         dataObject.add("level", levelObject);
         dataObject.add("player", playerObject);
 
-        //Save
         Preferences prefs = Gdx.app.getPreferences(Constants.prefs);
         prefs.putString("level", dataObject.toString());
         prefs.flush();
@@ -70,7 +66,6 @@ public enum FileUtils {
         Preferences prefs = Gdx.app.getPreferences(Constants.prefs);
         JsonElement element = gson.fromJson(prefs.getString("level", ""), JsonElement.class);
 
-        //Parse data
         if (element != null && !element.isJsonNull() && element.isJsonObject()) {
             JsonObject dataObject = element.getAsJsonObject();
             JsonObject levelObject = dataObject.get("level").getAsJsonObject();

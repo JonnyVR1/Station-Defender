@@ -34,10 +34,8 @@ public enum SoundManager {
                 music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Explosion.mp3"));
                 break;
         }
-        if (music != null) {
-            music.setVolume(volume);
-            music.play();
-            music.setOnCompletionListener(Music::dispose);
-        }
+        music.setVolume(volume);
+        music.play();
+        music.setOnCompletionListener(Music::dispose);
     }
 }
