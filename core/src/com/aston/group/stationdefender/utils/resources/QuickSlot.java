@@ -27,7 +27,7 @@ public class QuickSlot {
     private final int width = 48;
     private final int height = 48;
     private boolean isSelected;
-    private ItemStack<Item> itemStack;
+    private ItemStack itemStack;
 
     /**
      * Construct a new QuickSlot
@@ -129,7 +129,7 @@ public class QuickSlot {
      *
      * @param itemStack The ItemStack to be used in the QuickSlot Inventory
      */
-    public void setItemStack(ItemStack<Item> itemStack) {
+    public void setItemStack(ItemStack itemStack) {
         this.itemStack = itemStack;
     }
 }

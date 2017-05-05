@@ -17,9 +17,9 @@ import java.util.List;
  *
  * @author Mohammed Foysal
  */
-public class ItemStack<T extends Item> implements Iterable<T> {
+public class ItemStack implements Iterable<Item> {
     private final int maxItems = 64;
-    private final List<T> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private final SpriteBatch batch = GameEngine.getBatch();
     private final BitmapFont font = FontManager.getFont(16);
     private final int width = 32;
@@ -32,7 +32,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
      *
      * @param item The specific Item to add to the ItemStack
      */
-    public ItemStack(T item) {
+    public ItemStack(Item item) {
         itemName = item.getName();
         addItem(item);
     }
@@ -42,7 +42,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
      *
      * @param item The Item to add to the ItemStack
      */
-    public void addItem(T item) {
+    public void addItem(Item item) {
         if (items.size() < maxItems)
             items.add(item);
     }
@@ -52,15 +52,13 @@ public class ItemStack<T extends Item> implements Iterable<T> {
      *
      * @param item The Item to remove from the Stack
      */
-    public void removeItem(T item) {
-        Iterator<T> iterator = items.iterator();
+    public void removeItem(Item item) {
+        Iterator<Item> iterator = items.iterator();
         while (iterator.hasNext()) {
-            T chosenItem = iterator.next();
-            if (chosenItem != null) {
-                if (chosenItem.getClass().getName().equals(item.getClass().getName())) {
+            Item chosenItem = iterator.next();
+            if (chosenItem != null && chosenItem.getName().equals(item.getName())) {
                     iterator.remove();
                     return;
-                }
             }
         }
     }
@@ -70,7 +68,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
      *
      * @return The Item if it is in the ItemStack, null if it is not
      */
-    public T getItem() {
+    public Item getItem() {
         if (!items.isEmpty())
             return items.get(items.size() - 1);
         else
@@ -94,8 +92,6 @@ public class ItemStack<T extends Item> implements Iterable<T> {
             batch.begin();
             batch.draw((items.get(0)).getTexture(), x, y, width, height);
             batch.end();
-
-            //Draw number of items text
             batch.begin();
             font.draw(batch, Integer.toString(items.size()), x + 20, y + 10);
             batch.end();
@@ -136,7 +132,7 @@ public class ItemStack<T extends Item> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<Item> iterator() {
         return items.iterator();
     }
 

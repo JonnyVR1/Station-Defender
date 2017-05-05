@@ -13,14 +13,14 @@ import java.util.Objects;
  * @author Mohammed Foysal
  */
 public class StackableInventory {
-    private final Array<ItemStack<Item>> itemStacks = new Array<>();
+    private final Array<ItemStack> itemStacks = new Array<>();
 
     public void addItem(Item item) {
-        ItemStack<Item> itemStack = findStack(item);
+        ItemStack itemStack = findStack(item);
         if (itemStack != null) {
             itemStack.addItem(item);
         } else {
-            ItemStack<Item> newStack = new ItemStack<>(item);
+            ItemStack newStack = new ItemStack(item);
             itemStacks.add(newStack);
         }
     }
@@ -31,7 +31,7 @@ public class StackableInventory {
      * @param item The Item to be removed from the StackableInventory
      */
     public void removeItem(Item item) {
-        ItemStack<Item> itemStack = findStack(item);
+        ItemStack itemStack = findStack(item);
         if (itemStack != null) {
             itemStack.removeItem(item);
         }
@@ -42,7 +42,7 @@ public class StackableInventory {
      *
      * @return The ItemStacks being used in the StackableInventory
      */
-    public Array<ItemStack<Item>> getItemStacks() {
+    public Array<ItemStack> getItemStacks() {
         return itemStacks;
     }
 
@@ -52,8 +52,8 @@ public class StackableInventory {
      * @param item The Item to find the ItemStack of
      * @return The ItemStack that contains the Item
      */
-    private ItemStack<Item> findStack(Item item) {
-        for (ItemStack<Item> itemStack : itemStacks) {
+    private ItemStack findStack(Item item) {
+        for (ItemStack itemStack : itemStacks) {
             if (Objects.equals(itemStack.getItemName(), item.getName()) && !itemStack.isFull()) {
                 return itemStack;
             }

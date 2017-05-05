@@ -77,7 +77,7 @@ public class Player implements InputProcessor, ItemCallback {
         int slotX = 0;
         for (int i = 0; i < 8; i++) {
             QuickSlot quickSlot = new QuickSlot(slotX);
-            quickSlot.setItemStack(new ItemStack<>(ItemFactory.getItem(ItemFactory.UNKNOWN)));
+            quickSlot.setItemStack(new ItemStack(ItemFactory.getItem(ItemFactory.UNKNOWN)));
             quickSlots.add(quickSlot);
             slotX += 48;
         }
@@ -263,7 +263,7 @@ public class Player implements InputProcessor, ItemCallback {
             if (i < inventory.getItemStacks().size && inventory.getItemStacks().get(i) != null) {
                 quickSlots.get(i).setItemStack(inventory.getItemStacks().get(i));
             } else {
-                quickSlots.get(i).setItemStack(new ItemStack<>(ItemFactory.getItem(ItemFactory.UNKNOWN)));
+                quickSlots.get(i).setItemStack(new ItemStack(ItemFactory.getItem(ItemFactory.UNKNOWN)));
             }
         }
     }
