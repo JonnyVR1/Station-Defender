@@ -52,8 +52,7 @@ public class Weapon extends Unit {
 
     @Override
     public void render(float delta) {
-        batch.begin();
-        renderParticleEffect(delta, batch);
+        super.render(delta);
         batch.draw(texture, x, y, width, height);
         batch.end();
         act();

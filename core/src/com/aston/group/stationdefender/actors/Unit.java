@@ -86,7 +86,10 @@ public abstract class Unit implements Actor {
     }
 
     @Override
-    public abstract void render(float delta);
+    public void render(float delta) {
+        batch.begin();
+        renderParticleEffect(delta, batch);
+    }
 
     @Override
     public boolean getExists() {
