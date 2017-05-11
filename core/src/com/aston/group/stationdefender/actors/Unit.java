@@ -328,7 +328,7 @@ public abstract class Unit implements Actor {
      * @param delta The time in seconds since the last render
      * @param batch The SpriteBatch to render the particle effect on
      */
-    void renderParticleEffect(float delta, Batch batch) {
+    private void renderParticleEffect(float delta, Batch batch) {
         particleEffectHelper.renderParticleEffect(delta, batch, x, y);
     }
 

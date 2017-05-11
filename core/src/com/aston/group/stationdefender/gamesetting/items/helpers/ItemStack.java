@@ -57,8 +57,8 @@ public class ItemStack implements Iterable<Item> {
         while (iterator.hasNext()) {
             Item chosenItem = iterator.next();
             if (chosenItem != null && chosenItem.getName().equals(item.getName())) {
-                    iterator.remove();
-                    return;
+                iterator.remove();
+                return;
             }
         }
     }
