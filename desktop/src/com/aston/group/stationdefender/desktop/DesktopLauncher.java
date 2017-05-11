@@ -17,6 +17,7 @@ public enum DesktopLauncher {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setTitle(Constants.GAME_NAME);
         config.setWindowedMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        config.setWindowIcon("textures/intro-back.jpg");
         new Lwjgl3Application(new Main(), config);
     }
 }
