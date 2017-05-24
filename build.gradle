@@ -3,10 +3,11 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url 'https://maven.google.com' }
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha1'
     }
 }
 
@@ -31,6 +32,22 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    }
+}
+
+// Workaround to get builds to run from inside Intellij
+// Building directly from Gradle was never affected
+// See: https://github.com/libgdx/libgdx/issues/4698#issuecomment-294303794
+subprojects {
+    if (it.name != "android") { // android plugin is not compatible with java plugin
+        apply plugin: "java"
+        apply plugin: "idea"
+        idea {
+            module {
+                scopes.PROVIDED.minus += [configurations.compile]
+                scopes.COMPILE.plus += [configurations.compile]
+            }
+        }
     }
 }
 
