@@ -35,19 +35,11 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
         introScreen = new IntroScreen(this);
         menuScreen = new MenuScreen(this);
         initGame();
-
-        // Setup title and body text
         backgroundScreen.setTitle(Constants.MENU_ITEMS[0]);
         backgroundScreen.setBody(Constants.BACKGROUND);
         instructionScreen.setTitle(Constants.MENU_ITEMS[1]);
         instructionScreen.setBody(Constants.INSTRUCTIONS);
-
-        //Set the screen to intro upon creation if debug flag is not set
-        if (!Constants.DEBUG) {
-            setScreen(introScreen);
-        } else {
-            setScreen(gameScreen);
-        }
+        setScreen(gameScreen);
         SoundManager.playSound(SoundManager.BACKGROUND_MUSIC);
     }
 

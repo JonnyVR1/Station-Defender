@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Color;
  */
 public enum Constants {
     ;
-    public static final boolean DEBUG = false;
 
     // 16/9 Aspect Ratio
     public static final int SCREEN_WIDTH = 1024;
