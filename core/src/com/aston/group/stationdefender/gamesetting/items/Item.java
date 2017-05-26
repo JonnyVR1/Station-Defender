@@ -22,8 +22,8 @@ public class Item {
     private final boolean placeable;
     private final Texture texture;
     private final ItemFactory sku;
-    private final int width = 32;
-    private final int height = 32;
+    private static final int width = 32;
+    private static final int height = 32;
     private final int cost;
     private final int value;
     private final int health;
@@ -167,7 +167,7 @@ public class Item {
      *
      * @return The width of the Item
      */
-    public int getWidth() {
+    public static int getWidth() {
         return width;
     }
 
@@ -176,7 +176,7 @@ public class Item {
      *
      * @return The height of the Item
      */
-    public int getHeight() {
+    public static int getHeight() {
         return height;
     }
 

@@ -15,8 +15,8 @@ import com.badlogic.gdx.utils.Pool.Poolable;
 public class Projectile implements Poolable {
     private final SpriteBatch batch = GameEngine.getBatch();
     private final Texture texture = TextureManager.loadTexture(TextureManager.PROJECTILE);
-    private final int width = 10;
-    private final int height = 8;
+    private static final int width = 10;
+    private static final int height = 8;
     private int x;
     private int y;
     private boolean alive;
@@ -82,7 +82,7 @@ public class Projectile implements Poolable {
      * @return true if the values overlap, false if the values do not overlap
      */
     public boolean isColliding(int x, int y, int width, int height) {
-        return x + width > this.x && x < this.x + this.width && y + height > this.y && y < this.y + this.height;
+        return x + width > this.x && x < this.x + Projectile.width && y + height > this.y && y < this.y + Projectile.height;
     }
 
     /**
@@ -133,7 +133,7 @@ public class Projectile implements Poolable {
      *
      * @return The width of the Projectile
      */
-    public int getWidth() {
+    public static int getWidth() {
         return width;
     }
 
@@ -142,7 +142,7 @@ public class Projectile implements Poolable {
      *
      * @return The height of the Projectile
      */
-    public int getHeight() {
+    public static int getHeight() {
         return height;
     }
 }

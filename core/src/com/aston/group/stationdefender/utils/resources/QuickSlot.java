@@ -23,9 +23,9 @@ public class QuickSlot {
     private final TextureRegion trQuickSlotHovered;
     private final BitmapFont font = FontManager.getFont(16);
     private final int x;
-    private final int y = 0;
-    private final int width = 48;
-    private final int height = 48;
+    private static final int y = 0;
+    private static final int width = 48;
+    private static final int height = 48;
     private boolean isSelected;
     private ItemStack itemStack;
 
@@ -84,7 +84,7 @@ public class QuickSlot {
      *
      * @return The Y co-ordinate value of the QuickSlot
      */
-    public int getY() {
+    public static int getY() {
         return y;
     }
 
@@ -93,7 +93,7 @@ public class QuickSlot {
      *
      * @return The width of the QuickSlot
      */
-    public int getWidth() {
+    public static int getWidth() {
         return width;
     }
 
@@ -102,7 +102,7 @@ public class QuickSlot {
      *
      * @return The height of the QuickSlot
      */
-    public int getHeight() {
+    public static int getHeight() {
         return height;
     }
 

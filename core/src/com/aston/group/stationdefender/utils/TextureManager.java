@@ -73,7 +73,7 @@ public enum TextureManager {
                 texture = new Texture(Gdx.files.internal("textures/black.jpg"));
                 break;
             case QUICK_SLOT:
-                texture = new Texture(Gdx.files.internal("data/uiskin.png"));
+                texture = new Texture(Gdx.files.internal("data/UISkin.png"));
                 break;
             case TILE:
                 texture = new Texture(Gdx.files.internal("textures/tile.png"));

@@ -191,7 +191,7 @@ public class Lane implements UnitCallback {
         //Render item drops
         for (int i = 0; i < itemDrops.size; i++) {
             itemDrops.get(i).render();
-            if (Gdx.input.isButtonPressed(Buttons.RIGHT) && itemDrops.get(i).isJustSpawned() && Input.isColliding(itemDrops.get(i).getX(), itemDrops.get(i).getY(), itemDrops.get(i).getWidth(), itemDrops.get(i).getHeight())) {
+            if (Gdx.input.isButtonPressed(Buttons.RIGHT) && itemDrops.get(i).isJustSpawned() && Input.isColliding(itemDrops.get(i).getX(), itemDrops.get(i).getY(), Item.getWidth(), Item.getHeight())) {
                 laneCallback.collectItem(itemDrops.get(i));
                 removeItem(i);
             }
@@ -357,7 +357,7 @@ public class Lane implements UnitCallback {
             }
             actor.takeDamage(damage);
         }
-        if (laneCallback.isTowerColliding(projectile.getX(), projectile.getY(), projectile.getWidth(), projectile.getHeight())) {
+        if (laneCallback.isTowerColliding(projectile.getX(), projectile.getY(), Projectile.getWidth(), Projectile.getHeight())) {
             laneCallback.towerTakeDamage(projectile.getDamage());
             projectile.setDead();
         }

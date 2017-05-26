@@ -18,12 +18,12 @@ import java.util.List;
  * @author Mohammed Foysal
  */
 public class ItemStack implements Iterable<Item> {
-    private final int maxItems = 64;
+    private static final int maxItems = 64;
     private final List<Item> items = new ArrayList<>();
     private final SpriteBatch batch = GameEngine.getBatch();
     private final BitmapFont font = FontManager.getFont(16);
-    private final int width = 32;
-    private final int height = 32;
+    private static final int width = 32;
+    private static final int height = 32;
     private final String itemName;
     private int x, y;
 

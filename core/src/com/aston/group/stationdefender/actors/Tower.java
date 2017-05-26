@@ -20,8 +20,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Tower implements Actor {
     private static final String name = "Tower";
-    private final int height = 400;
-    private final int width = 100;
+    private static final int height = 400;
+    private static final int width = 100;
     private final SpriteBatch batch = GameEngine.getBatch();
     private final Texture texture = TextureManager.loadTexture(TextureManager.TOWER);
     private final BitmapFont font = FontManager.getFont(16);
@@ -56,7 +56,7 @@ public class Tower implements Actor {
      * @return true if the values overlap, false if the values do not overlap
      */
     public boolean isColliding(int x, int y, int width, int height) {
-        return x + width > this.x && x < this.x + this.width && y + height > this.y && y < this.y + this.height;
+        return x + width > this.x && x < this.x + Tower.width && y + height > this.y && y < this.y + Tower.height;
     }
 
     @Override

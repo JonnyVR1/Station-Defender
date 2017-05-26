@@ -109,8 +109,8 @@ public class Player implements InputProcessor, ItemCallback {
     public void render(float delta) {
         //Render Player's current item (if any)
         if (currentItem != null) {
-            currentItem.setX(Input.getX() - (currentItem.getWidth() / 2));
-            currentItem.setY(Input.getY() - (currentItem.getHeight() / 2));
+            currentItem.setX(Input.getX() - (Item.getWidth() / 2));
+            currentItem.setY(Input.getY() - (Item.getHeight() / 2));
             currentItem.render();
         }
 
@@ -222,7 +222,7 @@ public class Player implements InputProcessor, ItemCallback {
 
             for (int i = 0; i < quickSlots.size; i++) {
                 QuickSlot quickSlot = quickSlots.get(i);
-                if (Input.isColliding(quickSlot.getX(), quickSlot.getY(), quickSlot.getWidth(), quickSlot.getHeight())) {
+                if (Input.isColliding(quickSlot.getX(), QuickSlot.getY(), QuickSlot.getWidth(), QuickSlot.getHeight())) {
                     selectedSlot = i;
                     quickSlotCallback.onSelectedItemChanged(quickSlots.get(selectedSlot).getItem());
                 }

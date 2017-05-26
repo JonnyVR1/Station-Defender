@@ -167,8 +167,8 @@ public abstract class Unit implements Actor {
      *
      * @return Boolean which says if the Unit is adjacent to another entity.
      */
-    boolean isAdjacent() {
-        return isAdjacent;
+    boolean isNotAdjacent() {
+        return !isAdjacent;
     }
 
     /**
@@ -186,7 +186,7 @@ public abstract class Unit implements Actor {
      * @return The Actor that the Unit is adjacent to, null if no Actor is adjacent to the Unit
      */
     Actor getAdjacentActor() {
-        if (isAdjacent()) {
+        if (isAdjacent) {
             return adjacentActor;
         } else {
             return null;
@@ -340,7 +340,7 @@ public abstract class Unit implements Actor {
     boolean rapidFireHelper() {
         boolean result = false;
         double damageDealt = fire();
-        if ((damageDealt / getDamage()) == getRateOfFire()) {
+        if ((damageDealt / damage) == rateOfFire) {
             result = true;
         } else {
             adjacentActor.takeDamage(damageDealt);
