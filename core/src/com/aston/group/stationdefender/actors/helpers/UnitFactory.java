@@ -69,7 +69,6 @@ public enum UnitFactory {
                 TextureManager.BOSS_ALIEN_3,
                 TextureManager.BOSS_ALIEN_4
         };
-        int randomTexture = new Random().nextInt(bossEnemies.length);
-        return new Alien("Boss Alien", -60, 200, 5, 800, 5.0, 8, 300, 225, bossEnemies[randomTexture]);
+        return new Alien("Boss Alien", -60, 200, 5, 800, 5.0, 8, 300, 225, bossEnemies[new Random().nextInt(bossEnemies.length)]);
     }
 }
