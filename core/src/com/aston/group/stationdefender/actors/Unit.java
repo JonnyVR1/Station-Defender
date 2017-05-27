@@ -216,13 +216,7 @@ public abstract class Unit implements Actor {
      * false if there is not a Unit adjacent to the current Unit
      */
     public boolean isUnitAdjacent(Actor actor) {
-        if (actor == this)
-            return false;
-        if (facingLeft) {
-            return actor.getX() + actor.getWidth() > x && actor.getX() < x + width && y + height > y && y < y + height;
-        } else {
-            return actor.getX() + actor.getWidth() > x && actor.getX() < x + width && y + height > y && y < y + height;
-        }
+        return actor != this && actor.getX() + actor.getWidth() > x && actor.getX() < x + width && y + height > y && y < y + height;
     }
 
     /**
@@ -366,11 +360,9 @@ public abstract class Unit implements Actor {
      * If it does then create a new HUD element for the Weapon
      */
     void checkInput() {
-        if (Input.isColliding(x, y, width, height)) {
-            if (hudElement == null) {
-                hudElement = new HudUnit(this, x, y);
-                Hud.addHudElement(hudElement);
-            }
+        if (Input.isColliding(x, y, width, height) && hudElement == null) {
+            hudElement = new HudUnit(this, x, y);
+            Hud.addHudElement(hudElement);
         } else if (Hud.isNotColliding()) {
             Hud.removeHudElement(hudElement);
             hudElement = null;

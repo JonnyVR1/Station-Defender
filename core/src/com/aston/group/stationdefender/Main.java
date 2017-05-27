@@ -39,7 +39,7 @@ public class Main extends Game implements GameCallback, TwoTextCallback, MenuCal
         backgroundScreen.setBody(Constants.BACKGROUND);
         instructionScreen.setTitle(Constants.MENU_ITEMS[1]);
         instructionScreen.setBody(Constants.INSTRUCTIONS);
-        setScreen(gameScreen);
+        setScreen(introScreen);
         SoundManager.playSound(SoundManager.BACKGROUND_MUSIC);
     }
 
