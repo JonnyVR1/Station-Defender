@@ -334,8 +334,10 @@ public class Player implements InputProcessor, ItemCallback {
      * @param amount The amount of money to be removed from the Player's money total
      */
     private void removeMoney(int amount) {
-        if (money - amount >= 0 && amount != 0)
+        if (money - amount >= 0 && amount != 0) {
             money -= amount;
+            moneyIndicator.addIndicator('-' + Integer.toString(amount), Color.YELLOW);
+        }
     }
 
     /**

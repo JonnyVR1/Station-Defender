@@ -53,8 +53,7 @@ public enum UnitFactory {
      * @return The new Enemy Unit
      */
     public static Actor getRandomEnemy() {
-        int rand = (int) (Math.random() * (values().length));
-        return getEnemy(values()[rand]);
+        return getEnemy(values()[(int) (Math.random() * (values().length))]);
     }
 
     /**
