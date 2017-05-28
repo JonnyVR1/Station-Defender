@@ -7,10 +7,9 @@ import com.aston.group.stationdefender.utils.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * This class allows the Items to be stacked into a QuickSlot Inventory
@@ -19,11 +18,11 @@ import java.util.List;
  */
 public class ItemStack implements Iterable<Item> {
     private static final int maxItems = 64;
-    private final List<Item> items = new ArrayList<>();
-    private final SpriteBatch batch = GameEngine.getBatch();
-    private final BitmapFont font = FontManager.getFont(16);
     private static final int width = 32;
     private static final int height = 32;
+    private final Array<Item> items = new Array<>();
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final BitmapFont font = FontManager.getFont(16);
     private final String itemName;
     private int x, y;
 
@@ -43,7 +42,7 @@ public class ItemStack implements Iterable<Item> {
      * @param item The Item to add to the ItemStack
      */
     public void addItem(Item item) {
-        if (items.size() < maxItems)
+        if (items.size < maxItems)
             items.add(item);
     }
 
@@ -69,8 +68,8 @@ public class ItemStack implements Iterable<Item> {
      * @return The Item if it is in the ItemStack, null if it is not
      */
     public Item getItem() {
-        if (!items.isEmpty())
-            return items.get(items.size() - 1);
+        if (items.size != 0)
+            return items.get(items.size - 1);
         else
             return null;
     }
@@ -88,12 +87,12 @@ public class ItemStack implements Iterable<Item> {
      * Render the ItemStack
      */
     public void render() {
-        if (!items.isEmpty() && items.get(0).getTexture() != null) {
+        if (items.size != 0 && items.get(0).getTexture() != null) {
             batch.begin();
             batch.draw((items.get(0)).getTexture(), x, y, width, height);
             batch.end();
             batch.begin();
-            font.draw(batch, Integer.toString(items.size()), x + 20, y + 10);
+            font.draw(batch, Integer.toString(items.size), x + 20, y + 10);
             batch.end();
         }
 
@@ -142,7 +141,7 @@ public class ItemStack implements Iterable<Item> {
      * @return Whether the ItemStack is full or not
      */
     public boolean isFull() {
-        return items.size() >= maxItems;
+        return items.size >= maxItems;
     }
 
     /**

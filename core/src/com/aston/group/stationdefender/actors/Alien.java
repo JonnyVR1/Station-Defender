@@ -40,7 +40,7 @@ public class Alien extends Unit {
     @Override
     public void render(float delta) {
         super.render(delta);
-        if (isNotAdjacent())
+        if (!isAdjacent)
             batch.setColor(1f, 1f, 1f, 1f);
         else
             batch.setColor(.5f, .5f, .5f, 1f);
@@ -97,7 +97,7 @@ public class Alien extends Unit {
      * @param delta The time in seconds since the last move
      */
     private void move(float delta) {
-        if (isNotAdjacent())
+        if (!isAdjacent)
             x += (speed * delta);
         else if (getAdjacentActor() != null && !((Unit) getAdjacentActor()).isFacingLeft())
             getAdjacentActor().takeDamage(getDamage());

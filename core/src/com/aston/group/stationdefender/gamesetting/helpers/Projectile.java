@@ -13,14 +13,32 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  * @author Mohammed Foysal
  */
 public class Projectile implements Poolable {
-    private final SpriteBatch batch = GameEngine.getBatch();
-    private final Texture texture = TextureManager.loadTexture(TextureManager.PROJECTILE);
     private static final int width = 10;
     private static final int height = 8;
+    private final SpriteBatch batch = GameEngine.getBatch();
+    private final Texture texture = TextureManager.loadTexture(TextureManager.PROJECTILE);
     private int x;
     private int y;
     private boolean alive;
     private double damage, speed;
+
+    /**
+     * Returns the width of the Projectile
+     *
+     * @return The width of the Projectile
+     */
+    public static int getWidth() {
+        return width;
+    }
+
+    /**
+     * Returns the height of the Projectile
+     *
+     * @return The height of the Projectile
+     */
+    public static int getHeight() {
+        return height;
+    }
 
     /**
      * Initiate the Projectile moving
@@ -126,23 +144,5 @@ public class Projectile implements Poolable {
      */
     public int getY() {
         return y;
-    }
-
-    /**
-     * Returns the width of the Projectile
-     *
-     * @return The width of the Projectile
-     */
-    public static int getWidth() {
-        return width;
-    }
-
-    /**
-     * Returns the height of the Projectile
-     *
-     * @return The height of the Projectile
-     */
-    public static int getHeight() {
-        return height;
     }
 }

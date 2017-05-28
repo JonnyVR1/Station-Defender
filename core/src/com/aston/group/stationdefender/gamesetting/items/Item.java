@@ -17,13 +17,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Mohammed Foysal
  */
 public class Item {
+    private static final int width = 32;
+    private static final int height = 32;
     private final SpriteBatch batch = GameEngine.getBatch();
     private final String name;
     private final boolean placeable;
     private final Texture texture;
     private final ItemFactory sku;
-    private static final int width = 32;
-    private static final int height = 32;
     private final int cost;
     private final int value;
     private final int health;
@@ -49,6 +49,24 @@ public class Item {
         this.placeable = placeable;
         this.sku = sku;
         this.texture = TextureManager.loadTexture(texture);
+    }
+
+    /**
+     * Returns the width of the Item
+     *
+     * @return The width of the Item
+     */
+    public static int getWidth() {
+        return width;
+    }
+
+    /**
+     * Returns the height of the Item
+     *
+     * @return The height of the Item
+     */
+    public static int getHeight() {
+        return height;
     }
 
     /**
@@ -163,24 +181,6 @@ public class Item {
     }
 
     /**
-     * Returns the width of the Item
-     *
-     * @return The width of the Item
-     */
-    public static int getWidth() {
-        return width;
-    }
-
-    /**
-     * Returns the height of the Item
-     *
-     * @return The height of the Item
-     */
-    public static int getHeight() {
-        return height;
-    }
-
-    /**
      * Returns the cost of the Item
      *
      * @return The cost of the Item
@@ -205,16 +205,6 @@ public class Item {
      */
     public int getHealth() {
         return health;
-    }
-
-    /**
-     * Returns the Item SKU and Name
-     *
-     * @return The Item SKU and Name
-     */
-    @Override
-    public String toString() {
-        return "Item{" + "SKU=" + sku + ", Name='" + name + '\'' + '}';
     }
 
     /**

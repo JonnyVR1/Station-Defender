@@ -163,15 +163,6 @@ public abstract class Unit implements Actor {
     }
 
     /**
-     * Checks if the Unit is adjacent to another entity.
-     *
-     * @return Boolean which says if the Unit is adjacent to another entity.
-     */
-    boolean isNotAdjacent() {
-        return !isAdjacent;
-    }
-
-    /**
      * Sets whether the Unit is adjacent to another object
      *
      * @param isAdjacent Whether the Unit is adjacent to another object
