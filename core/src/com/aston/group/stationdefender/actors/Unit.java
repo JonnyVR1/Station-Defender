@@ -23,27 +23,27 @@ import java.util.Random;
  * @version 01/11/2016
  */
 public abstract class Unit implements Actor {
-    final double speed; //How many tiles it can move per "tick".
+    final double speed;
     final IndicatorManager indicatorManager = new IndicatorManager();
-    final int width; //Unit's width
-    final int height; //Unit's height
+    final int width;
+    final int height;
     final Texture texture;
-    final String name; //Name of the type of unit.
+    final String name;
     final SpriteBatch batch = GameEngine.getBatch();
-    private final double rateOfFire; //How many times the unit fires per "tick".
-    private final double range; //How many tiles forward the Unit can fire.
+    private final double rateOfFire;
+    private final double range;
     private final ParticleEffectHelper particleEffectHelper = new ParticleEffectHelper();
-    private final double chanceToHit; //Chance of a hit
-    private final boolean facingLeft; //Whether the Unit is facing left or not
-    double damage; //How much damage each successful hit causes.
-    int x; //Unit's position on the X-Axis
-    int y; //Unit's position on the Y-Axis
-    boolean isAdjacent; //Checks if the Unit is adjacent to any other unit.  This information is retrieved from the Level.
-    Actor adjacentActor; //The Unit that this Unit is adjacent to.
-    private UnitCallback unitCallback; //The UnitCallBack used for the Unit
-    private boolean exists = true; //Whether the Unit is alive or dead.
-    private double health; //How much damage the Unit can take before being destroyed.
-    private long lastTime; //The last time a unit fired a missile.
+    private final double chanceToHit;
+    private final boolean facingLeft;
+    double damage;
+    int x;
+    int y;
+    boolean isAdjacent;
+    Actor adjacentActor;
+    private UnitCallback unitCallback;
+    private boolean exists = true;
+    private double health;
+    private long lastTime;
     private HudElement hudElement;
 
     /**
