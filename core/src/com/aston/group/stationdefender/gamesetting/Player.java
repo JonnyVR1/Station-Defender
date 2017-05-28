@@ -360,14 +360,10 @@ public class Player implements InputProcessor, ItemCallback {
 
     @Override
     public void onUse(boolean placeable, int cost, int value, int health) {
-        if (placeable) {
-            if (playerCallback.placeActor(currentItem.getPlaceableActor(), Input.getX(), Input.getY())) {
-                useItemProperties(cost, value, health);
-                inventory.removeItem(currentItem);
-                updateQuickSlots();
-            }
-        } else {
-            useItemProperties(cost, value, health);
+        useItemProperties(cost, value, health);
+        if (placeable && playerCallback.placeActor(currentItem.getPlaceableActor(), Input.getX(), Input.getY())) {
+            inventory.removeItem(currentItem);
+            updateQuickSlots();
         }
     }
 

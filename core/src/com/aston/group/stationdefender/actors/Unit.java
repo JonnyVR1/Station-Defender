@@ -351,9 +351,11 @@ public abstract class Unit implements Actor {
      * If it does then create a new HUD element for the Weapon
      */
     void checkInput() {
-        if (Input.isColliding(x, y, width, height) && hudElement == null) {
-            hudElement = new HudUnit(this, x, y);
-            Hud.addHudElement(hudElement);
+        if (Input.isColliding(x, y, width, height)) {
+            if (hudElement == null) {
+                hudElement = new HudUnit(this, x, y);
+                Hud.addHudElement(hudElement);
+            }
         } else if (Hud.isNotColliding()) {
             Hud.removeHudElement(hudElement);
             hudElement = null;

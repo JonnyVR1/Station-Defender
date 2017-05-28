@@ -19,7 +19,7 @@ public class Projectile implements Poolable {
     private final Texture texture = TextureManager.loadTexture(TextureManager.PROJECTILE);
     private int x;
     private int y;
-    private boolean alive = true;
+    private boolean alive;
     private double damage, speed;
 
     /**
@@ -53,6 +53,7 @@ public class Projectile implements Poolable {
         this.y = y;
         this.speed = speed;
         this.damage = damage;
+        alive = true;
     }
 
     @Override
