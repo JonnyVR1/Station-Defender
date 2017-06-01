@@ -60,7 +60,7 @@ public enum GameEngine {
     public static void render() {
         mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
         mousePosition = camera.unproject(mousePosition);
-        Input.getPosition().set(mousePosition.x, mousePosition.y);
+        Input.setPosition(mousePosition.x, mousePosition.y);
         camera.update();
         shapeRenderer.setProjectionMatrix(camera.combined);
         batch.setProjectionMatrix(camera.combined);

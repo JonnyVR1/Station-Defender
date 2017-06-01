@@ -14,10 +14,11 @@ public enum Input {
     /**
      * Returns the Vector2 position of the mouse
      *
-     * @return The Vector2 position of the mouse
+     * @param x The X co-ordinate of the mouse
+     * @param y The Y co-ordinate of the mouse
      */
-    public static Vector2 getPosition() {
-        return position;
+    public static void setPosition(float x, float y) {
+        position.set(x, y);
     }
 
     /**
@@ -49,6 +50,6 @@ public enum Input {
      * @return true if the values overlap, false if the values do not overlap
      */
     public static boolean isColliding(int x, int y, int width, int height) {
-        return x + width > getX() && x < getX() && y + height > getY() && y < getY();
+        return x + width > position.x && x < position.x && y + height > position.y && y < position.y;
     }
 }
