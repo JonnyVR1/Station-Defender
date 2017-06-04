@@ -35,7 +35,6 @@ public class Lane implements UnitCallback {
     private final Array<Item> itemDrops = new Array<>();
     private final ProjectileFactory projectileFactory = new ProjectileFactory();
     private final LaneCallback laneCallback;
-    private int width;
     private boolean cleared;
     private int alienAmount;
     private long lastRenderTime = System.currentTimeMillis();
@@ -63,7 +62,6 @@ public class Lane implements UnitCallback {
             tile[i].setHasItem(rand.nextInt(itemTileProbability) == 0);
             tile[i].setInvalid(rand.nextInt(invalidTileProbability) == 0);
             tileX += Constants.TILE_WIDTH;
-            width += Constants.TILE_WIDTH;
         }
         tiles.addAll(tile);
 
@@ -259,9 +257,9 @@ public class Lane implements UnitCallback {
      * @return true if the values overlap, false if the values do not overlap
      */
     boolean isColliding(int x, int y) {
-        int height = Constants.TILE_HEIGHT;
+        int width = Constants.TILE_AMOUNT * Constants.TILE_WIDTH;
         int laneX = 100;
-        return x + 1 > laneX && x < laneX + width && y + 1 > this.y && y < this.y + height;
+        return x + 1 > laneX && x < laneX + width && y + 1 > this.y && y < this.y + Constants.TILE_HEIGHT;
     }
 
     @Override
